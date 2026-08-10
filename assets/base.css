@@ -2957,3 +2957,178 @@ details-disclosure > details {
     outline: transparent solid 1px;
   }
 }
+
+/* ==========================================================================
+   WORST WORK STREETWEAR THEME DESIGN SYSTEM
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+  --font-heading-family: 'Roboto Condensed', -apple-system, sans-serif !important;
+  --font-body-family: 'Roboto Condensed', -apple-system, sans-serif !important;
+  --font-heading-style: normal !important;
+  --font-heading-weight: 800 !important;
+  --font-body-weight: 400 !important;
+  
+  --color-base-text: 255, 255, 255 !important;
+  --color-base-background-1: 13, 13, 13 !important;
+  --color-base-background-2: 20, 20, 20 !important;
+  --color-base-solid-button-labels: 0, 0, 0 !important;
+  --color-base-outline-button-labels: 255, 255, 255 !important;
+  --color-base-accent-1: 255, 255, 255 !important;
+  --color-base-accent-2: 38, 38, 38 !important;
+
+  --buttons-radius: 0px !important;
+  --buttons-radius-outset: 0px !important;
+  --inputs-radius: 0px !important;
+  --inputs-radius-outset: 0px !important;
+  --variant-pills-radius: 0px !important;
+  --media-radius: 0px !important;
+}
+
+body,
+.gradient,
+.page-width,
+.header-wrapper,
+.footer,
+.color-scheme-1,
+.color-scheme-2,
+.color-scheme-3,
+.color-scheme-4,
+.color-scheme-5,
+main,
+#MainContent {
+  background-color: #0d0d0d !important;
+  color: #ffffff !important;
+  font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
+}
+
+/* Typography Overrides */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.title, .heading, .card__heading,
+.announcement-bar__message,
+.header__menu-item {
+  font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+}
+
+/* Enforce Strict Square Corners */
+*,
+*::before,
+*::after,
+.button,
+.button--primary,
+.button--secondary,
+.button--tertiary,
+button,
+input,
+select,
+textarea,
+.card,
+.card__inner,
+.card-wrapper,
+.card-wrapper .media,
+.media,
+.media > img,
+.badge,
+.price__badge,
+.drawer,
+.modal__content,
+.search-modal,
+.field__input,
+.quantity__button,
+.quantity__input {
+  border-radius: 0px !important;
+}
+
+/* High Contrast Streetwear Buttons */
+.button,
+.button--primary,
+button[type="submit"],
+.product-form__submit {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #ffffff !important;
+  font-family: 'Roboto Condensed', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  padding: 1rem 2rem !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.button:hover,
+.button--primary:hover,
+button[type="submit"]:hover,
+.product-form__submit:hover {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.button--secondary {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+.button--secondary:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Product Cards & Borders */
+.card {
+  background-color: #141414 !important;
+  border: 1px solid #262626 !important;
+}
+
+.card__inner {
+  background-color: #1a1a1a !important;
+}
+
+.price, .price-item, .price__regular {
+  color: #ffffff !important;
+  font-family: 'Roboto Condensed', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+}
+
+/* Header & Announcement Styling */
+.announcement-bar {
+  background-color: #000000 !important;
+  border-bottom: 1px solid #262626 !important;
+  color: #ffffff !important;
+}
+
+.announcement-bar__message {
+  font-weight: 800 !important;
+  letter-spacing: 0.1em !important;
+}
+
+.header-wrapper {
+  border-bottom: 1px solid #262626 !important;
+}
+
+.header__heading-link {
+  font-family: 'Roboto Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  font-size: 1.6rem !important;
+}
+
+.header__menu-item {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+}
+
+.footer {
+  border-top: 1px solid #262626 !important;
+  background-color: #080808 !important;
+}
