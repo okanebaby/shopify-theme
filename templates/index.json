@@ -1,0 +1,260 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "slideshow_geQjRX": {
+      "type": "slideshow",
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "17716852711bed09c2": {
+      "type": "apps",
+      "blocks": {
+        "essential_countdown_timer_app_block_WCP7k9": {
+          "type": "shopify://apps/essential-countdown-timer/blocks/app-block/722378e8-5a70-4eae-aa89-9e44e8e9f6de",
+          "settings": {
+            "id": "cmlwfrkwq005w14j4j1w0jqy4"
+          }
+        }
+      },
+      "block_order": [
+        "essential_countdown_timer_app_block_WCP7k9"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "video": {
+      "type": "video",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "background-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "blocks": {
+        "column1": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column2": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column3": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column1",
+        "column2",
+        "column3"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "background-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "177942673551d4cf7e": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_652e967_NUYihb": {
+          "type": "ai_gen_block_652e967",
+          "settings": {
+            "text": "LIMITED STOCK AVAILABLE",
+            "font_size": 24,
+            "font_weight": "900",
+            "letter_spacing": 1,
+            "desktop_width_percent": 100,
+            "scroll_speed": 40,
+            "gap": 100,
+            "pause_on_hover": "paused",
+            "text_color": "#000000",
+            "background_color": "#ffffff",
+            "padding_vertical": 0,
+            "padding_horizontal": 20,
+            "border_radius": 0
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_452f3c9_gRebLU": {
+          "type": "ai_gen_block_452f3c9",
+          "settings": {
+            "image": "shopify://shop_images/0C69ED59-B97F-45E2-BFE8-B9D83075EF4B_2.png",
+            "image_height": 600,
+            "image_border_radius": 10,
+            "button_text": "SHOP NOW",
+            "button_link": "shopify://collections/all",
+            "button_font_size": 18,
+            "button_padding_vertical": 18,
+            "button_padding_horizontal": 40,
+            "button_border_radius": 0,
+            "button_background_color": "#ffffff",
+            "button_text_color": "#000000",
+            "button_hover_background_color": "#121212",
+            "button_hover_text_color": "#ffffff",
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_652e967_NUYihb",
+        "ai_gen_block_452f3c9_gRebLU"
+      ],
+      "settings": {}
+    },
+    "1779429724a15fc265": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f5c75ac_pQnHdk": {
+          "type": "ai_gen_block_f5c75ac",
+          "settings": {
+            "heading": "Featured products",
+            "description": "",
+            "heading_alignment": "center",
+            "products": [
+              "black-yellow-tracksuit-set",
+              "grey-white-tracksuit-set",
+              "okanebaby-black-baggy-sweats",
+              "okanebaby-black-fitted-hoodie",
+              "okanebaby-grey-baggy-sweats",
+              "okanebaby-grey-fitted-hoodie",
+              "okanebaby-reflective-windbreaker",
+              "oaknebaby-shorts",
+              "windbreaker-shorts-set"
+            ],
+            "products_to_show": 8,
+            "show_vendor": false,
+            "columns_desktop": 4,
+            "columns_tablet": 3,
+            "columns_mobile": "2",
+            "grid_gap": 20,
+            "section_padding": 40,
+            "desktop_width_percent": 100,
+            "heading_size": 32,
+            "heading_color": "#000000",
+            "text_color": "#000000",
+            "price_color": "#000000",
+            "card_background": "#ffffff",
+            "card_border_radius": 8,
+            "badge_background": "#334fb4",
+            "badge_text_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f5c75ac_pQnHdk"
+      ],
+      "settings": {}
+    },
+    "1779372229f18e6bb2": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_4zqFYW": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "",
+            "title_color": "",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_4zqFYW"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "17794301414a6631ed": {
+      "type": "_blocks",
+      "settings": {}
+    }
+  },
+  "order": [
+    "rich_text",
+    "slideshow_geQjRX",
+    "17716852711bed09c2",
+    "video",
+    "multicolumn",
+    "177942673551d4cf7e",
+    "1779429724a15fc265",
+    "1779372229f18e6bb2",
+    "17794301414a6631ed"
+  ]
+}

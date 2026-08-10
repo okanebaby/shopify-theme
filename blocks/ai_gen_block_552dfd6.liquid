@@ -1,0 +1,578 @@
+{% doc %}
+  @prompt
+    Create a size selector for a product page that uses a height slider to recommend the best size (Small, Medium, Large, XL) for baggy pants. The slider should let customers input their height (in cm or ft/in), and based on their height, it should highlight or recommend the appropriate size. Since the pants are baggy, the sizing should be generous/relaxed. The component should be visually appealing, fit within the product information section, and update the size selection automatically based on the slider value., get rid of the XL
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-size-selector-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    border: {{ block.settings.border_thickness }}px solid {{ block.settings.border_color }};
+  }
+
+  .ai-size-selector-header-{{ ai_gen_id }} {
+    margin-bottom: 20px;
+  }
+
+  .ai-size-selector-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .ai-size-selector-subtitle-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .ai-size-selector-unit-toggle-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .ai-size-selector-unit-btn-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 10px 16px;
+    background-color: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+
+  .ai-size-selector-unit-btn-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.accent_color }};
+    color: {{ block.settings.accent_text_color }};
+    border-color: {{ block.settings.accent_color }};
+  }
+
+  .ai-size-selector-slider-container-{{ ai_gen_id }} {
+    margin-bottom: 24px;
+  }
+
+  .ai-size-selector-slider-header-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .ai-size-selector-slider-label-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    font-weight: 500;
+  }
+
+  .ai-size-selector-slider-value-{{ ai_gen_id }} {
+    font-size: 18px;
+    color: {{ block.settings.accent_color }};
+    font-weight: 600;
+  }
+
+  .ai-size-selector-slider-{{ ai_gen_id }} {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: {{ block.settings.slider_track_color }};
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .ai-size-selector-slider-{{ ai_gen_id }}::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: {{ block.settings.accent_color }};
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-size-selector-slider-{{ ai_gen_id }}::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: {{ block.settings.accent_color }};
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-size-selector-recommendation-{{ ai_gen_id }} {
+    padding: 16px;
+    background-color: {{ block.settings.recommendation_bg_color }};
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .ai-size-selector-recommendation-label-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-size-selector-recommendation-size-{{ ai_gen_id }} {
+    font-size: 32px;
+    color: {{ block.settings.accent_color }};
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .ai-size-selector-sizes-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .ai-size-selector-size-option-{{ ai_gen_id }} {
+    padding: 12px 8px;
+    text-align: center;
+    border: 2px solid {{ block.settings.border_color }};
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-size-selector-size-option-{{ ai_gen_id }}.recommended {
+    border-color: {{ block.settings.accent_color }};
+    background-color: {{ block.settings.recommendation_bg_color }};
+  }
+
+  .ai-size-selector-size-option-{{ ai_gen_id }}.selected {
+    background-color: {{ block.settings.accent_color }};
+    border-color: {{ block.settings.accent_color }};
+  }
+
+  .ai-size-selector-size-label-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .ai-size-selector-size-option-{{ ai_gen_id }}.selected .ai-size-selector-size-label-{{ ai_gen_id }} {
+    color: {{ block.settings.accent_text_color }};
+  }
+
+  .ai-size-selector-size-range-{{ ai_gen_id }} {
+    font-size: 11px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+    margin: 4px 0 0 0;
+  }
+
+  .ai-size-selector-size-option-{{ ai_gen_id }}.selected .ai-size-selector-size-range-{{ ai_gen_id }} {
+    color: {{ block.settings.accent_text_color }};
+    opacity: 0.9;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-size-selector-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-size-selector-sizes-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .ai-size-selector-size-option-{{ ai_gen_id }} {
+      padding: 14px 10px;
+    }
+  }
+{% endstyle %}
+
+<size-selector-{{ ai_gen_id }}
+  class="ai-size-selector-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+  data-small-cm="{{ block.settings.small_cm }}"
+  data-medium-cm="{{ block.settings.medium_cm }}"
+  data-large-cm="{{ block.settings.large_cm }}"
+>
+  <div class="ai-size-selector-header-{{ ai_gen_id }}">
+    <h3 class="ai-size-selector-title-{{ ai_gen_id }}">{{ block.settings.title }}</h3>
+    <p class="ai-size-selector-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+  </div>
+
+  <div class="ai-size-selector-unit-toggle-{{ ai_gen_id }}">
+    <button
+      type="button"
+      class="ai-size-selector-unit-btn-{{ ai_gen_id }} active"
+      data-unit="cm"
+    >
+      Centimeters (cm)
+    </button>
+    <button
+      type="button"
+      class="ai-size-selector-unit-btn-{{ ai_gen_id }}"
+      data-unit="ft"
+    >
+      Feet & Inches (ft/in)
+    </button>
+  </div>
+
+  <div class="ai-size-selector-slider-container-{{ ai_gen_id }}">
+    <div class="ai-size-selector-slider-header-{{ ai_gen_id }}">
+      <span class="ai-size-selector-slider-label-{{ ai_gen_id }}">Your height</span>
+      <span class="ai-size-selector-slider-value-{{ ai_gen_id }}">170 cm</span>
+    </div>
+    <input
+      type="range"
+      class="ai-size-selector-slider-{{ ai_gen_id }}"
+      min="140"
+      max="210"
+      value="170"
+      step="1"
+    >
+  </div>
+
+  <div class="ai-size-selector-recommendation-{{ ai_gen_id }}">
+    <p class="ai-size-selector-recommendation-label-{{ ai_gen_id }}">Recommended size</p>
+    <p class="ai-size-selector-recommendation-size-{{ ai_gen_id }}">Medium</p>
+  </div>
+
+  <div class="ai-size-selector-sizes-{{ ai_gen_id }}">
+    <div class="ai-size-selector-size-option-{{ ai_gen_id }}" data-size="Small">
+      <p class="ai-size-selector-size-label-{{ ai_gen_id }}">Small</p>
+      <p class="ai-size-selector-size-range-{{ ai_gen_id }}">140-160 cm</p>
+    </div>
+    <div class="ai-size-selector-size-option-{{ ai_gen_id }} recommended" data-size="Medium">
+      <p class="ai-size-selector-size-label-{{ ai_gen_id }}">Medium</p>
+      <p class="ai-size-selector-size-range-{{ ai_gen_id }}">160-175 cm</p>
+    </div>
+    <div class="ai-size-selector-size-option-{{ ai_gen_id }}" data-size="Large">
+      <p class="ai-size-selector-size-label-{{ ai_gen_id }}">Large</p>
+      <p class="ai-size-selector-size-range-{{ ai_gen_id }}">175+ cm</p>
+    </div>
+  </div>
+</size-selector-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SizeSelector{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentUnit = 'cm';
+        this.currentHeightCm = 170;
+        
+        this.sizeRanges = {
+          Small: parseInt(this.dataset.smallCm),
+          Medium: parseInt(this.dataset.mediumCm),
+          Large: parseInt(this.dataset.largeCm)
+        };
+      }
+
+      connectedCallback() {
+        this.slider = this.querySelector('.ai-size-selector-slider-{{ ai_gen_id }}');
+        this.sliderValue = this.querySelector('.ai-size-selector-slider-value-{{ ai_gen_id }}');
+        this.recommendationSize = this.querySelector('.ai-size-selector-recommendation-size-{{ ai_gen_id }}');
+        this.unitButtons = this.querySelectorAll('.ai-size-selector-unit-btn-{{ ai_gen_id }}');
+        this.sizeOptions = this.querySelectorAll('.ai-size-selector-size-option-{{ ai_gen_id }}');
+        this.sizeRangeLabels = this.querySelectorAll('.ai-size-selector-size-range-{{ ai_gen_id }}');
+
+        this.setupEventListeners();
+        this.updateRecommendation();
+      }
+
+      setupEventListeners() {
+        this.slider.addEventListener('input', () => {
+          this.currentHeightCm = parseInt(this.slider.value);
+          this.updateDisplay();
+          this.updateRecommendation();
+        });
+
+        this.unitButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            this.switchUnit(button.dataset.unit);
+          });
+        });
+
+        this.sizeOptions.forEach(option => {
+          option.addEventListener('click', () => {
+            this.selectSize(option.dataset.size);
+          });
+        });
+      }
+
+      switchUnit(unit) {
+        this.currentUnit = unit;
+        
+        this.unitButtons.forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.unit === unit);
+        });
+
+        if (unit === 'ft') {
+          this.slider.min = 55;
+          this.slider.max = 83;
+          this.slider.step = 1;
+          this.slider.value = this.cmToInches(this.currentHeightCm);
+        } else {
+          this.slider.min = 150;
+          this.slider.max = 190;
+          this.slider.step = 1;
+          this.slider.value = this.currentHeightCm;
+        }
+
+        this.updateDisplay();
+        this.updateSizeRangeLabels();
+      }
+
+      updateDisplay() {
+        if (this.currentUnit === 'cm') {
+          this.currentHeightCm = parseInt(this.slider.value);
+          this.sliderValue.textContent = this.currentHeightCm + ' cm';
+        } else {
+          const inches = parseInt(this.slider.value);
+          this.currentHeightCm = this.inchesToCm(inches);
+          const feet = Math.floor(inches / 12);
+          const remainingInches = inches % 12;
+          this.sliderValue.textContent = feet + "'" + remainingInches + '"';
+        }
+      }
+
+      updateSizeRangeLabels() {
+        const ranges = {
+          Small: this.currentUnit === 'cm' ? '150-165 cm' : '4\'10"-5\'6"',
+          Medium: this.currentUnit === 'cm' ? '165-18 cm' : '5\'6"-6\'0"',
+          Large: this.currentUnit === 'cm' ? '180+ cm' : '6\'0"+'
+        };
+
+        this.sizeRangeLabels.forEach((label, index) => {
+          const size = ['Small', 'Medium', 'Large'][index];
+          label.textContent = ranges[size];
+        });
+      }
+
+      updateRecommendation() {
+        let recommendedSize = 'Small';
+        
+        if (this.currentHeightCm >= this.sizeRanges.Large) {
+          recommendedSize = 'Large';
+        } else if (this.currentHeightCm >= this.sizeRanges.Medium) {
+          recommendedSize = 'Medium';
+        } else {
+          recommendedSize = 'Small';
+        }
+
+        this.recommendationSize.textContent = recommendedSize;
+
+        this.sizeOptions.forEach(option => {
+          option.classList.toggle('recommended', option.dataset.size === recommendedSize);
+        });
+      }
+
+      selectSize(size) {
+        this.sizeOptions.forEach(option => {
+          option.classList.toggle('selected', option.dataset.size === size);
+        });
+
+        const variantSelector = document.querySelector('variant-selects, variant-radios');
+        if (variantSelector) {
+          const sizeInputs = variantSelector.querySelectorAll('input[name="Size"], input[name="size"]');
+          sizeInputs.forEach(input => {
+            if (input.value === size || input.nextElementSibling?.textContent?.trim() === size) {
+              input.checked = true;
+              input.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          });
+        }
+      }
+
+      cmToInches(cm) {
+        return Math.round(cm / 2.54);
+      }
+
+      inchesToCm(inches) {
+        return Math.round(inches * 2.54);
+      }
+    }
+
+    customElements.define('size-selector-{{ ai_gen_id }}', SizeSelector{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Size selector with height",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Find your perfect size"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Use the slider to get a size recommendation based on your height"
+    },
+    {
+      "type": "header",
+      "content": "Size ranges"
+    },
+    {
+      "type": "paragraph",
+      "content": "Set the minimum height (in cm) for each size. Sizing is generous for baggy fit."
+    },
+    {
+      "type": "range",
+      "id": "small_cm",
+      "label": "Small starts at",
+      "min": 140,
+      "max": 160,
+      "step": 1,
+      "unit": "cm",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "medium_cm",
+      "label": "Medium starts at",
+      "min": 155,
+      "max": 175,
+      "step": 1,
+      "unit": "cm",
+      "default": 160
+    },
+    {
+      "type": "range",
+      "id": "large_cm",
+      "label": "Large starts at",
+      "min": 170,
+      "max": 210,
+      "step": 1,
+      "unit": "cm",
+      "default": 175
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#334fb4"
+    },
+    {
+      "type": "color",
+      "id": "accent_text_color",
+      "label": "Accent text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "slider_track_color",
+      "label": "Slider track",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "recommendation_bg_color",
+      "label": "Recommendation background",
+      "default": "#f3f3f3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size selector with height"
+    }
+  ]
+}
+{% endschema %}
