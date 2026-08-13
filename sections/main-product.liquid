@@ -332,6 +332,23 @@
                   </h2>
                 </a>
               </div>
+              <div class="product-live-demand-badge" style="display: inline-flex; align-items: center; gap: 8px; margin: 0.8rem 0 1.2rem 0; padding: 0.6rem 1.2rem; background: #000000; color: #ffffff; border: 1.5px solid #ff0022; border-radius: 4px; box-shadow: 0 0 14px rgba(255, 0, 34, 0.4); font-family: 'Times New Roman', Times, serif; font-weight: 700; font-style: italic; font-size: 1.3rem;">
+                <span style="font-size: 1.4rem;">🔥</span>
+                <span><strong style="color: #ff0022; font-style: normal;">HOT ITEM:</strong> <span id="live-viewer-count">18</span> people are looking at this right now!</span>
+              </div>
+              <script>
+                (function() {
+                  function updateViewerCount() {
+                    const el = document.getElementById('live-viewer-count');
+                    if (!el) return;
+                    let count = parseInt(el.textContent, 10) || 18;
+                    const delta = Math.floor(Math.random() * 5) - 2;
+                    count = Math.max(14, Math.min(34, count + delta));
+                    el.textContent = count;
+                  }
+                  setInterval(updateViewerCount, 4000);
+                })();
+              </script>
             {%- when 'price' -%}
               <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                 {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
