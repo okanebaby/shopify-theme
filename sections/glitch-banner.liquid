@@ -37,26 +37,26 @@
     display: inline-block !important;
   }
 
-  /* Spray Paint Ambient Glow Element */
+  /* Spray Paint Ambient Glow Element - Stronger White Glow */
   .spray-glow {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 120% !important;
-    height: 160% !important;
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 45%, transparent 75%) !important;
-    filter: blur(25px) !important;
+    width: 125% !important;
+    height: 170% !important;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.18) 45%, transparent 80%) !important;
+    filter: blur(30px) !important;
     z-index: 1 !important;
     pointer-events: none !important;
     transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease !important;
     border-radius: 50% !important;
   }
 
-  /* Red Spray Glow when in State 2 ("LIMITED STOCK AVAILABLE") */
+  /* Red Spray Glow when in State 2 ("LIMITED STOCK AVAILABLE") - Subtler Red Glow */
   .glitch-heading-container.is-red .spray-glow {
-    background: radial-gradient(ellipse at center, rgba(255, 0, 34, 0.55) 0%, rgba(255, 0, 34, 0.18) 50%, transparent 80%) !important;
-    filter: blur(30px) !important;
+    background: radial-gradient(ellipse at center, rgba(255, 0, 34, 0.28) 0%, rgba(255, 0, 34, 0.08) 50%, transparent 80%) !important;
+    filter: blur(20px) !important;
   }
 
   h2.glitch-heading-text,
@@ -66,7 +66,7 @@
     font-weight: 400 !important;
     font-style: normal !important;
     color: #ffffff !important;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4) !important;
+    text-shadow: 0 0 28px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 0.55) !important;
     line-height: 1.15 !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -80,7 +80,7 @@
     transition: color 0.3s ease, text-shadow 0.3s ease !important;
   }
 
-  /* State 2: Red Text for "LIMITED STOCK AVAILABLE" */
+  /* State 2: Red Text for "LIMITED STOCK AVAILABLE" - Subtler Red Glow */
   h2.glitch-heading-text.is-sans,
   .glitch-heading-text.is-sans {
     font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
@@ -88,7 +88,7 @@
     text-transform: uppercase !important;
     letter-spacing: 0.06em !important;
     color: #ff0022 !important;
-    text-shadow: 0 0 25px rgba(255, 0, 34, 0.75), 0 0 10px rgba(255, 0, 34, 0.5) !important;
+    text-shadow: 0 0 14px rgba(255, 0, 34, 0.4) !important;
   }
 
   /* Subtle Sleek Cyber Glitch RGB Split Effects */
