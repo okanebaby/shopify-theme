@@ -306,9 +306,9 @@
           const length = originalText.length;
           let iteration = 0;
           
-          // 1. Start glitching in RED
+          // 1. Immediately apply RED GLITCH (no split-second unedited text flash!)
           el.style.color = '#ff0022';
-          el.style.textShadow = '-1.5px 0 0 #000000, 1.5px 0 0 #ff0022, 0 0 8px rgba(255, 0, 34, 0.4)';
+          el.style.textShadow = '-1.5px 0 0 #000000, 1.5px 0 0 #ff0022, 0 0 10px rgba(255, 0, 34, 0.6)';
           
           const timer = setInterval(() => {
             let scramble = '';
@@ -325,15 +325,16 @@
             // 2. Transition to BLACK midway
             if (iteration >= length * 0.5) {
               el.style.color = '#000000';
-              el.style.textShadow = '0 0 1px rgba(0, 0, 0, 0.3)';
+              el.style.textShadow = '0 0 2px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3)';
             }
             
-            // 3. Complete & settle in original BLACK writing
+            // 3. Complete & settle in original BLACK writing with GLOW
             if (iteration >= length) {
               clearInterval(timer);
               el.textContent = originalText;
               el.style.color = '#000000';
-              el.style.textShadow = 'none';
+              el.style.textShadow = '0 0 2px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3)';
+              el.classList.add('is-scrambled');
             }
           }, 28);
         }
@@ -342,6 +343,13 @@
           const selector = '.card__heading a, .card__heading, .product__title h1, .product__title h2, .scramble-hover-title, .featured-glitch-heading, .title-wrapper .title, h2.title';
           const targets = document.querySelectorAll(selector);
           
+          targets.forEach(el => {
+            if (el.dataset.scrambleDone !== 'true') {
+              el.style.color = '#ff0022';
+              el.style.textShadow = '-1.5px 0 0 #000000, 1.5px 0 0 #ff0022, 0 0 10px rgba(255, 0, 34, 0.6)';
+            }
+          });
+
           if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
               entries.forEach(entry => {
@@ -350,7 +358,7 @@
                   observer.unobserve(entry.target);
                 }
               });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.05 });
 
             targets.forEach(target => observer.observe(target));
           } else {
@@ -365,11 +373,11 @@
         }
         window.addEventListener('load', initScrollObserver);
         window.addEventListener('scroll', function() {
-          const selector = '.card__heading a, .product__title h1, .scramble-hover-title, h2.title';
+          const selector = '.card__heading a, .card__heading, .product__title h1, .product__title h2, .scramble-hover-title, h2.title';
           document.querySelectorAll(selector).forEach(el => {
             if (el.dataset.scrambleDone !== 'true') {
               const rect = el.getBoundingClientRect();
-              if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+              if (rect.top <= window.innerHeight * 0.9 && rect.bottom >= 0) {
                 scrambleOnScroll(el);
               }
             }
