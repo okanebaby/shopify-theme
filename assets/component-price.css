@@ -63,9 +63,8 @@
   display: none;
 }
 
-.price--sold-out .price__badge-sold-out,
-.price--on-sale .price__badge-sale {
-  display: inline-block;
+.price--sold-out .price__badge-sold-out {
+  display: none !important;
 }
 
 .price--on-sale .price__sale {

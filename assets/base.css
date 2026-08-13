@@ -3996,11 +3996,23 @@ span.badge--sold-out,
 .card .badge--bottom-left,
 .card-information .badge,
 .card-wrapper .badge,
-.badge {
+.badge,
+.price--sold-out .price__badge-sold-out,
+.price .price__badge-sold-out,
+span.price__badge-sold-out,
+[class*="badge-sold-out"],
+[class*="price__badge-sold-out"],
+[id*="Badge-"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  max-height: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
 }
 
 @keyframes stampFloatPulse {
