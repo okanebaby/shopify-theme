@@ -290,5 +290,81 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <script>
+      (function() {
+        const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        
+        function scrambleOnScroll(el) {
+          if (el.dataset.scrambleDone === 'true') return;
+          el.dataset.scrambleDone = 'true';
+          
+          const originalText = el.dataset.originalText || el.textContent.trim();
+          if (!el.dataset.originalText) el.dataset.originalText = originalText;
+          
+          const length = originalText.length;
+          let iteration = 0;
+          
+          const timer = setInterval(() => {
+            let htmlContent = '';
+            for (let i = 0; i < length; i++) {
+              if (i < iteration) {
+                htmlContent += `<span style="color: #000000; text-shadow: 0 0 4px #000000, 0 0 14px rgba(0, 0, 0, 0.85); font-style: italic;">${originalText[i]}</span>`;
+              } else {
+                const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                htmlContent += `<span style="color: #ff0022; text-shadow: -2px 0 0 #000000, 2px 0 0 #ff0022, 0 0 16px rgba(255, 0, 34, 0.6); font-style: italic;">${randomChar}</span>`;
+              }
+            }
+            el.innerHTML = htmlContent;
+            iteration += 1.3;
+            
+            if (iteration >= length) {
+              clearInterval(timer);
+              el.textContent = originalText;
+              el.style.color = '#000000';
+              el.style.textShadow = '0 0 4px #000000, 0 0 14px rgba(0, 0, 0, 0.85)';
+            }
+          }, 28);
+        }
+
+        function initScrollObserver() {
+          const selector = '.card__heading a, .card__heading, .product__title h1, .product__title h2, .scramble-hover-title, .title-wrapper .title, h2.title';
+          const targets = document.querySelectorAll(selector);
+
+          if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  scrambleOnScroll(entry.target);
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.05 });
+
+            targets.forEach(target => observer.observe(target));
+          } else {
+            targets.forEach(scrambleOnScroll);
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initScrollObserver);
+        } else {
+          initScrollObserver();
+        }
+        window.addEventListener('load', initScrollObserver);
+        window.addEventListener('scroll', function() {
+          const selector = '.card__heading a, .card__heading, .product__title h1, .product__title h2, .scramble-hover-title, h2.title';
+          document.querySelectorAll(selector).forEach(el => {
+            if (el.dataset.scrambleDone !== 'true') {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= window.innerHeight * 0.9 && rect.bottom >= 0) {
+                scrambleOnScroll(el);
+              }
+            }
+          });
+        }, { passive: true });
+      })();
+    </script>
   </body>
 </html>
