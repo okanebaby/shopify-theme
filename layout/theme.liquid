@@ -388,13 +388,13 @@
           document.querySelectorAll(selector).forEach(initGlitchTitle);
         }
 
-        // Global Event Delegation for Product Card Clicks
+        // Unstoppable Capture-Phase Programmatic Navigation for Product Cards
         document.addEventListener('click', function(e) {
-          if (e.target.closest('button, input, form, select, option, modal-opener, .quick-add')) return;
+          if (e.target.closest('button, input, form, select, option, modal-opener, .quick-add, [data-type="add-to-cart-form"]')) return;
           const card = e.target.closest('.card-wrapper, .product-card-wrapper, .card, .grid__item');
           if (card) {
-            const link = card.querySelector('a[href]');
-            if (link && link.href && !e.target.closest('a[href]')) {
+            const link = card.querySelector('a[href]') || card.closest('a[href]');
+            if (link && link.href) {
               window.location.href = link.href;
             }
           }
