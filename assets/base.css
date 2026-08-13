@@ -3461,3 +3461,113 @@ details > .header__submenu {
   user-select: none !important;
   transition: opacity 0.2s ease, transform 0.2s ease !important;
 }
+
+/* ==========================================================================
+   MILTON ONE CALLIGRAPHIC FONT & BULLETPROOF GLITCH STYLES
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Italianno&family=Monsieur+La+Doulaise&family=MonteCarlo&display=swap');
+
+@font-face {
+  font-family: 'Milton One';
+  src: url('https://fonts.cdnfonts.com/s/85257/MiltonOne.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-milton,
+.milton-font,
+.script-font {
+  font-family: 'Milton One', 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em !important;
+}
+
+.glitch-section-wrapper {
+  background-color: #000000 !important;
+  border-top: 1px solid #222222 !important;
+  border-bottom: 1px solid #222222 !important;
+  padding: 5rem 0 !important;
+  min-height: 250px !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+.glitch-banner-inner {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.glitch-banner__left {
+  width: 100% !important;
+}
+
+.glitch-banner__heading {
+  font-size: clamp(3.2rem, 7.5vw, 6rem) !important;
+  color: #ffffff !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  position: relative !important;
+  display: inline-block !important;
+  user-select: none !important;
+}
+
+/* RGB Split Cyber Glitch Distortion Keyframes */
+.is-glitching {
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both !important;
+}
+
+.is-glitching::before,
+.is-glitching::after {
+  content: attr(data-text) !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  clip: rect(0, 0, 0, 0) !important;
+  font-family: inherit !important;
+}
+
+.is-glitching::before {
+  left: 3px !important;
+  text-shadow: -3px 0 #ff0055 !important;
+  animation: glitch-anim-1 0.25s infinite linear alternate-reverse !important;
+}
+
+.is-glitching::after {
+  left: -3px !important;
+  text-shadow: -3px 0 #00e5ff !important;
+  animation: glitch-anim-2 0.25s infinite linear alternate-reverse !important;
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-2deg); }
+  40% { transform: skew(3deg); }
+  60% { transform: skew(-1deg); }
+  80% { transform: skew(2deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip: rect(10px, 9999px, 35px, 0); }
+  33% { clip: rect(45px, 9999px, 15px, 0); }
+  66% { clip: rect(20px, 9999px, 55px, 0); }
+  100% { clip: rect(5px, 9999px, 25px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(35px, 9999px, 15px, 0); }
+  33% { clip: rect(15px, 9999px, 45px, 0); }
+  66% { clip: rect(50px, 9999px, 20px, 0); }
+  100% { clip: rect(20px, 9999px, 35px, 0); }
+}
