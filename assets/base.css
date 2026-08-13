@@ -4051,7 +4051,7 @@ span.badge--sold-out,
 }
 
 /* ==========================================================================
-   PRODUCT TITLE RED GLITCH & BLACK GLOW SYSTEM
+   PRODUCT TITLE TYPOGRAPHY & SUBTLE TEXT GLOW SYSTEM
    ========================================================================== */
 
 .scramble-hover-title,
@@ -4064,24 +4064,14 @@ span.badge--sold-out,
   font-size: clamp(1.8rem, 3.2vw, 2.6rem) !important;
   font-weight: 700 !important;
   text-transform: none !important;
-  color: #ff0022 !important;
-  text-shadow: -1.5px 0 0 #000000, 1.5px 0 0 #ff0022, 0 0 10px rgba(255, 0, 34, 0.5) !important;
+  color: #000000 !important;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
   position: relative !important;
   display: inline-block !important;
   cursor: pointer !important;
   pointer-events: auto !important;
   z-index: 10 !important;
-  transition: color 0.3s ease, text-shadow 0.3s ease !important;
-}
-
-/* Settled State after scramble (applied via JS class .is-scrambled) */
-.scramble-hover-title.is-scrambled,
-.card-wrapper .card__heading a.is-scrambled,
-.card__heading a.is-scrambled,
-.product__title h1.is-scrambled,
-.product__title h2.is-scrambled {
-  color: #000000 !important;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+  transition: color 0.25s ease, text-shadow 0.25s ease !important;
 }
 
 /* Ensure whole product card link is fully clickable */
