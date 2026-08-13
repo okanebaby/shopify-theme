@@ -49,7 +49,86 @@
   <div class="collection section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}">
       <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
         {%- if section.settings.title != blank -%}
-          <h2 class="title {{ section.settings.heading_size }}">{{ section.settings.title | escape }}</h2>
+          <h2 class="title {{ section.settings.heading_size }} featured-glitch-heading" id="featured-glitch-{{ section.id }}" data-phrase1="{{ section.settings.title | escape }}" data-phrase2="LIMITED STOCK AVAILABLE">
+            {{ section.settings.title | escape }}
+          </h2>
+          <script>
+            (function() {
+              function initFeaturedGlitch() {
+                const heading = document.getElementById('featured-glitch-{{ section.id }}');
+                if (!heading) return;
+
+                const phrase1 = heading.getAttribute('data-phrase1') || "Featured products";
+                const phrase2 = heading.getAttribute('data-phrase2') || "LIMITED STOCK AVAILABLE";
+                const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                
+                let currentState = 1;
+                let isAnimating = false;
+
+                function runGlitchTransition(toState) {
+                  if (isAnimating) return;
+                  isAnimating = true;
+
+                  const targetText = toState === 2 ? phrase2 : phrase1;
+                  const length = Math.max(heading.textContent.trim().length, targetText.length);
+                  let iteration = 0;
+
+                  heading.classList.add('is-glitching');
+                  if (toState === 2) {
+                    heading.classList.add('is-red-glitch');
+                  } else {
+                    heading.classList.remove('is-red-glitch');
+                  }
+
+                  const timer = setInterval(() => {
+                    let scramble = '';
+                    for (let i = 0; i < length; i++) {
+                      if (i < iteration) {
+                        scramble += targetText[i] || '';
+                      } else {
+                        scramble += chars[Math.floor(Math.random() * chars.length)];
+                      }
+                    }
+                    heading.textContent = scramble;
+                    iteration += 1.2;
+
+                    if (iteration >= length) {
+                      clearInterval(timer);
+                      heading.textContent = targetText;
+                      heading.classList.remove('is-glitching');
+                      isAnimating = false;
+                      currentState = toState;
+                    }
+                  }, 35);
+                }
+
+                function checkScroll() {
+                  const rect = heading.getBoundingClientRect();
+                  const winHeight = window.innerHeight || document.documentElement.clientHeight;
+                  if (rect.top <= winHeight * 0.8 && rect.bottom >= 0) {
+                    if (currentState !== 2) runGlitchTransition(2);
+                  } else if (rect.top > winHeight * 0.9) {
+                    if (currentState !== 1) runGlitchTransition(1);
+                  }
+                }
+
+                window.addEventListener('scroll', checkScroll, { passive: true });
+                
+                setInterval(() => {
+                  runGlitchTransition(currentState === 1 ? 2 : 1);
+                }, 6000);
+
+                heading.addEventListener('mouseenter', () => runGlitchTransition(currentState === 1 ? 2 : 1));
+                heading.addEventListener('click', () => runGlitchTransition(currentState === 1 ? 2 : 1));
+              }
+
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initFeaturedGlitch);
+              } else {
+                initFeaturedGlitch();
+              }
+            })();
+          </script>
         {%- endif -%}
         {%- if section.settings.description != blank or section.settings.show_description and section.settings.collection.description != empty -%}
           <div class="collection__description {{ section.settings.description_style }}">{%- if section.settings.show_description -%}{{ section.settings.collection.description }}{%- else -%}{{ section.settings.description }}{% endif %}</div>
