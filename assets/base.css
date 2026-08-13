@@ -4051,7 +4051,7 @@ span.badge--sold-out,
 }
 
 /* ==========================================================================
-   TIMES NEW ROMAN ITALIC & TONED DOWN RED/BLACK HOVER GLITCH FOR PRODUCT TITLES
+   HOVER-ONLY RED-TO-BLACK GLITCH TRANSITION FOR PRODUCT TITLES (1-SHOT, NOT INFINITE)
    ========================================================================== */
 
 .scramble-hover-title,
@@ -4066,23 +4066,36 @@ span.badge--sold-out,
   color: #000000 !important;
   position: relative !important;
   display: inline-block !important;
-  transition: color 0.2s ease, text-shadow 0.2s ease !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease !important;
 }
 
-/* Subtle, Toned-down Red/Black Glitch Effect on Hover */
+/* Hover-only Red to Black Glitch Transition (Single Pass on Hover) */
 .card-wrapper:hover .card__heading a,
 .card-wrapper:hover .scramble-hover-title,
-.scramble-hover-title:hover {
-  color: #ff0022 !important;
-  text-shadow: 
-    -1px 0 0 #000000,
-     1px 0 0 #ff0022,
-     0 0 5px rgba(255, 0, 34, 0.3) !important;
-  animation: titleSubtleRedBlackGlitch 0.35s ease infinite alternate !important;
+.scramble-hover-title:hover,
+.scramble-hover-title.is-glitching-hover {
+  animation: redToBlackHoverGlitch 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1 forwards !important;
 }
 
-@keyframes titleSubtleRedBlackGlitch {
-  0% { transform: translate(0, 0); color: #ff0022; text-shadow: -1px 0 0 #000000; }
-  50% { transform: translate(-0.5px, 0.5px); color: #000000; text-shadow: 1px 0 0 #ff0022; }
-  100% { transform: translate(0, 0); color: #ff0022; text-shadow: -1px 0 0 #000000; }
+@keyframes redToBlackHoverGlitch {
+  0% {
+    color: #ff0022;
+    text-shadow: -3px 0 0 #000000, 3px 0 0 #ff0022;
+    transform: skew(-2deg) translate(-1px, 0);
+  }
+  25% {
+    color: #ff0022;
+    text-shadow: 3px 0 0 #000000, -3px 0 0 #ff0022;
+    transform: skew(2deg) translate(1px, -1px);
+  }
+  60% {
+    color: #000000;
+    text-shadow: -1px 0 0 #ff0022, 1px 0 0 #000000;
+    transform: skew(0deg) translate(0, 0);
+  }
+  100% {
+    color: #000000;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    transform: skew(0deg) translate(0, 0);
+  }
 }

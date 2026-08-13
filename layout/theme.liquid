@@ -306,7 +306,7 @@
           const length = originalText.length;
           let iteration = 0;
           
-          el.classList.add('is-glitching');
+          el.classList.add('is-glitching-hover');
           
           const timer = setInterval(() => {
             let scramble = '';
@@ -323,23 +323,17 @@
             if (iteration >= length) {
               clearInterval(timer);
               el.textContent = originalText;
-              el.classList.remove('is-glitching');
+              el.classList.remove('is-glitching-hover');
               el.dataset.isScrambling = 'false';
             }
           }, 30);
         }
 
+        // Trigger ONLY on hover / mouseover over title links & headings
         document.addEventListener('mouseover', function(e) {
           const target = e.target.closest('.card__heading a, .product__title h1, .product__title h2, .scramble-hover-title');
           if (target) {
             scrambleElement(target);
-          }
-        });
-
-        window.addEventListener('load', function() {
-          const mainTitle = document.querySelector('.product__title h1, .product__title h2');
-          if (mainTitle) {
-            setTimeout(() => scrambleElement(mainTitle), 300);
           }
         });
       })();
