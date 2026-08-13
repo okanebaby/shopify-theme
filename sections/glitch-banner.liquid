@@ -1,5 +1,5 @@
 {%- comment -%}
-  Custom Glitch Slogan Section - Spray Paint Glow & Color Shift
+  Custom Glitch Slogan Section - White Theme with Black Slogan & Text Underglow
 {%- endcomment -%}
 
 <style>
@@ -13,14 +13,10 @@
     font-display: swap;
   }
 
-  .glitch-banner-wrapper,
-  .glitch-banner-wrapper * {
-    background-color: #000000 !important;
-    background: #000000 !important;
-    border: none !important;
-  }
-
   .glitch-banner-wrapper {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    border: none !important;
     padding: 5rem 1rem !important;
     min-height: 220px !important;
     display: flex !important;
@@ -35,9 +31,10 @@
   .glitch-heading-container {
     position: relative !important;
     display: inline-block !important;
+    background: transparent !important;
   }
 
-  /* Spray Paint Ambient Glow Element - Stronger White Glow */
+  /* Spray Paint Ambient Glow Element - Dark Spray Glow for White Background */
   .spray-glow {
     position: absolute !important;
     top: 50% !important;
@@ -45,18 +42,18 @@
     transform: translate(-50%, -50%) !important;
     width: 125% !important;
     height: 170% !important;
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.18) 45%, transparent 80%) !important;
-    filter: blur(30px) !important;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 80%) !important;
+    filter: blur(25px) !important;
     z-index: 1 !important;
     pointer-events: none !important;
     transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease !important;
     border-radius: 50% !important;
   }
 
-  /* Red Spray Glow when in State 2 ("LIMITED STOCK AVAILABLE") - Subtler Red Glow */
+  /* Red Spray Glow when in State 2 ("LIMITED STOCK AVAILABLE") */
   .glitch-heading-container.is-red .spray-glow {
-    background: radial-gradient(ellipse at center, rgba(255, 0, 34, 0.28) 0%, rgba(255, 0, 34, 0.08) 50%, transparent 80%) !important;
-    filter: blur(20px) !important;
+    background: radial-gradient(ellipse at center, rgba(255, 0, 34, 0.22) 0%, rgba(255, 0, 34, 0.06) 50%, transparent 80%) !important;
+    filter: blur(25px) !important;
   }
 
   h2.glitch-heading-text,
@@ -65,8 +62,8 @@
     font-size: clamp(1.8rem, 5.2vw, 5.5rem) !important;
     font-weight: 400 !important;
     font-style: normal !important;
-    color: #ffffff !important;
-    text-shadow: 0 0 28px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 0.55) !important;
+    color: #000000 !important;
+    text-shadow: 0 0 16px rgba(0, 0, 0, 0.35), 0 0 6px rgba(0, 0, 0, 0.18) !important;
     line-height: 1.15 !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -77,10 +74,11 @@
     display: inline-block !important;
     white-space: nowrap !important;
     user-select: none !important;
+    background: transparent !important;
     transition: color 0.3s ease, text-shadow 0.3s ease !important;
   }
 
-  /* State 2: Red Text for "LIMITED STOCK AVAILABLE" - Subtler Red Glow */
+  /* State 2: Red Text for "LIMITED STOCK AVAILABLE" */
   h2.glitch-heading-text.is-sans,
   .glitch-heading-text.is-sans {
     font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
@@ -170,7 +168,7 @@
       const phrase2 = heading.dataset.text2 || "LIMITED STOCK AVAILABLE";
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       
-      let currentState = 1; // 1 = "Me Against Myself" (White), 2 = "LIMITED STOCK AVAILABLE" (Red)
+      let currentState = 1; // 1 = "Me Against Myself" (Black), 2 = "LIMITED STOCK AVAILABLE" (Red)
       let isAnimating = false;
 
       function runGlitchTransition(toState) {
@@ -205,7 +203,7 @@
           iteration += 1.2;
 
           if (iteration >= length) {
-            clearInterval(timer);
+            clearInterval(interval);
             heading.textContent = targetText;
             heading.classList.remove('is-glitching');
             isAnimating = false;

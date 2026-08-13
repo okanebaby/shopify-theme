@@ -3136,144 +3136,6 @@ button[type="submit"]:hover,
 }
 
 /* ==========================================================================
-   PREMIUM STREETWEAR HEADER & ANIMATED DROPDOWNS
-   ========================================================================== */
-
-/* Header Container & Glassmorphic Background */
-.header-wrapper {
-  background: rgba(10, 10, 12, 0.95) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 100 !important;
-  transition: all 0.3s ease !important;
-}
-
-header.header {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
-}
-
-/* Header Navigation Menu Items */
-.header__menu-item {
-  font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
-  font-size: 0.95rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.12em !important;
-  text-transform: uppercase !important;
-  color: rgba(255, 255, 255, 0.75) !important;
-  padding: 0.8rem 1.2rem !important;
-  position: relative !important;
-  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  text-decoration: none !important;
-  display: inline-flex !important;
-  align-items: center !important;
-}
-
-/* Remove default static browser underlines */
-.header__menu-item span,
-.header__menu-item:hover span {
-  text-decoration: none !important;
-}
-
-/* Sliding Animated Underline Effect on Hover */
-.header__menu-item::after {
-  content: '' !important;
-  position: absolute !important;
-  bottom: 4px !important;
-  left: 50% !important;
-  width: 0% !important;
-  height: 2px !important;
-  background: #ffffff !important;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
-  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  border-radius: 2px !important;
-}
-
-.header__menu-item:hover {
-  color: #ffffff !important;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4) !important;
-  transform: translateY(-1px) !important;
-}
-
-.header__menu-item:hover::after,
-  header-menu details-disclosure:hover > details > .mega-menu__content,
-  .header__inline-menu details-disclosure:hover > details > .header__submenu,
-  .header__inline-menu details-disclosure:hover > details[open] > .header__submenu {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-  }
-}
-
-/* Animated Dropdown Submenu Container */
-.header__submenu,
-details > .header__submenu {
-  background: #111116 !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85) !important;
-  border-radius: 0px !important;
-  padding: 0.8rem 0 !important;
-  min-width: 14rem !important;
-  z-index: 101 !important;
-
-  /* Smooth Dropdown Opening Animation */
-  animation: headerSubmenuFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-}
-
-@keyframes headerSubmenuFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Dropdown Menu Links */
-.header__submenu .header__menu-item {
-  display: flex !important;
-  align-items: center !important;
-  padding: 0.65rem 1.4rem !important;
-  font-size: 0.85rem !important;
-  color: rgba(255, 255, 255, 0.7) !important;
-  border-left: 2px solid transparent !important;
-  transition: background-color 0.2s ease, color 0.2s ease, border-left-color 0.2s ease, padding-left 0.2s ease !important;
-}
-
-.header__submenu .header__menu-item::after {
-  display: none !important;
-}
-
-.header__submenu .header__menu-item:hover {
-  background-color: rgba(255, 255, 255, 0.08) !important;
-  color: #ffffff !important;
-  border-left-color: #ffffff !important;
-  padding-left: 1.8rem !important;
-  transform: none !important;
-}
-
-/* Action Icons (Search & Cart) Micro-Animations */
-.header__icon {
-  color: #ffffff !important;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease !important;
-}
-
-.header__icon:hover {
-  color: #ffffff !important;
-  transform: scale(1.18) !important;
-}
-
-.header__icon .icon {
-  stroke-width: 2.2px !important;
-}
-
-/* ==========================================================================
    CALLIGRAPHIC SCRIPT FONT & GLITCH BANNER STYLES
    ========================================================================== */
 
@@ -3606,10 +3468,16 @@ details-disclosure:hover .icon-caret {
 }
 
 /* ==========================================================================
-   REVERT STORE FONTS & APPLY SITE-WIDE TEXT UNDERGLOW
+   WHITE THEME & SITE-WIDE BLACK TEXT UNDERGLOW
    ========================================================================== */
 
-/* Restore clean streetwear fonts */
+/* Global white background & black text */
+body, html, .gradient, .page-width, main, section {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Clean streetwear fonts */
 h1, h2, h3, h4, h5, h6,
 .h0, .h1, .h2, .h3, .h4, .h5,
 .header__menu-item, .list-menu__item, .menu-drawer__menu-item,
@@ -3618,11 +3486,12 @@ h1, h2, h3, h4, h5, h6,
 .footer-block__heading,
 .button, .btn {
   font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
+  color: #000000 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
 }
 
-/* Site-Wide Glowing Text Effect */
+/* Site-Wide Glowing Black Text Effect */
 h1, h2, h3, h4, h5, h6,
 .h0, .h1, .h2, .h3, .h4, .h5,
 p, span, a, li, button,
@@ -3631,7 +3500,8 @@ p, span, a, li, button,
 .card__heading, .product__title,
 .price, .price-item,
 .footer-block__heading {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.45), 0 0 20px rgba(255, 255, 255, 0.25) !important;
+  color: #000000 !important;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Retain Milton One for Slogan Heading & Hero Text */
