@@ -82,7 +82,7 @@
     transition: color 0.3s ease, text-shadow 0.3s ease !important;
   }
 
-  /* State 2: Red Bold Uppercase Crisp Text (No Glow Blob) */
+  /* State 2: Red Bold Uppercase Text with Vivid Red Underglow */
   h2.glitch-heading-text.is-sans,
   .glitch-heading-text.is-sans {
     font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
@@ -90,7 +90,10 @@
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
     color: #ff0022 !important;
-    text-shadow: none !important;
+    text-shadow: 
+      0 0 6px #ff0022,
+      0 0 16px rgba(255, 0, 34, 0.75),
+      0 0 30px rgba(255, 0, 34, 0.45) !important;
   }
 
   /* Subtle Sleek Cyber Glitch RGB Split Effects */
