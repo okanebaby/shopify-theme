@@ -324,15 +324,13 @@
                 {{- block.settings.text -}}
               </p>
             {%- when 'title' -%}
-              <div class="product__title product-glitch-container" {{ block.shopify_attributes }}>
-                <div class="spray-glow"></div>
-                <h1
-                  class="product-glitch-title"
-                  data-text-1="{{ product.title | escape }}"
-                  data-text-2="{{ product.title | uppercase }}"
-                >
-                  {{ product.title | escape }}
-                </h1>
+              <div class="product__title" {{ block.shopify_attributes }}>
+                <h1>{{ product.title | escape }}</h1>
+                <a href="{{ product.url }}" class="product__title">
+                  <h2 class="h1">
+                    {{ product.title | escape }}
+                  </h2>
+                </a>
               </div>
             {%- when 'price' -%}
               <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
@@ -357,11 +355,8 @@
               </div>
             {%- when 'description' -%}
               {%- if product.description != blank -%}
-                <div class="product__description rte quick-add-hidden product-glitch-container description-glitch-container" {{ block.shopify_attributes }}>
-                  <div class="spray-glow"></div>
-                  <div class="product-description-glow">
-                    {{ product.description }}
-                  </div>
+                <div class="product__description rte quick-add-hidden">
+                  {{ product.description }}
                 </div>
               {%- endif -%}
             {%- when 'custom_liquid' -%}
