@@ -3148,3 +3148,19 @@ details,
 .card__heading {
   pointer-events: auto !important;
 }
+
+/* 7. Center Product Grid Items horizontally */
+.product-grid,
+.grid.product-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+}
+
+.product-grid .grid__item {
+  max-width: 340px !important;
+  width: 100% !important;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
