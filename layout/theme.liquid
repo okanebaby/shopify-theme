@@ -296,9 +296,9 @@
       (function() {
         const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         
-        function scrambleElement(el) {
-          if (el.dataset.isScrambling === 'true') return;
-          el.dataset.isScrambling = 'true';
+        function scrambleOnScroll(el) {
+          if (el.dataset.scrambleDone === 'true') return;
+          el.dataset.scrambleDone = 'true';
           
           const originalText = el.dataset.originalText || el.textContent.trim();
           if (!el.dataset.originalText) el.dataset.originalText = originalText;
@@ -328,24 +328,40 @@
               el.style.textShadow = '0 0 1px rgba(0, 0, 0, 0.3)';
             }
             
-            // 3. Complete & settle cleanly in original BLACK writing
+            // 3. Complete & settle in original BLACK writing
             if (iteration >= length) {
               clearInterval(timer);
               el.textContent = originalText;
               el.style.color = '#000000';
               el.style.textShadow = 'none';
-              el.dataset.isScrambling = 'false';
             }
           }, 28);
         }
 
-        // Trigger ONLY on hover / mouseover over title links & headings
-        document.addEventListener('mouseover', function(e) {
-          const target = e.target.closest('.card__heading a, .product__title h1, .product__title h2, .scramble-hover-title');
-          if (target) {
-            scrambleElement(target);
+        // Trigger ONCE when scrolling past each product title / heading
+        function initScrollObserver() {
+          const targets = document.querySelectorAll('.card__heading a, .product__title h1, .product__title h2, .scramble-hover-title');
+          if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  scrambleOnScroll(entry.target);
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.15 });
+
+            targets.forEach(target => observer.observe(target));
+          } else {
+            targets.forEach(scrambleOnScroll);
           }
-        });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initScrollObserver);
+        } else {
+          initScrollObserver();
+        }
       })();
     </script>
   </body>

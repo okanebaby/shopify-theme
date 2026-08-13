@@ -4075,7 +4075,10 @@ span.badge--sold-out,
 
 /* Ensure whole product card link is fully clickable */
 .card-wrapper a,
-.card__heading a.full-unstyled-link {
+.card__heading a.full-unstyled-link,
+.card__media-link {
+  display: block !important;
   pointer-events: auto !important;
   cursor: pointer !important;
+  text-decoration: none !important;
 }
