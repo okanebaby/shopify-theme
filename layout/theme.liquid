@@ -294,80 +294,120 @@
 
     <script>
       (function() {
-        const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        
-        function scrambleOnScroll(el) {
-          if (el.dataset.scrambleDone === 'true') return;
-          el.dataset.scrambleDone = 'true';
-          
-          const originalText = el.dataset.originalText || el.textContent.trim();
-          if (!el.dataset.originalText) el.dataset.originalText = originalText;
-          
-          const length = originalText.length;
-          let iteration = 0;
-          
-          const timer = setInterval(() => {
-            let htmlContent = '';
-            for (let i = 0; i < length; i++) {
-              if (i < iteration) {
-                // Settled character with red glitch underglow shadow
-                htmlContent += `<span style="color: #000000; text-shadow: -1.5px 0 0 #000000, 1.5px 0 0 #ff0022, 0 0 14px rgba(255, 0, 34, 0.45); font-style: italic;">${originalText[i]}</span>`;
-              } else {
-                // Active scrambling character in red glitch underglow
-                const randomChar = chars[Math.floor(Math.random() * chars.length)];
-                htmlContent += `<span style="color: #ff0022; text-shadow: -2px 0 0 #000000, 2px 0 0 #ff0022, 0 0 16px rgba(255, 0, 34, 0.6); font-style: italic;">${randomChar}</span>`;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=';
+
+        function initGlitchTitle(el) {
+          if (el.dataset.glitchInitialized === 'true') return;
+          el.dataset.glitchInitialized = 'true';
+
+          const container = el.closest('.product-glitch-container') || el.parentElement;
+          const phrase1 = el.dataset.text1 || el.dataset.scrambleText || el.textContent.trim();
+          const phrase2 = el.dataset.text2 || phrase1.toUpperCase();
+          if (!el.dataset.text1) el.setAttribute('data-text-1', phrase1);
+          if (!el.dataset.text2) el.setAttribute('data-text-2', phrase2);
+          el.setAttribute('data-text', phrase1);
+
+          let currentState = 1; // 1 = Black Italic, 2 = Red Uppercase
+          let isAnimating = false;
+
+          function runGlitchTransition(toState) {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const targetText = toState === 2 ? phrase2 : phrase1;
+            const length = Math.max(el.textContent.trim().length, targetText.length);
+            let iteration = 0;
+
+            el.classList.add('is-glitching');
+            el.setAttribute('data-text', targetText);
+
+            if (toState === 2) {
+              el.classList.add('is-red');
+              if (container) container.classList.add('is-red');
+            } else {
+              el.classList.remove('is-red');
+              if (container) container.classList.remove('is-red');
+            }
+
+            const timer = setInterval(() => {
+              let scramble = '';
+              for (let i = 0; i < length; i++) {
+                if (i < iteration) {
+                  scramble += targetText[i] || '';
+                } else {
+                  scramble += chars[Math.floor(Math.random() * chars.length)];
+                }
               }
-            }
-            el.innerHTML = htmlContent;
-            iteration += 1.3;
-            
-            // Complete & settle into original heading with red underglow text shadow
-            if (iteration >= length) {
-              clearInterval(timer);
-              el.textContent = originalText;
-              el.style.color = '#000000';
-              el.style.textShadow = '-1.5px 0 0 #000000, 1.5px 0 0 #ff0022, 0 0 14px rgba(255, 0, 34, 0.45)';
-            }
-          }, 28);
-        }
+              el.textContent = scramble;
+              iteration += 1.3;
 
-        function initScrollObserver() {
-          const selector = '.card__heading a, .card__heading, .product__title h1, .product__title h2, .scramble-hover-title, .featured-glitch-heading, .title-wrapper .title, h2.title';
-          const targets = document.querySelectorAll(selector);
+              if (iteration >= length) {
+                clearInterval(timer);
+                el.textContent = targetText;
+                el.classList.remove('is-glitching');
+                isAnimating = false;
+                currentState = toState;
+              }
+            }, 30);
+          }
 
+          // Hover Interactivity
+          el.addEventListener('mouseenter', function() {
+            runGlitchTransition(currentState === 1 ? 2 : 1);
+          });
+
+          // Click Interactivity: Allow normal link navigation for <a> tags
+          el.addEventListener('click', function(e) {
+            if (el.tagName === 'A' && el.getAttribute('href')) {
+              // Standard link navigation proceeds
+            } else {
+              runGlitchTransition(currentState === 1 ? 2 : 1);
+            }
+          });
+
+          // Periodic Auto-Glitch Loop
+          setInterval(function() {
+            runGlitchTransition(currentState === 1 ? 2 : 1);
+          }, 5500);
+
+          // Scroll into view trigger
           if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  scrambleOnScroll(entry.target);
-                  observer.unobserve(entry.target);
+            const observer = new IntersectionObserver(function(entries) {
+              entries.forEach(function(entry) {
+                if (entry.isIntersecting && currentState === 1) {
+                  runGlitchTransition(2);
                 }
               });
-            }, { threshold: 0.05 });
-
-            targets.forEach(target => observer.observe(target));
-          } else {
-            targets.forEach(scrambleOnScroll);
+            }, { threshold: 0.1 });
+            observer.observe(el);
           }
         }
 
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', initScrollObserver);
-        } else {
-          initScrollObserver();
-        }
-        window.addEventListener('load', initScrollObserver);
-        window.addEventListener('scroll', function() {
-          const selector = '.card__heading a, .card__heading, .product__title h1, .product__title h2, .scramble-hover-title, h2.title';
-          document.querySelectorAll(selector).forEach(el => {
-            if (el.dataset.scrambleDone !== 'true') {
-              const rect = el.getBoundingClientRect();
-              if (rect.top <= window.innerHeight * 0.9 && rect.bottom >= 0) {
-                scrambleOnScroll(el);
+        function initAllGlitchTitles() {
+          const selector = '.product-glitch-title, .card__heading a, .product__title h1, .scramble-hover-title';
+          document.querySelectorAll(selector).forEach(initGlitchTitle);
+
+          // Card Product Click Navigation Fallback
+          document.querySelectorAll('.card-wrapper, .product-card-wrapper').forEach(function(card) {
+            if (card.dataset.cardClickable === 'true') return;
+            card.dataset.cardClickable = 'true';
+            card.addEventListener('click', function(e) {
+              // Ignore clicks on buttons, forms, input elements or quick add triggers
+              if (e.target.closest('button, input, form, select, option, modal-opener, .quick-add')) return;
+              const link = card.querySelector('a[href]');
+              if (link && link.href) {
+                window.location.href = link.href;
               }
-            }
+            });
           });
-        }, { passive: true });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initAllGlitchTitles);
+        } else {
+          initAllGlitchTitles();
+        }
+        window.addEventListener('load', initAllGlitchTitles);
       })();
     </script>
   </body>

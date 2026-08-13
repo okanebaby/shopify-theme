@@ -4051,16 +4051,47 @@ span.badge--sold-out,
 }
 
 /* ==========================================================================
-   PRODUCT TITLE TIMES NEW ROMAN ITALIC & RED GLITCH UNDERGLOW SYSTEM
+   PRODUCT TITLE GLITCH ENGINE & INTERACTIVE CARD CLICKABILITY SYSTEM
    ========================================================================== */
 
-.scramble-hover-title,
-.card-wrapper .card__heading a,
-.card__heading a,
-.product__title h1,
-.product__title h2,
-h1.product-title {
-  font-family: 'Times New Roman', Times, Baskerville, Georgia, serif !important;
+/* Product Glitch Container & Ambient Spray Glow */
+.product-glitch-container {
+  position: relative !important;
+  display: inline-block !important;
+  background: transparent !important;
+  width: auto !important;
+}
+
+.product-glitch-container .spray-glow {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 140% !important;
+  height: 180% !important;
+  background: radial-gradient(ellipse at center, rgba(255, 0, 34, 0.25) 0%, rgba(255, 0, 34, 0.08) 50%, transparent 80%) !important;
+  filter: blur(20px) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  transition: opacity 0.35s ease, filter 0.35s ease !important;
+  border-radius: 50% !important;
+  opacity: 0;
+}
+
+.product-glitch-container.is-red .spray-glow,
+.product-glitch-container:hover .spray-glow,
+.card-wrapper:hover .spray-glow {
+  opacity: 1 !important;
+  filter: blur(24px) !important;
+}
+
+/* State 1: Classic Script / Serif Font with Dark Outline & Red Highlight Shadow */
+.product-glitch-title,
+a.product-glitch-title,
+.card__heading a.product-glitch-title,
+.product__title h1.product-glitch-title,
+.scramble-hover-title {
+  font-family: 'Milton One Local', 'Times New Roman', Times, Baskerville, Georgia, serif !important;
   font-style: italic !important;
   font-size: clamp(1.8rem, 3.2vw, 2.6rem) !important;
   font-weight: 700 !important;
@@ -4071,27 +4102,79 @@ h1.product-title {
      1.5px 0 0 #ff0022,
      0 0 14px rgba(255, 0, 34, 0.45) !important;
   position: relative !important;
+  z-index: 2 !important;
   display: inline-block !important;
   cursor: pointer !important;
   pointer-events: auto !important;
-  z-index: 10 !important;
-  transition: color 0.25s ease, text-shadow 0.25s ease !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease, font-family 0.3s ease !important;
 }
 
-/* Red Glitch Hover Underglow Animation for Titles */
-.card-wrapper:hover .card__heading a,
-.card-wrapper:hover .scramble-hover-title,
-.card__heading a:hover,
-.product__title h1:hover,
-.scramble-hover-title:hover {
+/* State 2: Red Bold Uppercase Glitch Font (matches Glitch Slogan Section / Image 2) */
+.product-glitch-title.is-red,
+a.product-glitch-title.is-red,
+.card__heading a.product-glitch-title.is-red,
+.product__title h1.product-glitch-title.is-red,
+.product-glitch-container.is-red .product-glitch-title {
+  font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+  font-weight: 900 !important;
+  font-style: italic !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
   color: #ff0022 !important;
   text-shadow: 
+    0 0 14px rgba(255, 0, 34, 0.9),
+    0 0 28px rgba(255, 0, 34, 0.5),
     -2px 0 0 #000000,
-     2px 0 0 #ff0022,
-     0 0 18px rgba(255, 0, 34, 0.7) !important;
+     2px 0 0 #ff0022 !important;
 }
 
-/* Direct Product Card Media Link & Title Overlay Clickability */
+/* Cyber RGB Split Glitch Effects */
+.product-glitch-title.is-glitching {
+  animation: product-glitch-skew 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both !important;
+}
+
+.product-glitch-title.is-glitching::before,
+.product-glitch-title.is-glitching::after {
+  content: attr(data-text) !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  clip: rect(0, 0, 0, 0) !important;
+  font-family: inherit !important;
+  background: transparent !important;
+  white-space: nowrap !important;
+}
+
+.product-glitch-title.is-glitching::before {
+  left: 2px !important;
+  text-shadow: -2px 0 rgba(255, 0, 85, 0.8) !important;
+  animation: glitch-split-1 0.2s infinite linear alternate-reverse !important;
+}
+
+.product-glitch-title.is-glitching::after {
+  left: -2px !important;
+  text-shadow: 2px 0 rgba(0, 229, 255, 0.8) !important;
+  animation: glitch-split-2 0.2s infinite linear alternate-reverse !important;
+}
+
+@keyframes product-glitch-skew {
+  0% { transform: skew(0deg); }
+  30% { transform: skew(-2deg); }
+  70% { transform: skew(2deg); }
+  100% { transform: skew(0deg); }
+}
+
+/* Card & Link Clickability Rules */
+.card-wrapper,
+.card,
+.card__inner,
+.card__media {
+  cursor: pointer !important;
+}
+
 .card-wrapper a,
 .card__heading a,
 .card__heading a.full-unstyled-link,
@@ -4103,6 +4186,19 @@ h1.product-title {
 
 .card__heading a::after,
 .card--standard .card__heading a::after {
-  content: none !important;
-  display: none !important;
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 1 !important;
+}
+
+.card__badge,
+.quick-add,
+.card-information .price {
+  position: relative !important;
+  z-index: 2 !important;
 }
