@@ -217,20 +217,15 @@
       }
 
       // 1. Scroll Position Check
-      function checkScrollPosition() {
-        const rect = heading.getBoundingClientRect();
-        const winHeight = window.innerHeight || document.documentElement.clientHeight;
-
-        if (rect.top <= winHeight * 0.75 && rect.bottom >= 0) {
-          if (currentState !== 2) runGlitchTransition(2);
-        } else if (rect.top > winHeight * 0.85) {
-          if (currentState !== 1) runGlitchTransition(1);
+      // 1. Scroll Movement Glitch Trigger
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (Math.abs(currentScrollY - lastScrollY) > 12) {
+          lastScrollY = currentScrollY;
+          runGlitchTransition(currentState === 1 ? 2 : 1);
         }
-      }
-
-      window.addEventListener('scroll', checkScrollPosition, { passive: true });
-      document.addEventListener('scroll', checkScrollPosition, { passive: true });
-      checkScrollPosition();
+      }, { passive: true });
 
       // 2. Smooth Auto-Loop (glitches every 6s)
       setInterval(() => {
