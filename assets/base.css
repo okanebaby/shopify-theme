@@ -2989,10 +2989,18 @@ details-disclosure > details {
   --media-radius: 0px !important;
 }
 
+/* ==========================================================================
+   PURE WHITE STOREFRONT & BLACK STREETWEAR TYPOGRAPHY WITH DARK TEXT GLOW
+   ========================================================================== */
+
+html,
 body,
 .gradient,
 .page-width,
 .header-wrapper,
+.header,
+header,
+.announcement-bar,
 .footer,
 .color-scheme-1,
 .color-scheme-2,
@@ -3000,23 +3008,54 @@ body,
 .color-scheme-4,
 .color-scheme-5,
 main,
-#MainContent {
-  background-color: #0d0d0d !important;
-  color: #ffffff !important;
-  font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
+#MainContent,
+.section,
+section,
+.drawer,
+.menu-drawer,
+.search-modal,
+.modal__content,
+.card,
+.card__inner,
+.card-wrapper {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
 }
 
-/* Typography Overrides */
+/* All Writing & Header Typography - Deep Black */
 h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6,
+.h0, .h1, .h2, .h3, .h4, .h5, .h6,
 .title, .heading, .card__heading,
 .announcement-bar__message,
-.header__menu-item {
+.header__heading-link,
+.header__menu-item,
+.list-menu__item,
+.menu-drawer__menu-item,
+.product__title,
+.price, .price-item, .price__regular,
+.footer-block__heading,
+p, span, a, li, label, strong, b {
+  color: #000000 !important;
   font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
-  font-weight: 700 !important;
-  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Header Links & Icons specifically */
+.header__menu-item,
+.header__menu-item span,
+.header__heading-link,
+.header__icon,
+.header__icon svg,
+.announcement-bar__message {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+.header__menu-item::after {
+  background: #000000 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
 }
 
 /* Enforce Strict Square Corners */
@@ -3053,9 +3092,9 @@ textarea,
 .button--primary,
 button[type="submit"],
 .product-form__submit {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border: 1px solid #ffffff !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #000000 !important;
   font-family: 'Roboto Condensed', sans-serif !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
@@ -3068,71 +3107,47 @@ button[type="submit"],
 .button--primary:hover,
 button[type="submit"]:hover,
 .product-form__submit:hover {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border-color: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
 }
 
 .button--secondary {
   background-color: transparent !important;
-  color: #ffffff !important;
-  border: 1px solid #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
 }
 
 .button--secondary:hover {
-  background-color: #ffffff !important;
-  color: #000000 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
 }
 
 /* Product Cards & Borders */
 .card {
-  background-color: #141414 !important;
-  border: 1px solid #262626 !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e5e5e5 !important;
 }
 
 .card__inner {
-  background-color: #1a1a1a !important;
+  background-color: #f8f8f8 !important;
 }
 
-.price, .price-item, .price__regular {
-  color: #ffffff !important;
-  font-family: 'Roboto Condensed', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 1.1rem !important;
-}
-
-/* Header & Announcement Styling */
+/* Header & Announcement Borders */
 .announcement-bar {
-  background-color: #000000 !important;
-  border-bottom: 1px solid #262626 !important;
-  color: #ffffff !important;
-}
-
-.announcement-bar__message {
-  font-weight: 800 !important;
-  letter-spacing: 0.1em !important;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e5e5e5 !important;
+  color: #000000 !important;
 }
 
 .header-wrapper {
-  border-bottom: 1px solid #262626 !important;
-}
-
-.header__heading-link {
-  font-family: 'Roboto Condensed', sans-serif !important;
-  font-weight: 900 !important;
-  letter-spacing: 0.12em !important;
-  text-transform: uppercase !important;
-  font-size: 1.6rem !important;
-}
-
-.header__menu-item {
-  font-size: 0.95rem !important;
-  font-weight: 600 !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid #e5e5e5 !important;
 }
 
 .footer {
-  border-top: 1px solid #262626 !important;
-  background-color: #080808 !important;
+  border-top: 1px solid #e5e5e5 !important;
+  background-color: #ffffff !important;
 }
 
 /* ==========================================================================
