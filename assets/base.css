@@ -3528,7 +3528,7 @@ header-menu details[open] > .header__submenu {
   color: #000000 !important;
 }
 
-/* 2. Universal Deep Black Writing & Header Typography */
+/* 2. Universal Times New Roman Italic Writing & Header Typography */
 *,
 *::before,
 *::after,
@@ -3546,9 +3546,11 @@ p, span, a, li, label, strong, b,
 .price, .price-item, .price__regular,
 .footer-block__heading,
 .quantity__input,
-.field__input {
+.field__input,
+.button, .btn {
+  font-family: 'Times New Roman', Times, Baskerville, Georgia, serif !important;
+  font-style: italic !important;
   color: #000000 !important;
-  font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
   text-shadow: 
     0 0 3px #000000,
     0 0 8px rgba(0, 0, 0, 0.7),
@@ -3556,7 +3558,47 @@ p, span, a, li, label, strong, b,
     0 0 30px rgba(0, 0, 0, 0.2) !important;
 }
 
-/* 3. Header Icons & Carets - Deep Black */
+/* 3. Header Option Spring Hover Animations & Glowing Underline */
+.header__menu-item,
+.list-menu__item,
+.menu-drawer__menu-item {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.3s ease, color 0.3s ease !important;
+}
+
+.header__menu-item:hover,
+.list-menu__item:hover,
+.menu-drawer__menu-item:hover {
+  transform: translateY(-3px) scale(1.08) !important;
+  color: #000000 !important;
+  text-shadow: 
+    0 0 5px #000000,
+    0 0 14px rgba(0, 0, 0, 0.9),
+    0 0 28px rgba(0, 0, 0, 0.6),
+    0 0 45px rgba(0, 0, 0, 0.3) !important;
+}
+
+.header__menu-item::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 2px !important;
+  left: 50% !important;
+  width: 0% !important;
+  height: 2px !important;
+  background: #000000 !important;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.8) !important;
+  transition: width 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), left 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  border-radius: 2px !important;
+}
+
+.header__menu-item:hover::after {
+  width: 90% !important;
+  left: 5% !important;
+}
+
+/* 4. Header Icons & Carets - Deep Black */
 .header__icon,
 .header__icon svg,
 .header__icon svg path,
@@ -3569,7 +3611,7 @@ svg.icon-caret,
   color: #000000 !important;
 }
 
-/* 4. Retain Milton One for Slogan & Hero Text */
+/* 5. Retain Milton One for Slogan & Hero Text */
 .milton-font,
 .script-font {
   font-family: 'Milton One Local', 'Milton One', 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
@@ -3577,10 +3619,11 @@ svg.icon-caret,
   text-transform: none !important;
 }
 
-/* 5. Glitch target phrase (LIMITED STOCK AVAILABLE) remains Red when glitching */
+/* 6. Glitch target phrase (LIMITED STOCK AVAILABLE) */
 .glitch-heading-text.is-sans,
 h2.glitch-heading-text.is-sans {
   color: #ff0022 !important;
-  font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+  font-family: 'Times New Roman', Times, serif !important;
+  font-style: italic !important;
   text-shadow: 0 0 14px rgba(255, 0, 34, 0.4) !important;
 }
