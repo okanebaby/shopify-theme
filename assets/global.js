@@ -945,3 +945,28 @@ class ProductRecommendations extends HTMLElement {
 }
 
 customElements.define('product-recommendations', ProductRecommendations);
+
+/* Header Menu Desktop Hover-to-Open Controller */
+class HeaderMenu extends HTMLElement {
+  constructor() {
+    super();
+    this.details = this.querySelector('details');
+    if (!this.details) return;
+
+    this.addEventListener('mouseenter', () => {
+      if (window.innerWidth >= 990) {
+        this.details.setAttribute('open', '');
+      }
+    });
+
+    this.addEventListener('mouseleave', () => {
+      if (window.innerWidth >= 990) {
+        this.details.removeAttribute('open');
+      }
+    });
+  }
+}
+
+if (!customElements.get('header-menu')) {
+  customElements.define('header-menu', HeaderMenu);
+}
