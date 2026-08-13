@@ -4180,44 +4180,37 @@ a.product-glitch-title.is-red,
   text-shadow: none !important;
 }
 
-/* Card & Dedicated Overlay Link Clickability Rules */
+/* Card & Dedicated Top-Level Wrapper Link Clickability Rules */
 .card-wrapper,
 .product-card-wrapper {
   position: relative !important;
   cursor: pointer !important;
 }
 
-a.card-overlay-link {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
+a.card-wrapper-link,
+.card-wrapper-link {
+  display: block !important;
+  position: relative !important;
   width: 100% !important;
   height: 100% !important;
-  z-index: 15 !important;
-  cursor: pointer !important;
-  display: block !important;
-  background: transparent !important;
-  border: none !important;
-  outline: none !important;
-  pointer-events: auto !important;
-}
-
-.card,
-.card__inner,
-.card__media {
-  cursor: pointer !important;
-}
-
-.card-wrapper a,
-.card__heading a,
-.card__heading a.full-unstyled-link,
-.card__media-link {
-  pointer-events: auto !important;
-  cursor: pointer !important;
   text-decoration: none !important;
-  user-select: text !important;
+  color: inherit !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+a.card-wrapper-link *,
+.card-wrapper,
+.card-wrapper *,
+.card,
+.card *,
+.card__inner,
+.card__inner *,
+.card__media,
+.card__media *,
+.card__content,
+.card__content * {
+  cursor: pointer !important;
 }
 
 .product-glitch-title,
@@ -4226,7 +4219,7 @@ a.product-glitch-title,
   user-select: text !important;
 }
 
-/* Badges (Sold Out, Sale) MUST pass clicks through to the overlay link! */
+/* Badges (Sold Out, Sale) MUST pass clicks through to the wrapper link! */
 .card__badge,
 .card-wrapper .card__badge,
 .card .card__badge,
@@ -4239,7 +4232,7 @@ a.product-glitch-title,
   z-index: 5 !important;
 }
 
-/* Keep Interactive Form Controls & Buttons Above Card Overlay Link */
+/* Keep Interactive Form Controls & Buttons Above Card Wrapper Link */
 .card-wrapper .quick-add,
 .card-wrapper button,
 .card-wrapper input,
