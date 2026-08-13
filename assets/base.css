@@ -3001,6 +3001,14 @@ details,
     0 0 24px rgba(0, 0, 0, 0.3) !important;
 }
 
+h2.glitch-heading-text,
+.glitch-heading-text,
+.password-glitch-heading {
+  font-family: 'Milton One Local', 'Milton One', 'Pinyon Script', 'Great Vibes', 'Italianno', cursive !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
 .glitch-heading-text.is-sans,
 .product-glitch-title.is-red,
 .is-red-glitch {
