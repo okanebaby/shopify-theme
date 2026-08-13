@@ -234,7 +234,100 @@
     if (Shopify.designMode) {
       document.documentElement.classList.add('shopify-design-mode');
     }
-    </script>
+    <style id="AntigravityDirectOverrides">
+      /* 1. Complete Suppression of All Sold Out Badges */
+      .card__badge,
+      .card-wrapper .card__badge,
+      .card .card__badge,
+      .card-information .card__badge,
+      .badge--sold-out,
+      .price__badge-sold-out,
+      .badge.price__badge-sold-out,
+      span.badge--sold-out,
+      .card .badge,
+      .card__badge .badge,
+      .card .badge--bottom-left,
+      .card-information .badge,
+      .card-wrapper .badge,
+      .badge,
+      .price--sold-out .price__badge-sold-out,
+      .price .price__badge-sold-out,
+      span.price__badge-sold-out,
+      [class*="badge-sold-out"],
+      [class*="price__badge-sold-out"],
+      [id*="Badge-"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        max-height: 0 !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+      }
+
+      /* 2. Universal Hand Pointer Cursor & Card Wrapper Link */
+      .card-wrapper,
+      .product-card-wrapper,
+      a.card-wrapper-link,
+      .card-wrapper-link {
+        display: block !important;
+        position: relative !important;
+        width: 100% !important;
+        height: 100% !important;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+
+      .card-wrapper *,
+      .product-card-wrapper *,
+      a.card-wrapper-link *,
+      .card,
+      .card *,
+      .card__inner,
+      .card__inner *,
+      .card__media,
+      .card__media *,
+      .card__content,
+      .card__content * {
+        cursor: pointer !important;
+      }
+
+      /* 3. Vivid Brand Red Text Selection */
+      ::selection {
+        background-color: #ff0022 !important;
+        color: #ffffff !important;
+        text-shadow: none !important;
+      }
+
+      ::-moz-selection {
+        background-color: #ff0022 !important;
+        color: #ffffff !important;
+        text-shadow: none !important;
+      }
+
+      .product-glitch-title,
+      a.product-glitch-title,
+      .glitch-heading-text {
+        user-select: text !important;
+      }
+
+      /* Keep Interactive Form Controls & Buttons Above Card Wrapper Link */
+      .card-wrapper .quick-add,
+      .card-wrapper button,
+      .card-wrapper input,
+      .card-wrapper form,
+      .card-wrapper select,
+      .quick-add {
+        position: relative !important;
+        z-index: 20 !important;
+        pointer-events: auto !important;
+      }
+    </style>
   </head>
 
   <body class="gradient">
@@ -391,11 +484,12 @@
         // Unstoppable Capture-Phase Programmatic Navigation for Product Cards
         document.addEventListener('click', function(e) {
           if (e.target.closest('button, input, form, select, option, modal-opener, .quick-add, [data-type="add-to-cart-form"]')) return;
-          const card = e.target.closest('.card-wrapper, .product-card-wrapper, .card, .grid__item');
+          const card = e.target.closest('.card-wrapper, .product-card-wrapper, .card, .grid__item, .card-wrapper-link');
           if (card) {
-            const link = card.querySelector('a[href]') || card.closest('a[href]');
-            if (link && link.href) {
-              window.location.href = link.href;
+            let link = card.tagName === 'A' ? card : (card.querySelector('a[href]') || card.closest('a[href]'));
+            let targetUrl = link ? link.getAttribute('href') : null;
+            if (targetUrl) {
+              window.location.href = targetUrl;
             }
           }
         }, true);
