@@ -291,5 +291,58 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <script>
+      (function() {
+        const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        
+        function scrambleElement(el) {
+          if (el.dataset.isScrambling === 'true') return;
+          el.dataset.isScrambling = 'true';
+          
+          const originalText = el.dataset.originalText || el.textContent.trim();
+          if (!el.dataset.originalText) el.dataset.originalText = originalText;
+          
+          const length = originalText.length;
+          let iteration = 0;
+          
+          el.classList.add('is-glitching');
+          
+          const timer = setInterval(() => {
+            let scramble = '';
+            for (let i = 0; i < length; i++) {
+              if (i < iteration) {
+                scramble += originalText[i];
+              } else {
+                scramble += chars[Math.floor(Math.random() * chars.length)];
+              }
+            }
+            el.textContent = scramble;
+            iteration += 1.4;
+            
+            if (iteration >= length) {
+              clearInterval(timer);
+              el.textContent = originalText;
+              el.classList.remove('is-glitching');
+              el.dataset.isScrambling = 'false';
+            }
+          }, 30);
+        }
+
+        document.addEventListener('mouseover', function(e) {
+          const target = e.target.closest('.card__heading a, .product__title h1, .product__title h2, .scramble-hover-title');
+          if (target) {
+            scrambleElement(target);
+          }
+        });
+
+        window.addEventListener('load', function() {
+          const mainTitle = document.querySelector('.product__title h1, .product__title h2');
+          if (mainTitle) {
+            setTimeout(() => scrambleElement(mainTitle), 300);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -4053,3 +4053,35 @@ span.badge--sold-out,
 .featured-glitch-heading.is-glitching {
   text-shadow: -2px 0 #ff0055, 2px 0 #00e5ff !important;
 }
+
+/* ==========================================================================
+   MATRIX CHARACTER SCRAMBLE & RGB SPLIT HOVER GLITCH EFFECT FOR PRODUCT TITLES
+   ========================================================================== */
+
+.scramble-hover-title,
+.card-wrapper:hover .card__heading a,
+.card-wrapper:hover .scramble-hover-title {
+  position: relative !important;
+  display: inline-block !important;
+  transition: color 0.2s ease, text-shadow 0.2s ease !important;
+}
+
+/* RGB Split Distortion on Card or Title Hover */
+.card-wrapper:hover .card__heading a,
+.card-wrapper:hover .scramble-hover-title,
+.scramble-hover-title:hover {
+  color: #000000 !important;
+  text-shadow: 
+    -2px 0 0 #ff0055,
+     2px 0 0 #00e5ff,
+     0 0 8px rgba(0, 0, 0, 0.4) !important;
+  animation: titleRgbJitter 0.25s infinite alternate !important;
+}
+
+@keyframes titleRgbJitter {
+  0% { transform: translate(0, 0) skew(0deg); }
+  25% { transform: translate(-1px, 1px) skew(-1deg); }
+  50% { transform: translate(1px, -1px) skew(1deg); }
+  75% { transform: translate(-1px, 0) skew(0deg); }
+  100% { transform: translate(1px, 1px) skew(-1deg); }
+}
