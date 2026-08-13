@@ -3627,3 +3627,95 @@ h2.glitch-heading-text.is-sans {
   font-style: italic !important;
   text-shadow: 0 0 14px rgba(255, 0, 34, 0.4) !important;
 }
+
+/* ==========================================================================
+   INTERACTIVE PRODUCT CARD & GALLERY PHOTO HOVER ANIMATIONS
+   ========================================================================== */
+
+/* 1. Product Cards (Collection Grid & Featured Product Grid) */
+.card-wrapper,
+.card,
+.card__inner,
+.product-card,
+.grid__item .card {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.3s ease !important;
+  will-change: transform, box-shadow !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* Card Hover Float Lift & Ambient Dark Drop Shadow */
+.card-wrapper:hover,
+.card:hover,
+.card-wrapper:hover .card,
+.card-wrapper:hover .card__inner,
+.grid__item:hover .card {
+  transform: translateY(-8px) scale(1.015) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18), 0 6px 12px rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Product Card Media & Image Smooth Zoom Effect */
+.card__media,
+.card__inner .media,
+.card .media {
+  overflow: hidden !important;
+}
+
+.card__media img,
+.card__inner .media img,
+.card .media img,
+.product-card img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease !important;
+  will-change: transform !important;
+}
+
+/* Image Zoom on Card Hover */
+.card-wrapper:hover .card__media img,
+.card-wrapper:hover .card__inner .media img,
+.card:hover .media img,
+.grid__item:hover .media img {
+  transform: scale(1.08) !important;
+  filter: brightness(1.04) !important;
+}
+
+/* Product Card Title & Price Hover Animation */
+.card-wrapper:hover .card__heading,
+.card:hover .card__heading,
+.card-wrapper:hover .price {
+  transform: translateY(-2px) !important;
+  text-shadow: 
+    0 0 4px #000000,
+    0 0 12px rgba(0, 0, 0, 0.8),
+    0 0 24px rgba(0, 0, 0, 0.5) !important;
+  transition: transform 0.3s ease, text-shadow 0.3s ease !important;
+}
+
+/* 2. Main Product Gallery & Hero Collage Photo Hover Animations */
+.product__media,
+.product-media-container,
+.product__modal-opener,
+.media-modal__content,
+.media,
+[class*="ai-product-hero-container"],
+[class*="ai-product-hero-image"] {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease !important;
+  cursor: pointer !important;
+}
+
+.product__media:hover,
+.product-media-container:hover,
+.product__modal-opener:hover,
+[class*="ai-product-hero-container"]:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22), 0 8px 16px rgba(0, 0, 0, 0.12) !important;
+  z-index: 5 !important;
+}
+
+.product__media img:hover,
+.product-media-container img:hover,
+.product__modal-opener img:hover,
+[class*="ai-product-hero-image"]:hover {
+  transform: scale(1.05) !important;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
