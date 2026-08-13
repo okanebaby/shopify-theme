@@ -186,12 +186,12 @@
             "products": [
               "broken-halo-set-ash-black"
             ],
-            "products_to_show": 8,
+            "products_to_show": 2,
             "show_vendor": false,
             "columns_desktop": 4,
             "columns_tablet": 3,
             "columns_mobile": "2",
-            "grid_gap": 20,
+            "grid_gap": 8,
             "section_padding": 40,
             "desktop_width_percent": 100,
             "heading_size": 32,
