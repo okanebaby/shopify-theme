@@ -3483,47 +3483,100 @@ details-disclosure:hover .icon-caret {
 }
 
 /* ==========================================================================
-   WHITE THEME & SITE-WIDE BLACK TEXT UNDERGLOW
+   UNIVERSAL WHITE THEME & BLACK WRITING SYSTEM
    ========================================================================== */
 
-/* Global white background & black text */
-body, html, .gradient, .page-width, main, section {
+/* 1. Universal Pure White Background for All Containers, Sections & Headers */
+html,
+body,
+#MainContent,
+main,
+header,
+footer,
+section,
+nav,
+aside,
+article,
+.gradient,
+.page-width,
+.header-wrapper,
+.header,
+.announcement-bar,
+.footer,
+.color-scheme-1,
+.color-scheme-2,
+.color-scheme-3,
+.color-scheme-4,
+.color-scheme-5,
+.drawer,
+.menu-drawer,
+.menu-drawer__inner-container,
+.menu-drawer__navigation,
+.search-modal,
+.modal__content,
+.card,
+.card__inner,
+.card-wrapper,
+.product-grid,
+.collection,
+.product,
+.header__submenu,
+.mega-menu__content,
+header-menu details[open] > .header__submenu {
   background-color: #ffffff !important;
+  background: #ffffff !important;
   color: #000000 !important;
 }
 
-/* Clean streetwear fonts */
+/* 2. Universal Deep Black Writing & Header Typography */
+*,
+*::before,
+*::after,
 h1, h2, h3, h4, h5, h6,
-.h0, .h1, .h2, .h3, .h4, .h5,
-.header__menu-item, .list-menu__item, .menu-drawer__menu-item,
+.h0, .h1, .h2, .h3, .h4, .h5, .h6,
+p, span, a, li, label, strong, b,
+.title, .heading, .card__heading,
 .announcement-bar__message,
-.card__heading, .product__title, .card-information,
+.header__heading-link,
+.header__menu-item,
+.header__menu-item span,
+.list-menu__item,
+.menu-drawer__menu-item,
+.product__title,
+.price, .price-item, .price__regular,
 .footer-block__heading,
-.button, .btn {
+.quantity__input,
+.field__input {
+  color: #000000 !important;
   font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
-  color: #000000 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
-}
-
-/* Site-Wide Glowing Black Text Effect */
-h1, h2, h3, h4, h5, h6,
-.h0, .h1, .h2, .h3, .h4, .h5,
-p, span, a, li, button,
-.header__menu-item, .list-menu__item,
-.announcement-bar__message,
-.card__heading, .product__title,
-.price, .price-item,
-.footer-block__heading {
-  color: #000000 !important;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Retain Milton One for Slogan Heading & Hero Text */
+/* 3. Header Icons & Carets - Deep Black */
+.header__icon,
+.header__icon svg,
+.header__icon svg path,
+.icon-caret,
+svg.icon-caret,
+.icon-search,
+.icon-cart {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+  color: #000000 !important;
+}
+
+/* 4. Retain Milton One for Slogan & Hero Text */
 .milton-font,
 .script-font {
   font-family: 'Milton One Local', 'Milton One', 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
-  font-style: normal !important;
+  color: #000000 !important;
   text-transform: none !important;
-  letter-spacing: 0.02em !important;
+}
+
+/* 5. Glitch target phrase (LIMITED STOCK AVAILABLE) remains Red when glitching */
+.glitch-heading-text.is-sans,
+h2.glitch-heading-text.is-sans {
+  color: #ff0022 !important;
+  font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+  text-shadow: 0 0 14px rgba(255, 0, 34, 0.4) !important;
 }
