@@ -1,5 +1,5 @@
 {%- comment -%}
-  Custom Glitch Slogan Section - Milton One & Self-Contained Auto/Scroll Glitch
+  Custom Glitch Slogan Section - Milton One & Sleek Smooth Transition
 {%- endcomment -%}
 
 <style>
@@ -13,12 +13,16 @@
     font-display: swap;
   }
 
-  .glitch-banner-wrapper {
+  .glitch-banner-wrapper,
+  .glitch-banner-wrapper * {
     background-color: #000000 !important;
-    border-top: 1px solid #222222 !important;
-    border-bottom: 1px solid #222222 !important;
+    background: #000000 !important;
+    border: none !important;
+  }
+
+  .glitch-banner-wrapper {
     padding: 5rem 1.5rem !important;
-    min-height: 240px !important;
+    min-height: 220px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
@@ -52,9 +56,9 @@
     letter-spacing: 0.08em !important;
   }
 
-  /* Cyber Glitch RGB Split Effects */
+  /* Subtle Sleek Cyber Glitch RGB Split Effects */
   .glitch-heading-text.is-glitching {
-    animation: glitch-skew-effect 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both !important;
+    animation: glitch-skew-subtle 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both !important;
   }
 
   .glitch-heading-text.is-glitching::before,
@@ -67,41 +71,38 @@
     height: 100% !important;
     clip: rect(0, 0, 0, 0) !important;
     font-family: inherit !important;
+    background: transparent !important;
   }
 
   .glitch-heading-text.is-glitching::before {
-    left: 3px !important;
-    text-shadow: -3px 0 #ff0055 !important;
-    animation: glitch-split-1 0.25s infinite linear alternate-reverse !important;
+    left: 1.5px !important;
+    text-shadow: -1.5px 0 rgba(255, 0, 85, 0.6) !important;
+    animation: glitch-split-1 0.2s infinite linear alternate-reverse !important;
   }
 
   .glitch-heading-text.is-glitching::after {
-    left: -3px !important;
-    text-shadow: -3px 0 #00e5ff !important;
-    animation: glitch-split-2 0.25s infinite linear alternate-reverse !important;
+    left: -1.5px !important;
+    text-shadow: 1.5px 0 rgba(0, 229, 255, 0.6) !important;
+    animation: glitch-split-2 0.2s infinite linear alternate-reverse !important;
   }
 
-  @keyframes glitch-skew-effect {
+  @keyframes glitch-skew-subtle {
     0% { transform: skew(0deg); }
-    20% { transform: skew(-3deg); }
-    40% { transform: skew(4deg); }
-    60% { transform: skew(-2deg); }
-    80% { transform: skew(2deg); }
+    30% { transform: skew(-1deg); }
+    70% { transform: skew(1deg); }
     100% { transform: skew(0deg); }
   }
 
   @keyframes glitch-split-1 {
-    0% { clip: rect(10px, 9999px, 35px, 0); }
-    33% { clip: rect(45px, 9999px, 15px, 0); }
-    66% { clip: rect(20px, 9999px, 55px, 0); }
-    100% { clip: rect(5px, 9999px, 25px, 0); }
+    0% { clip: rect(8px, 9999px, 30px, 0); }
+    50% { clip: rect(30px, 9999px, 10px, 0); }
+    100% { clip: rect(5px, 9999px, 20px, 0); }
   }
 
   @keyframes glitch-split-2 {
-    0% { clip: rect(35px, 9999px, 15px, 0); }
-    33% { clip: rect(15px, 9999px, 45px, 0); }
-    66% { clip: rect(50px, 9999px, 20px, 0); }
-    100% { clip: rect(20px, 9999px, 35px, 0); }
+    0% { clip: rect(25px, 9999px, 10px, 0); }
+    50% { clip: rect(10px, 9999px, 35px, 0); }
+    100% { clip: rect(15px, 9999px, 25px, 0); }
   }
 </style>
 
@@ -127,7 +128,7 @@
 
       const phrase1 = heading.dataset.text1 || "Me Against Myself";
       const phrase2 = heading.dataset.text2 || "LIMITED STOCK AVAILABLE";
-      const chars = '!@#$%^&*()_+/{}[]|:;<>?~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       
       let currentState = 1; // 1 = "Me Against Myself", 2 = "LIMITED STOCK AVAILABLE"
       let isAnimating = false;
@@ -159,7 +160,7 @@
             }
           }
           heading.textContent = scramble;
-          iteration += 0.6;
+          iteration += 1.2;
 
           if (iteration >= length) {
             clearInterval(timer);
@@ -168,7 +169,7 @@
             isAnimating = false;
             currentState = toState;
           }
-        }, 30);
+        }, 35);
       }
 
       // 1. Scroll Position Check
@@ -187,11 +188,11 @@
       document.addEventListener('scroll', checkScrollPosition, { passive: true });
       checkScrollPosition();
 
-      // 2. Continuous Auto-Loop Fallback (glitches every 3.5s so it's impossible to miss)
+      // 2. Smooth Auto-Loop (glitches every 6s)
       setInterval(() => {
         const nextState = currentState === 1 ? 2 : 1;
         runGlitchTransition(nextState);
-      }, 3500);
+      }, 6000);
 
       // 3. Hover / Click Replay
       heading.addEventListener('mouseenter', () => runGlitchTransition(currentState === 1 ? 2 : 1));
