@@ -306,7 +306,9 @@
           const length = originalText.length;
           let iteration = 0;
           
-          el.classList.add('is-glitching-hover');
+          // 1. Start glitching in RED
+          el.style.color = '#ff0022';
+          el.style.textShadow = '-1.5px 0 0 #000000, 1.5px 0 0 #ff0022, 0 0 8px rgba(255, 0, 34, 0.4)';
           
           const timer = setInterval(() => {
             let scramble = '';
@@ -320,13 +322,21 @@
             el.textContent = scramble;
             iteration += 1.4;
             
+            // 2. Transition to BLACK midway
+            if (iteration >= length * 0.5) {
+              el.style.color = '#000000';
+              el.style.textShadow = '0 0 1px rgba(0, 0, 0, 0.3)';
+            }
+            
+            // 3. Complete & settle cleanly in original BLACK writing
             if (iteration >= length) {
               clearInterval(timer);
               el.textContent = originalText;
-              el.classList.remove('is-glitching-hover');
+              el.style.color = '#000000';
+              el.style.textShadow = 'none';
               el.dataset.isScrambling = 'false';
             }
-          }, 30);
+          }, 28);
         }
 
         // Trigger ONLY on hover / mouseover over title links & headings
