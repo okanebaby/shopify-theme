@@ -3401,3 +3401,63 @@ details > .header__submenu {
   66% { clip: rect(50px, 9999px, 20px, 0); transform: skew(-0.2deg); }
   100% { clip: rect(20px, 9999px, 35px, 0); transform: skew(0deg); }
 }
+
+/* ==========================================================================
+   MILTON ONE CALLIGRAPHIC FONT & LARGE GLITCH BANNER
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Herr+Von+Muellerhoff&family=MonteCarlo&display=swap');
+
+@font-face {
+  font-family: 'Milton One';
+  src: url('https://fonts.cdnfonts.com/s/85257/MiltonOne.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-milton,
+.milton-font,
+.script-font {
+  font-family: 'Milton One', 'Herr Von Muellerhoff', 'Alex Brush', 'MonteCarlo', cursive !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0.04em !important;
+}
+
+.glitch-section-wrapper {
+  background-color: #000000 !important;
+  border-top: 1px solid #222222 !important;
+  border-bottom: 1px solid #222222 !important;
+  padding: 6rem 0 !important;
+  min-height: 280px !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+.glitch-banner-inner {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.glitch-banner__left {
+  width: 100% !important;
+}
+
+.glitch-banner__heading {
+  font-size: clamp(3rem, 7vw, 6.5rem) !important;
+  color: #ffffff !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  position: relative !important;
+  display: block !important;
+  letter-spacing: 0.04em !important;
+  user-select: none !important;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+}
