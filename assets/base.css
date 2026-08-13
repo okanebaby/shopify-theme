@@ -3109,17 +3109,42 @@ details,
   display: none !important;
 }
 
+/* 6. Full Product Card Clickability & Link Overlay */
+.card-wrapper {
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+.card-media-link,
 .card-wrapper a,
-.card__heading a,
-.card__heading a.full-unstyled-link,
-.card-media-link {
+.card__heading a {
   pointer-events: auto !important;
   cursor: pointer !important;
   text-decoration: none !important;
 }
 
 .card__heading a::after,
-.card--standard .card__heading a::after {
-  content: none !important;
-  display: none !important;
+.card--standard .card__heading a::after,
+.card--card .card__heading a::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 2 !important;
+  cursor: pointer !important;
+}
+
+.card-wrapper span,
+.card-wrapper img {
+  pointer-events: none !important;
+}
+
+.card-media-link,
+.card-wrapper a,
+.card__heading a,
+.card__heading {
+  pointer-events: auto !important;
 }

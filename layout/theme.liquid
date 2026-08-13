@@ -309,10 +309,10 @@
             let htmlContent = '';
             for (let i = 0; i < length; i++) {
               if (i < iteration) {
-                htmlContent += `<span style="color: #000000; text-shadow: 0 0 4px #000000, 0 0 14px rgba(0, 0, 0, 0.85); font-style: italic;">${originalText[i]}</span>`;
+                htmlContent += `<span style="color: #000000; text-shadow: 0 0 4px #000000, 0 0 14px rgba(0, 0, 0, 0.85); font-style: italic; pointer-events: none;">${originalText[i]}</span>`;
               } else {
                 const randomChar = chars[Math.floor(Math.random() * chars.length)];
-                htmlContent += `<span style="color: #ff0022; text-shadow: -2px 0 0 #000000, 2px 0 0 #ff0022, 0 0 16px rgba(255, 0, 34, 0.6); font-style: italic;">${randomChar}</span>`;
+                htmlContent += `<span style="color: #ff0022; text-shadow: -2px 0 0 #000000, 2px 0 0 #ff0022, 0 0 16px rgba(255, 0, 34, 0.6); font-style: italic; pointer-events: none;">${randomChar}</span>`;
               }
             }
             el.innerHTML = htmlContent;
