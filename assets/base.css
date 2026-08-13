@@ -3894,3 +3894,128 @@ button.field__button {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
+/* ==========================================================================
+   MINIMALIST FLOATING CONTROLS, CYBER TITLE GLITCH & BOLD VIVID SOLD OUT STAMP
+   ========================================================================== */
+
+/* 1. Remove Boxes around Quantity and Sizes (Minimalist Floating UI) */
+.product-form__input input[type='radio'] + label,
+.variant-option,
+.product-form__input label,
+fieldset.product-form__input label {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #000000 !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  padding: 0.4rem 0.8rem !important;
+  margin-right: 0.4rem !important;
+  transition: transform 0.2s ease, text-decoration 0.2s ease !important;
+}
+
+.product-form__input input[type='radio'] + label:hover {
+  transform: translateY(-2px) scale(1.1) !important;
+}
+
+/* Selected Size Pill - Clean Underline Indicator */
+.product-form__input input[type='radio']:checked + label,
+fieldset.product-form__input input[type='radio']:checked + label {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #000000 !important;
+  border-bottom: 2px solid #000000 !important;
+  border-radius: 0px !important;
+  font-weight: 900 !important;
+  text-decoration: underline !important;
+}
+
+/* Quantity Selector - Remove Outer Container Box */
+.quantity,
+quantity-input,
+.product-form__quantity {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.8rem !important;
+}
+
+.quantity__button,
+.quantity__input {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #000000 !important;
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+}
+
+.quantity__button:hover {
+  transform: scale(1.2) !important;
+  transition: transform 0.2s ease !important;
+}
+
+/* 2. Item Title Cyber Glitch Animation (Grid & Product Page) */
+.product__title h1,
+.product__title h2,
+.card__heading a,
+h1.product-title {
+  position: relative !important;
+  display: inline-block !important;
+  transition: text-shadow 0.3s ease !important;
+}
+
+.product__title h1:hover,
+.card__heading a:hover {
+  animation: cyberTitleGlitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both !important;
+}
+
+@keyframes cyberTitleGlitch {
+  0% { transform: skew(0deg); text-shadow: 2px 0 #ff0055, -2px 0 #00e5ff; }
+  30% { transform: skew(-2deg); text-shadow: -3px 0 #ff0055, 3px 0 #00e5ff; }
+  70% { transform: skew(2deg); text-shadow: 3px 0 #ff0055, -3px 0 #00e5ff; }
+  100% { transform: skew(0deg); text-shadow: 0 0 10px rgba(0,0,0,0.35); }
+}
+
+/* 3. Vivid Bold Animated Floating "SOLD OUT" Stamp Print Badge */
+.badge--sold-out,
+.price__badge-sold-out,
+.badge.price__badge-sold-out,
+span.badge--sold-out {
+  position: absolute !important;
+  top: 40% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(-14deg) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 3px solid #ff0022 !important;
+  color: #ff0022 !important;
+  font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(1.4rem, 3.8vw, 2.8rem) !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  padding: 0.4rem 1.6rem !important;
+  box-shadow: 0 0 25px rgba(255, 0, 34, 0.6), inset 0 0 12px rgba(255, 0, 34, 0.25) !important;
+  text-shadow: 0 0 10px #ff0022, 0 0 20px #ff0022 !important;
+  animation: stampFloatPulse 2.5s ease-in-out infinite alternate !important;
+  pointer-events: none !important;
+  z-index: 20 !important;
+  border-radius: 0px !important;
+}
+
+@keyframes stampFloatPulse {
+  0% {
+    transform: translate(-50%, -50%) rotate(-14deg) scale(1);
+    box-shadow: 0 0 20px rgba(255, 0, 34, 0.5), inset 0 0 10px rgba(255, 0, 34, 0.2);
+  }
+  100% {
+    transform: translate(-50%, -54%) rotate(-11deg) scale(1.07);
+    box-shadow: 0 0 32px rgba(255, 0, 34, 0.95), inset 0 0 18px rgba(255, 0, 34, 0.4);
+  }
+}
