@@ -3016,9 +3016,9 @@ h2.glitch-heading-text,
   font-style: normal !important;
   font-weight: 900 !important;
   text-shadow: 
-    -1.5px 0 0 #000000,
-     1.5px 0 0 #ff0022,
-     0 0 18px rgba(255, 0, 34, 0.65) !important;
+    -1px 0 0 #000000,
+     1px 0 0 #ff0022,
+     0 0 8px rgba(255, 0, 34, 0.45) !important;
 }
 
 /* 2. Interactive Navigation Links & Black & White Dropdowns */
