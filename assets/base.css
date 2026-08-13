@@ -3983,7 +3983,7 @@ h1.product-title {
   100% { transform: skew(0deg); text-shadow: 0 0 10px rgba(0,0,0,0.35); }
 }
 
-/* 3. Vivid Bold Animated Floating "SOLD OUT" Stamp Print Badge for Cards & Products */
+/* 3. Completely Hide "SOLD OUT" Stamp Badge for Clean Product Cards & Pages */
 .card-wrapper .card__badge,
 .card .card__badge,
 .card-information .card__badge,
@@ -3995,31 +3995,12 @@ span.badge--sold-out,
 .card__badge .badge,
 .card .badge--bottom-left,
 .card-information .badge,
-.card-wrapper .badge {
-  position: absolute !important;
-  top: 45% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) rotate(-14deg) !important;
-  background: rgba(255, 255, 255, 0.94) !important;
-  border: 3px solid #ff0022 !important;
-  color: #ff0022 !important;
-  font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
-  font-weight: 900 !important;
-  font-size: clamp(1.1rem, 2.8vw, 2.2rem) !important;
-  letter-spacing: 0.15em !important;
-  text-transform: uppercase !important;
-  padding: 0.4rem 1.6rem !important;
-  box-shadow: 0 0 25px rgba(255, 0, 34, 0.6), inset 0 0 12px rgba(255, 0, 34, 0.25) !important;
-  text-shadow: 0 0 10px #ff0022, 0 0 18px #ff0022 !important;
-  animation: stampFloatPulse 2.5s ease-in-out infinite alternate !important;
+.card-wrapper .badge,
+.badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
   pointer-events: none !important;
-  z-index: 30 !important;
-  border-radius: 0px !important;
-  white-space: nowrap !important;
-  line-height: 1 !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 @keyframes stampFloatPulse {
