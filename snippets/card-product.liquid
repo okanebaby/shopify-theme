@@ -30,6 +30,10 @@
     if ratio == 0 or ratio == nil
       assign ratio = 1
     endif
+    assign card_product_url = card_product.url | default: '/products/broken-halo-set'
+    if card_product_url == blank
+      assign card_product_url = '/products/broken-halo-set'
+    endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
     <div
@@ -49,7 +53,7 @@
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
         {%- if card_product.featured_media -%}
-          <a href="{{ card_product.url }}" class="card-media-link" aria-label="{{ card_product.title | escape }}">
+          <a href="{{ card_product_url }}" class="card-media-link" aria-label="{{ card_product.title | escape }}">
             <div class="card__media">
               <div class="media media--transparent media--hover-effect">
                 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
@@ -108,7 +112,7 @@
               {% endif %}
             >
               <a
-                href="{{ card_product.url }}"
+                href="{{ card_product_url }}"
                 id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
                 class="full-unstyled-link scramble-hover-title"
                 data-scramble-text="{{ card_product.title | escape }}"
@@ -146,7 +150,7 @@
             {% endif %}
           >
             <a
-              href="{{ card_product.url }}"
+              href="{{ card_product_url }}"
               id="CardLink-{{ section_id }}-{{ card_product.id }}"
               class="full-unstyled-link scramble-hover-title"
               data-scramble-text="{{ card_product.title | escape }}"

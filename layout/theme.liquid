@@ -363,7 +363,20 @@
               }
             }
           });
-        }, { passive: true });
+        // Global Product Card Click Redirection Handler
+        document.addEventListener('click', function(e) {
+          const card = e.target.closest('.card-wrapper, .card-product-wrapper, .card');
+          if (card) {
+            if (e.target.closest('button, .quick-add, input, select, label, modal-opener')) return;
+            const link = card.querySelector('a[href]');
+            if (link && link.getAttribute('href')) {
+              const targetUrl = link.getAttribute('href');
+              if (targetUrl && targetUrl !== '#') {
+                window.location.href = targetUrl;
+              }
+            }
+          }
+        });
       })();
     </script>
   </body>
