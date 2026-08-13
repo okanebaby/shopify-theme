@@ -3582,11 +3582,11 @@ a[class*="ai-product-hero-button"],
   color: #000000 !important;
   border: none !important;
   box-shadow: none !important;
-  font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
-  font-weight: 900 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
+  font-family: 'Milton One Local', 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em !important;
   white-space: nowrap !important;
-  text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff, 0 0 45px rgba(255, 255, 255, 0.95), 0 0 60px rgba(255, 255, 255, 0.8) !important;
+  text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff, 0 0 45px #ffffff, 0 0 60px rgba(255, 255, 255, 0.95) !important;
   position: relative !important;
 }
