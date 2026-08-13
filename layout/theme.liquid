@@ -310,23 +310,23 @@
             let htmlContent = '';
             for (let i = 0; i < length; i++) {
               if (i < iteration) {
-                // Settled character in clean black
-                htmlContent += `<span style="color: #000000; text-shadow: 0 0 2px rgba(0,0,0,0.4);">${originalText[i]}</span>`;
+                // Settled character with red glitch underglow shadow
+                htmlContent += `<span style="color: #000000; text-shadow: -1.5px 0 0 #000000, 1.5px 0 0 #ff0022, 0 0 14px rgba(255, 0, 34, 0.45); font-style: italic;">${originalText[i]}</span>`;
               } else {
-                // Scrambling character in subtle red underglow glitch
+                // Active scrambling character in red glitch underglow
                 const randomChar = chars[Math.floor(Math.random() * chars.length)];
-                htmlContent += `<span style="color: #ff0022; text-shadow: -1px 0 0 #000000, 1px 0 0 #ff0022;">${randomChar}</span>`;
+                htmlContent += `<span style="color: #ff0022; text-shadow: -2px 0 0 #000000, 2px 0 0 #ff0022, 0 0 16px rgba(255, 0, 34, 0.6); font-style: italic;">${randomChar}</span>`;
               }
             }
             el.innerHTML = htmlContent;
             iteration += 1.3;
             
-            // Complete & settle into clean original black heading with glow
+            // Complete & settle into original heading with red underglow text shadow
             if (iteration >= length) {
               clearInterval(timer);
               el.textContent = originalText;
               el.style.color = '#000000';
-              el.style.textShadow = '0 0 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2)';
+              el.style.textShadow = '-1.5px 0 0 #000000, 1.5px 0 0 #ff0022, 0 0 14px rgba(255, 0, 34, 0.45)';
             }
           }, 28);
         }

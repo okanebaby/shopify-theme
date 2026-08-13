@@ -4051,21 +4051,25 @@ span.badge--sold-out,
 }
 
 /* ==========================================================================
-   PRODUCT TITLE TYPOGRAPHY & SUBTLE TEXT GLOW SYSTEM
+   PRODUCT TITLE TIMES NEW ROMAN ITALIC & RED GLITCH UNDERGLOW SYSTEM
    ========================================================================== */
 
 .scramble-hover-title,
 .card-wrapper .card__heading a,
 .card__heading a,
 .product__title h1,
-.product__title h2 {
+.product__title h2,
+h1.product-title {
   font-family: 'Times New Roman', Times, Baskerville, Georgia, serif !important;
   font-style: italic !important;
   font-size: clamp(1.8rem, 3.2vw, 2.6rem) !important;
   font-weight: 700 !important;
   text-transform: none !important;
   color: #000000 !important;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+  text-shadow: 
+    -1.5px 0 0 #000000,
+     1.5px 0 0 #ff0022,
+     0 0 14px rgba(255, 0, 34, 0.45) !important;
   position: relative !important;
   display: inline-block !important;
   cursor: pointer !important;
@@ -4074,12 +4078,31 @@ span.badge--sold-out,
   transition: color 0.25s ease, text-shadow 0.25s ease !important;
 }
 
-/* Ensure whole product card link is fully clickable */
+/* Red Glitch Hover Underglow Animation for Titles */
+.card-wrapper:hover .card__heading a,
+.card-wrapper:hover .scramble-hover-title,
+.card__heading a:hover,
+.product__title h1:hover,
+.scramble-hover-title:hover {
+  color: #ff0022 !important;
+  text-shadow: 
+    -2px 0 0 #000000,
+     2px 0 0 #ff0022,
+     0 0 18px rgba(255, 0, 34, 0.7) !important;
+}
+
+/* Direct Product Card Media Link & Title Overlay Clickability */
 .card-wrapper a,
+.card__heading a,
 .card__heading a.full-unstyled-link,
 .card__media-link {
-  display: block !important;
   pointer-events: auto !important;
   cursor: pointer !important;
   text-decoration: none !important;
+}
+
+.card__heading a::after,
+.card--standard .card__heading a::after {
+  content: none !important;
+  display: none !important;
 }
