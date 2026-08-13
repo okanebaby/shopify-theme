@@ -3606,11 +3606,10 @@ details-disclosure:hover .icon-caret {
 }
 
 /* ==========================================================================
-   READABLE MILTON ONE FONT SYSTEM
+   REVERT STORE FONTS & APPLY SITE-WIDE TEXT UNDERGLOW
    ========================================================================== */
 
-.milton-font,
-.script-font,
+/* Restore clean streetwear fonts */
 h1, h2, h3, h4, h5, h6,
 .h0, .h1, .h2, .h3, .h4, .h5,
 .header__menu-item, .list-menu__item, .menu-drawer__menu-item,
@@ -3618,53 +3617,28 @@ h1, h2, h3, h4, h5, h6,
 .card__heading, .product__title, .card-information,
 .footer-block__heading,
 .button, .btn {
+  font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* Site-Wide Glowing Text Effect */
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5,
+p, span, a, li, button,
+.header__menu-item, .list-menu__item,
+.announcement-bar__message,
+.card__heading, .product__title,
+.price, .price-item,
+.footer-block__heading {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.45), 0 0 20px rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Retain Milton One for Slogan Heading & Hero Text */
+.milton-font,
+.script-font {
   font-family: 'Milton One Local', 'Milton One', 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
   font-style: normal !important;
-  font-weight: 400 !important;
   text-transform: none !important;
-  line-height: 1.35 !important;
-  letter-spacing: 0.04em !important;
-}
-
-/* Ensure Header Nav Menu Items are crisp & readable */
-.header__menu-item,
-.list-menu__item {
-  font-size: 1.25rem !important;
-  padding: 0.6rem 1rem !important;
-}
-
-/* Product Card Headings & Titles Readable */
-.card__heading,
-.product__title {
-  font-size: 1.4rem !important;
-  line-height: 1.3 !important;
-}
-
-/* Announcement Bar */
-.announcement-bar__message {
-  font-size: 1.15rem !important;
-  letter-spacing: 0.06em !important;
-}
-
-/* Body Text & Price Readability */
-body, p, input, select, textarea, label {
-  font-family: 'Roboto Condensed', -apple-system, sans-serif !important;
-  font-size: 1rem !important;
-  line-height: 1.6 !important;
-  color: #ffffff !important;
-}
-
-.price, .price-item {
-  font-family: 'Roboto Condensed', sans-serif !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.05em !important;
-}
-
-/* Retain Roboto Condensed for Glitch Target State (LIMITED STOCK AVAILABLE) */
-h2.glitch-heading-text.is-sans,
-.glitch-heading-text.is-sans {
-  font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
-  font-weight: 900 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
+  letter-spacing: 0.02em !important;
 }
