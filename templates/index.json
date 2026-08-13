@@ -241,6 +241,17 @@
         "include_margins": true
       }
     },
+    "glitch_banner": {
+      "type": "glitch-banner",
+      "settings": {
+        "heading_text_1": "Me Against Myself",
+        "heading_text_2": "LIMITED STOCK AVAILABLE",
+        "show_badge": true,
+        "badge_text_1": "SHIPS IN 24 HOURS",
+        "badge_text_2": "LIMITED STOCK",
+        "color_scheme": "background-1"
+      }
+    },
     "17794301414a6631ed": {
       "type": "_blocks",
       "settings": {}
@@ -253,6 +264,7 @@
     "video",
     "multicolumn",
     "177942673551d4cf7e",
+    "glitch_banner",
     "1779429724a15fc265",
     "1779372229f18e6bb2",
     "17794301414a6631ed"

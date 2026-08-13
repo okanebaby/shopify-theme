@@ -1,0 +1,204 @@
+{%- comment -%}
+  Custom Glitch Slogan Section for Streetwear Aesthetics
+{%- endcomment -%}
+
+<div class="glitch-section-wrapper color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width glitch-banner-inner">
+    <div class="glitch-banner__left">
+      <h2 
+        id="GlitchHeading-{{ section.id }}"
+        class="glitch-banner__heading script-font" 
+        data-text-1="{{ section.settings.heading_text_1 | escape }}" 
+        data-text-2="{{ section.settings.heading_text_2 | escape }}"
+        data-text="{{ section.settings.heading_text_1 | escape }}"
+      >
+        {{ section.settings.heading_text_1 | escape }}
+      </h2>
+    </div>
+
+    {%- if section.settings.show_badge -%}
+      <div class="glitch-banner__right">
+        <div 
+          id="GlitchBadge-{{ section.id }}"
+          class="glitch-badge" 
+          data-text-1="{{ section.settings.badge_text_1 | escape }}" 
+          data-text-2="{{ section.settings.badge_text_2 | escape }}"
+          data-text="{{ section.settings.badge_text_1 | escape }}"
+        >
+          <span class="glitch-badge__inner">{{ section.settings.badge_text_1 | escape }}</span>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const heading = document.getElementById('GlitchHeading-{{ section.id }}');
+    const badge = document.getElementById('GlitchBadge-{{ section.id }}');
+    const badgeInner = badge ? badge.querySelector('.glitch-badge__inner') : null;
+
+    if (!heading) return;
+
+    const chars = '!@#$%^&*()_+/{}[]|:;<>?~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let isTransformed = false;
+    let isAnimating = false;
+
+    function scrambleText(element, targetText, isHtmlInner = false) {
+      const original = element.textContent;
+      const length = Math.max(original.length, targetText.length);
+      let iteration = 0;
+      
+      element.classList.add('is-glitching');
+      element.setAttribute('data-text', targetText);
+
+      const interval = setInterval(() => {
+        let currentString = '';
+        for (let i = 0; i < length; i++) {
+          if (i < iteration) {
+            currentString += targetText[i] || '';
+          } else {
+            currentString += chars[Math.floor(Math.random() * chars.length)];
+          }
+        }
+
+        if (isHtmlInner && badgeInner) {
+          badgeInner.textContent = currentString;
+        } else {
+          element.textContent = currentString;
+        }
+
+        iteration += 1 / 2;
+
+        if (iteration >= length) {
+          clearInterval(interval);
+          if (isHtmlInner && badgeInner) {
+            badgeInner.textContent = targetText;
+          } else {
+            element.textContent = targetText;
+          }
+          setTimeout(() => {
+            element.classList.remove('is-glitching');
+            isAnimating = false;
+          }, 200);
+        }
+      }, 30);
+    }
+
+    function triggerGlitch(forward = true) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const headingTarget = forward ? heading.dataset.text2 : heading.dataset.text1;
+      
+      // Toggle script font styling based on phrase
+      if (forward) {
+        heading.classList.remove('script-font');
+        heading.style.fontFamily = "'Roboto Condensed', sans-serif";
+        heading.style.fontWeight = "800";
+        heading.style.textTransform = "uppercase";
+      } else {
+        heading.classList.add('script-font');
+        heading.style.fontFamily = "'MonteCarlo', 'Monsieur La Doulaise', cursive";
+        heading.style.fontWeight = "400";
+        heading.style.textTransform = "none";
+      }
+
+      scrambleText(heading, headingTarget);
+
+      if (badge) {
+        const badgeTarget = forward ? badge.dataset.text2 : badge.dataset.text1;
+        scrambleText(badge, badgeTarget, true);
+      }
+
+      isTransformed = forward;
+    }
+
+    // Scroll Trigger Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !isTransformed) {
+          setTimeout(() => triggerGlitch(true), 300);
+        } else if (!entry.isIntersecting && isTransformed) {
+          triggerGlitch(false);
+        }
+      });
+    }, { threshold: 0.6 });
+
+    observer.observe(heading);
+
+    // Interactive Hover Replay
+    heading.addEventListener('mouseenter', () => {
+      if (!isAnimating) triggerGlitch(!isTransformed);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Glitch Slogan Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_text_1",
+      "label": "Initial Slogan (Left)",
+      "default": "Me Against Myself"
+    },
+    {
+      "type": "text",
+      "id": "heading_text_2",
+      "label": "Glitch Target Slogan (Left)",
+      "default": "LIMITED STOCK AVAILABLE"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show Status Badge (Right)",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text_1",
+      "label": "Initial Badge Text",
+      "default": "SHIPS IN 24 HOURS"
+    },
+    {
+      "type": "text",
+      "id": "badge_text_2",
+      "label": "Glitch Target Badge Text",
+      "default": "LIMITED STOCK"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color Scheme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Glitch Slogan Banner"
+    }
+  ]
+}
+{% endschema %}
