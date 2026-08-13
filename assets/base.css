@@ -3932,33 +3932,33 @@ fieldset.product-form__input input[type='radio']:checked + label {
   text-decoration: underline !important;
 }
 
-/* Quantity Selector - Remove Outer Container Box */
+/* Quantity Selector - Clean White Box with Black Controls */
 .quantity,
 quantity-input,
 .product-form__quantity {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border: 1px solid #000000 !important;
   display: inline-flex !important;
   align-items: center !important;
-  gap: 0.8rem !important;
+  justify-content: space-between !important;
+  box-shadow: none !important;
 }
 
 .quantity__button,
 .quantity__input {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
   color: #000000 !important;
-  font-size: 1.25rem !important;
+  border: none !important;
+  font-size: 1.15rem !important;
   font-weight: 800 !important;
 }
 
-.quantity__button:hover {
-  transform: scale(1.2) !important;
-  transition: transform 0.2s ease !important;
+.quantity__button svg {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+  color: #000000 !important;
 }
 
 /* 2. Item Title Cyber Glitch Animation (Grid & Product Page) */
@@ -3984,6 +3984,9 @@ h1.product-title {
 }
 
 /* 3. Vivid Bold Animated Floating "SOLD OUT" Stamp Print Badge for Cards & Products */
+.card-wrapper .card__badge,
+.card .card__badge,
+.card-information .card__badge,
 .badge--sold-out,
 .price__badge-sold-out,
 .badge.price__badge-sold-out,
@@ -4005,15 +4008,18 @@ span.badge--sold-out,
   font-size: clamp(1.1rem, 2.8vw, 2.2rem) !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
-  padding: 0.35rem 1.4rem !important;
+  padding: 0.4rem 1.6rem !important;
   box-shadow: 0 0 25px rgba(255, 0, 34, 0.6), inset 0 0 12px rgba(255, 0, 34, 0.25) !important;
   text-shadow: 0 0 10px #ff0022, 0 0 18px #ff0022 !important;
   animation: stampFloatPulse 2.5s ease-in-out infinite alternate !important;
   pointer-events: none !important;
-  z-index: 25 !important;
+  z-index: 30 !important;
   border-radius: 0px !important;
   white-space: nowrap !important;
   line-height: 1 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 @keyframes stampFloatPulse {
