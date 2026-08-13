@@ -63,7 +63,11 @@
     font-weight: 400 !important;
     font-style: normal !important;
     color: #000000 !important;
-    text-shadow: 0 0 16px rgba(0, 0, 0, 0.35), 0 0 6px rgba(0, 0, 0, 0.18) !important;
+    text-shadow: 
+      0 0 3px #000000,
+      0 0 10px rgba(0, 0, 0, 0.8),
+      0 0 22px rgba(0, 0, 0, 0.5),
+      0 0 38px rgba(0, 0, 0, 0.25) !important;
     line-height: 1.15 !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -203,7 +207,7 @@
           iteration += 1.2;
 
           if (iteration >= length) {
-            clearInterval(interval);
+            clearInterval(timer);
             heading.textContent = targetText;
             heading.classList.remove('is-glitching');
             isAnimating = false;
