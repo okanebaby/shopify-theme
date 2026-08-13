@@ -2,6 +2,22 @@
   Render "FIND MY SIZE" Fit Quiz Modal (worstwork.com style)
 {% endcomment %}
 
+<style>
+  /* Remove ALL text-shadow underglow ONLY inside Find My Size Fit Quiz */
+  #fit-quiz-modal,
+  #fit-quiz-modal *,
+  .fit-quiz-modal-overlay,
+  .fit-quiz-modal-overlay *,
+  .fit-quiz-modal-card,
+  .fit-quiz-modal-card *,
+  .fit-quiz-opt-btn,
+  .fit-quiz-opt-btn *,
+  .fit-quiz-step-view,
+  .fit-quiz-step-view * {
+    text-shadow: none !important;
+  }
+</style>
+
 <div class="fit-quiz-trigger-container" style="margin: 1.2rem 0 0.8rem 0;">
   <button
     type="button"

@@ -3172,3 +3172,17 @@ h2.glitch-heading-text,
   margin-left: 1rem !important;
   margin-right: 1rem !important;
 }
+
+/* Remove text-shadow underglow ONLY inside Find My Size Fit Quiz Modal */
+#fit-quiz-modal,
+#fit-quiz-modal *,
+.fit-quiz-modal-overlay,
+.fit-quiz-modal-overlay *,
+.fit-quiz-modal-card,
+.fit-quiz-modal-card *,
+.fit-quiz-opt-btn,
+.fit-quiz-opt-btn *,
+.fit-quiz-step-view,
+.fit-quiz-step-view * {
+  text-shadow: none !important;
+}
