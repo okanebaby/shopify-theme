@@ -4047,38 +4047,41 @@ span.price__badge-sold-out,
    PRODUCT TITLE GLITCH ENGINE & INTERACTIVE CARD CLICKABILITY SYSTEM
    ========================================================================== */
 
-/* Product Glitch Container & Ambient Spray Glow */
-.product-glitch-container {
+/* Product Glitch Container & Ambient White Spray Glow System */
+.product-glitch-container,
+.description-glitch-container {
   position: relative !important;
-  display: inline-block !important;
+  display: block !important;
   background: transparent !important;
   width: auto !important;
 }
 
-.product-glitch-container .spray-glow {
+.product-glitch-container .spray-glow,
+.description-glitch-container .spray-glow {
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   width: 140% !important;
   height: 180% !important;
-  background: radial-gradient(ellipse at center, rgba(255, 0, 34, 0.25) 0%, rgba(255, 0, 34, 0.08) 50%, transparent 80%) !important;
-  filter: blur(20px) !important;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.18) 50%, transparent 80%) !important;
+  filter: blur(22px) !important;
   z-index: 1 !important;
   pointer-events: none !important;
   transition: opacity 0.35s ease, filter 0.35s ease !important;
   border-radius: 50% !important;
-  opacity: 0;
+  opacity: 0.85 !important;
 }
 
 .product-glitch-container.is-red .spray-glow,
 .product-glitch-container:hover .spray-glow,
+.description-glitch-container:hover .spray-glow,
 .card-wrapper:hover .spray-glow {
   opacity: 1 !important;
-  filter: blur(24px) !important;
+  filter: blur(28px) !important;
 }
 
-/* State 1: Classic Script / Serif Font with Dark Outline & Red Highlight Shadow */
+/* State 1: Classic Script / Serif Font with Ambient White Glow */
 .product-glitch-title,
 a.product-glitch-title,
 .card__heading a.product-glitch-title,
@@ -4091,9 +4094,10 @@ a.product-glitch-title,
   text-transform: none !important;
   color: #000000 !important;
   text-shadow: 
-    -1.5px 0 0 #000000,
-     1.5px 0 0 #ff0022,
-     0 0 14px rgba(255, 0, 34, 0.45) !important;
+    0 0 12px rgba(255, 255, 255, 0.95),
+    0 0 24px rgba(255, 255, 255, 0.5),
+    -1px 0 0 #000000,
+     1px 0 0 #000000 !important;
   position: relative !important;
   z-index: 2 !important;
   display: inline-block !important;
@@ -4103,7 +4107,7 @@ a.product-glitch-title,
   transition: color 0.3s ease, text-shadow 0.3s ease, font-family 0.3s ease !important;
 }
 
-/* State 2: Red Bold Uppercase Glitch Font (matches Glitch Slogan Section / Image 2) */
+/* State 2: Bold Uppercase Glitch Font with Intense White Neon Glow (No Red) */
 .product-glitch-title.is-red,
 a.product-glitch-title.is-red,
 .card__heading a.product-glitch-title.is-red,
@@ -4114,12 +4118,39 @@ a.product-glitch-title.is-red,
   font-style: italic !important;
   text-transform: uppercase !important;
   letter-spacing: 0.06em !important;
-  color: #ff0022 !important;
+  color: #000000 !important;
   text-shadow: 
-    0 0 14px rgba(255, 0, 34, 0.9),
-    0 0 28px rgba(255, 0, 34, 0.5),
+    0 0 18px rgba(255, 255, 255, 1),
+    0 0 35px rgba(255, 255, 255, 0.8),
+    0 0 50px rgba(255, 255, 255, 0.5),
     -2px 0 0 #000000,
-     2px 0 0 #ff0022 !important;
+     2px 0 0 #000000 !important;
+}
+
+/* Product Description Ambient White Glow System */
+.product-description-glow,
+.product-description-glow *,
+.product__description,
+.product__description * {
+  position: relative !important;
+  z-index: 2 !important;
+  font-family: 'Milton One Local', 'Times New Roman', Times, Baskerville, Georgia, serif !important;
+  font-style: italic !important;
+  color: #000000 !important;
+  text-shadow: 
+    0 0 12px rgba(255, 255, 255, 0.95),
+    0 0 24px rgba(255, 255, 255, 0.5),
+    0 0 36px rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.35s ease !important;
+}
+
+.description-glitch-container:hover .product-description-glow,
+.description-glitch-container:hover .product-description-glow *,
+.product__description:hover * {
+  text-shadow: 
+    0 0 18px rgba(255, 255, 255, 1),
+    0 0 36px rgba(255, 255, 255, 0.8),
+    0 0 55px rgba(255, 255, 255, 0.55) !important;
 }
 
 /* Cyber RGB Split Glitch Effects */
@@ -4143,13 +4174,13 @@ a.product-glitch-title.is-red,
 
 .product-glitch-title.is-glitching::before {
   left: 2px !important;
-  text-shadow: -2px 0 rgba(255, 0, 85, 0.8) !important;
+  text-shadow: -2px 0 rgba(255, 255, 255, 0.9) !important;
   animation: glitch-split-1 0.2s infinite linear alternate-reverse !important;
 }
 
 .product-glitch-title.is-glitching::after {
   left: -2px !important;
-  text-shadow: 2px 0 rgba(0, 229, 255, 0.8) !important;
+  text-shadow: 2px 0 rgba(200, 200, 200, 0.9) !important;
   animation: glitch-split-2 0.2s infinite linear alternate-reverse !important;
 }
 
@@ -4162,13 +4193,13 @@ a.product-glitch-title.is-red,
 
 /* Global Brand Text Selection Highlighting Fix */
 ::selection {
-  background-color: #ff0022 !important;
+  background-color: #000000 !important;
   color: #ffffff !important;
   text-shadow: none !important;
 }
 
 ::-moz-selection {
-  background-color: #ff0022 !important;
+  background-color: #000000 !important;
   color: #ffffff !important;
   text-shadow: none !important;
 }

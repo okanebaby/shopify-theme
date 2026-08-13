@@ -40,8 +40,20 @@
       endif
     endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover" data-product-url="{{ product_url }}">
-    <a href="{{ product_url }}" class="card-wrapper-link" data-product-url="{{ product_url }}" aria-label="{{ card_product.title | escape }}">
+  <div
+    class="card-wrapper product-card-wrapper underline-links-hover"
+    data-product-url="{{ product_url }}"
+    onclick="window.location.href='{{ product_url }}';"
+    style="cursor: pointer !important;"
+  >
+    <a
+      href="{{ product_url }}"
+      class="card-wrapper-link"
+      data-product-url="{{ product_url }}"
+      onclick="window.location.href='{{ product_url }}';"
+      aria-label="{{ card_product.title | escape }}"
+      style="cursor: pointer !important;"
+    >
       <div
         class="
           card
@@ -52,11 +64,13 @@
           {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
           {% if horizontal_class %} card--horizontal{% endif %}
         "
-        style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+        onclick="window.location.href='{{ product_url }}';"
+        style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%; cursor: pointer !important;"
       >
         <div
           class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
-          style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+          onclick="window.location.href='{{ product_url }}';"
+          style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%; cursor: pointer !important;"
         >
           {%- if card_product.featured_media -%}
             <div class="card__media-link">

@@ -357,8 +357,11 @@
               </div>
             {%- when 'description' -%}
               {%- if product.description != blank -%}
-                <div class="product__description rte quick-add-hidden">
-                  {{ product.description }}
+                <div class="product__description rte quick-add-hidden product-glitch-container description-glitch-container" {{ block.shopify_attributes }}>
+                  <div class="spray-glow"></div>
+                  <div class="product-description-glow">
+                    {{ product.description }}
+                  </div>
                 </div>
               {%- endif -%}
             {%- when 'custom_liquid' -%}

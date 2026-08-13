@@ -50,9 +50,9 @@
     border-radius: 50% !important;
   }
 
-  /* Red Spray Glow when in State 2 ("LIMITED STOCK AVAILABLE") */
+  /* Ambient White Spray Glow when in State 2 ("LIMITED STOCK AVAILABLE") */
   .glitch-heading-container.is-red .spray-glow {
-    background: radial-gradient(ellipse at center, rgba(255, 0, 34, 0.22) 0%, rgba(255, 0, 34, 0.06) 50%, transparent 80%) !important;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.15) 50%, transparent 80%) !important;
     filter: blur(25px) !important;
   }
 
@@ -64,10 +64,9 @@
     font-style: normal !important;
     color: #000000 !important;
     text-shadow: 
-      0 0 3px #000000,
-      0 0 10px rgba(0, 0, 0, 0.8),
-      0 0 22px rgba(0, 0, 0, 0.5),
-      0 0 38px rgba(0, 0, 0, 0.25) !important;
+      0 0 12px rgba(255, 255, 255, 0.95),
+      0 0 24px rgba(255, 255, 255, 0.5),
+      0 0 38px rgba(255, 255, 255, 0.25) !important;
     line-height: 1.15 !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -82,15 +81,18 @@
     transition: color 0.3s ease, text-shadow 0.3s ease !important;
   }
 
-  /* State 2: Red Text for "LIMITED STOCK AVAILABLE" */
+  /* State 2: Bold Uppercase Text with Intense Ambient White Glow */
   h2.glitch-heading-text.is-sans,
   .glitch-heading-text.is-sans {
     font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
     font-weight: 900 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.06em !important;
-    color: #ff0022 !important;
-    text-shadow: 0 0 14px rgba(255, 0, 34, 0.4) !important;
+    color: #000000 !important;
+    text-shadow: 
+      0 0 18px rgba(255, 255, 255, 1),
+      0 0 35px rgba(255, 255, 255, 0.8),
+      0 0 50px rgba(255, 255, 255, 0.5) !important;
   }
 
   /* Subtle Sleek Cyber Glitch RGB Split Effects */
