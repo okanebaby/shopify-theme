@@ -3719,3 +3719,128 @@ h2.glitch-heading-text.is-sans {
   transform: scale(1.05) !important;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
+
+/* ==========================================================================
+   FORM CONTROLS, VARIANT PILLS, QUANTITY & MEDIA ICON WHITE FIXES
+   ========================================================================== */
+
+/* 1. Variant Option Pills (Size S, M, L) */
+.product-form__input input[type='radio'] + label,
+.variant-option,
+.product-form__input label,
+fieldset.product-form__input label {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Selected Size Pill */
+.product-form__input input[type='radio']:checked + label,
+fieldset.product-form__input input[type='radio']:checked + label {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
+  border-color: #000000 !important;
+}
+
+/* 2. Quantity Selector (- 1 +) */
+.quantity,
+.quantity__button,
+.quantity__input,
+quantity-input {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+.quantity {
+  border: 1px solid #000000 !important;
+}
+
+.quantity__button {
+  color: #000000 !important;
+}
+
+.quantity__button svg {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* 3. Newsletter Email Input & Submit Button */
+.field,
+.field__input,
+.newsletter-form__field-wrapper .field__input,
+.email-signup-banner .field__input {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  box-shadow: none !important;
+}
+
+.field__label,
+.field__input:focus ~ .field__label,
+.field__input:not(:placeholder-shown) ~ .field__label {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+.field__button,
+.newsletter-form__button {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #000000 !important;
+}
+
+.field__button svg,
+.newsletter-form__button svg {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* 4. Country / Region Selector Dropdown */
+.localization-form__select,
+.select__select,
+select,
+.disclosure__button {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  box-shadow: none !important;
+}
+
+.localization-form__select .icon-caret,
+.select__select .icon-caret,
+.disclosure__button .icon-caret {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+  color: #000000 !important;
+}
+
+/* 5. Product Image Media Zoom Icon / Badge */
+.product__media-icon,
+.product__media-toggle,
+.deferred-media__poster-button,
+.slider-button {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+}
+
+.product__media-icon svg,
+.product__media-toggle svg,
+.deferred-media__poster-button svg,
+.slider-button svg {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+  color: #000000 !important;
+}
