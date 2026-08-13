@@ -338,9 +338,10 @@
           }, 28);
         }
 
-        // Trigger ONCE when scrolling past each product title / heading
         function initScrollObserver() {
-          const targets = document.querySelectorAll('.card__heading a, .product__title h1, .product__title h2, .scramble-hover-title');
+          const selector = '.card__heading a, .card__heading, .product__title h1, .product__title h2, .scramble-hover-title, .featured-glitch-heading, .title-wrapper .title, h2.title';
+          const targets = document.querySelectorAll(selector);
+          
           if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
               entries.forEach(entry => {
@@ -349,7 +350,7 @@
                   observer.unobserve(entry.target);
                 }
               });
-            }, { threshold: 0.15 });
+            }, { threshold: 0.1 });
 
             targets.forEach(target => observer.observe(target));
           } else {
@@ -362,6 +363,18 @@
         } else {
           initScrollObserver();
         }
+        window.addEventListener('load', initScrollObserver);
+        window.addEventListener('scroll', function() {
+          const selector = '.card__heading a, .product__title h1, .scramble-hover-title, h2.title';
+          document.querySelectorAll(selector).forEach(el => {
+            if (el.dataset.scrambleDone !== 'true') {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+                scrambleOnScroll(el);
+              }
+            }
+          });
+        }, { passive: true });
       })();
     </script>
   </body>
