@@ -3199,28 +3199,6 @@ header.header {
 }
 
 .header__menu-item:hover::after,
-.header__menu-item[aria-current="page"]::after {
-  width: 70% !important;
-  left: 15% !important;
-}
-
-/* Rotate Caret Chevron on Dropdown Hover / Open */
-.header__menu-item .icon-caret,
-.header__menu-item svg.icon-caret {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  margin-left: 0.45rem !important;
-}
-
-details[open] > summary.header__menu-item .icon-caret,
-.header__menu-item:hover .icon-caret,
-header-menu:hover .icon-caret,
-details-disclosure:hover .icon-caret {
-  transform: rotate(180deg) !important;
-}
-
-/* Desktop Hover-to-Open Dropdown Trigger Support */
-@media screen and (min-width: 990px) {
-  header-menu details-disclosure:hover > details > .header__submenu,
   header-menu details-disclosure:hover > details > .mega-menu__content,
   .header__inline-menu details-disclosure:hover > details > .header__submenu,
   .header__inline-menu details-disclosure:hover > details[open] > .header__submenu {
@@ -3594,4 +3572,35 @@ a[class*="ai-product-hero-button"],
     0 0 35px #ffffff,
     0 0 55px rgba(255, 255, 255, 1) !important;
   position: relative !important;
+}
+
+/* Fix Caret Chevron Overlap Next to Clothing and Policies */
+.header__menu-item,
+summary.header__menu-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  position: relative !important;
+}
+
+.header__menu-item .icon-caret,
+.header__menu-item svg.icon-caret,
+summary.header__menu-item .icon-caret,
+header-menu .icon-caret {
+  position: static !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin-left: 0.6rem !important;
+  margin-right: 0 !important;
+  width: 0.8rem !important;
+  height: 0.5rem !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+details[open] > summary.header__menu-item .icon-caret,
+.header__menu-item:hover .icon-caret,
+header-menu:hover .icon-caret,
+details-disclosure:hover .icon-caret {
+  transform: rotate(180deg) !important;
 }
