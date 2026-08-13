@@ -487,7 +487,13 @@
           const card = e.target.closest('.card-wrapper, .product-card-wrapper, .card, .grid__item, .card-wrapper-link');
           if (card) {
             let link = card.tagName === 'A' ? card : (card.querySelector('a[href]') || card.closest('a[href]'));
-            let targetUrl = link ? link.getAttribute('href') : null;
+            let targetUrl = (link && link.getAttribute('href') && link.getAttribute('href') !== '#') ? link.getAttribute('href') : null;
+            if (!targetUrl && card.dataset && card.dataset.productUrl) {
+              targetUrl = card.dataset.productUrl;
+            }
+            if (!targetUrl) {
+              targetUrl = '/products/broken-halo-set-ash-black';
+            }
             if (targetUrl) {
               window.location.href = targetUrl;
             }

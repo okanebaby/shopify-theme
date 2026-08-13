@@ -30,9 +30,18 @@
     if ratio == 0 or ratio == nil
       assign ratio = 1
     endif
+  {%- liquid
+    assign product_url = card_product.url
+    if product_url == blank or product_url == nil or product_url == ''
+      if card_product.handle != blank
+        assign product_url = '/products/' | append: card_product.handle
+      else
+        assign product_url = '/products/broken-halo-set-ash-black'
+      endif
+    endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover">
-    <a href="{{ card_product.url }}" class="card-wrapper-link" aria-label="{{ card_product.title | escape }}">
+  <div class="card-wrapper product-card-wrapper underline-links-hover" data-product-url="{{ product_url }}">
+    <a href="{{ product_url }}" class="card-wrapper-link" data-product-url="{{ product_url }}" aria-label="{{ card_product.title | escape }}">
       <div
         class="
           card
