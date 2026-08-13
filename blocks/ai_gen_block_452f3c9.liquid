@@ -68,22 +68,47 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
-    background-color: {{ block.settings.button_background_color }};
-    color: {{ block.settings.button_text_color }};
+    padding: 12px 24px;
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #000000 !important;
     text-decoration: none;
-    border-radius: {{ block.settings.button_border_radius }}px;
-    font-size: {{ block.settings.button_font_size }}px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: none !important;
+    box-shadow: none !important;
+    font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+    font-size: clamp(1.4rem, 3.5vw, 2.5rem) !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap !important;
+    position: relative !important;
+    z-index: 3 !important;
+    text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff, 0 0 45px rgba(255, 255, 255, 0.95), 0 0 60px rgba(255, 255, 255, 0.8) !important;
+    transition: transform 0.3s ease, text-shadow 0.3s ease !important;
+  }
+
+  .ai-product-hero-button-{{ ai_gen_id }}::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 130% !important;
+    height: 180% !important;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.5) 50%, transparent 80%) !important;
+    filter: blur(25px) !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    border-radius: 50% !important;
   }
 
   .ai-product-hero-button-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.button_hover_background_color }};
-    color: {{ block.settings.button_hover_text_color }};
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #000000 !important;
+    transform: scale(1.06) !important;
+    text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px rgba(255, 255, 255, 1) !important;
+    box-shadow: none !important;
   }
 
   @media screen and (max-width: 749px) {
