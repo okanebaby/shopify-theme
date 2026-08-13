@@ -386,21 +386,19 @@
         function initAllGlitchTitles() {
           const selector = '.product-glitch-title, .card__heading a, .product__title h1, .scramble-hover-title';
           document.querySelectorAll(selector).forEach(initGlitchTitle);
-
-          // Card Product Click Navigation Fallback
-          document.querySelectorAll('.card-wrapper, .product-card-wrapper').forEach(function(card) {
-            if (card.dataset.cardClickable === 'true') return;
-            card.dataset.cardClickable = 'true';
-            card.addEventListener('click', function(e) {
-              // Ignore clicks on buttons, forms, input elements or quick add triggers
-              if (e.target.closest('button, input, form, select, option, modal-opener, .quick-add')) return;
-              const link = card.querySelector('a[href]');
-              if (link && link.href) {
-                window.location.href = link.href;
-              }
-            });
-          });
         }
+
+        // Global Event Delegation for Product Card Clicks
+        document.addEventListener('click', function(e) {
+          if (e.target.closest('button, input, form, select, option, modal-opener, .quick-add')) return;
+          const card = e.target.closest('.card-wrapper, .product-card-wrapper, .card, .grid__item');
+          if (card) {
+            const link = card.querySelector('a[href]');
+            if (link && link.href && !e.target.closest('a[href]')) {
+              window.location.href = link.href;
+            }
+          }
+        }, true);
 
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', initAllGlitchTitles);

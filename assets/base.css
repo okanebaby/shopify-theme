@@ -4195,12 +4195,13 @@ a.card-overlay-link {
   bottom: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  z-index: 10 !important;
+  z-index: 15 !important;
   cursor: pointer !important;
   display: block !important;
   background: transparent !important;
   border: none !important;
   outline: none !important;
+  pointer-events: auto !important;
 }
 
 .card,
@@ -4225,15 +4226,25 @@ a.product-glitch-title,
   user-select: text !important;
 }
 
-/* Keep Interactive Controls & Badges Above Card Overlay Link */
-.card-wrapper .quick-add,
+/* Badges (Sold Out, Sale) MUST pass clicks through to the overlay link! */
+.card__badge,
 .card-wrapper .card__badge,
+.card .card__badge,
+.card-information .card__badge,
+.badge,
+.badge--sold-out,
+.price__badge-sold-out,
+.card .badge {
+  pointer-events: none !important;
+  z-index: 5 !important;
+}
+
+/* Keep Interactive Form Controls & Buttons Above Card Overlay Link */
+.card-wrapper .quick-add,
 .card-wrapper button,
 .card-wrapper input,
 .card-wrapper form,
 .card-wrapper select,
-.card-information .price,
-.card__badge,
 .quick-add {
   position: relative !important;
   z-index: 20 !important;
