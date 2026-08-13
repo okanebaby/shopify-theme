@@ -1,5 +1,5 @@
 {%- comment -%}
-  Custom Glitch Slogan Section - Milton One & Single-Line Enforced Glitch
+  Custom Glitch Slogan Section - Spray Paint Glow & Color Shift
 {%- endcomment -%}
 
 <style>
@@ -21,14 +21,42 @@
   }
 
   .glitch-banner-wrapper {
-    padding: 4.5rem 1rem !important;
-    min-height: 200px !important;
+    padding: 5rem 1rem !important;
+    min-height: 220px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
     width: 100% !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
+    position: relative !important;
+  }
+
+  .glitch-heading-container {
+    position: relative !important;
+    display: inline-block !important;
+  }
+
+  /* Spray Paint Ambient Glow Element */
+  .spray-glow {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 120% !important;
+    height: 160% !important;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 45%, transparent 75%) !important;
+    filter: blur(25px) !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease !important;
+    border-radius: 50% !important;
+  }
+
+  /* Red Spray Glow when in State 2 ("LIMITED STOCK AVAILABLE") */
+  .glitch-heading-container.is-red .spray-glow {
+    background: radial-gradient(ellipse at center, rgba(255, 0, 34, 0.55) 0%, rgba(255, 0, 34, 0.18) 50%, transparent 80%) !important;
+    filter: blur(30px) !important;
   }
 
   h2.glitch-heading-text,
@@ -38,23 +66,29 @@
     font-weight: 400 !important;
     font-style: normal !important;
     color: #ffffff !important;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4) !important;
     line-height: 1.15 !important;
     margin: 0 !important;
     padding: 0 !important;
     text-transform: none !important;
     letter-spacing: 0.02em !important;
     position: relative !important;
+    z-index: 2 !important;
     display: inline-block !important;
-    white-space: nowrap !important; /* Strictly keep text on a single line */
+    white-space: nowrap !important;
     user-select: none !important;
+    transition: color 0.3s ease, text-shadow 0.3s ease !important;
   }
 
+  /* State 2: Red Text for "LIMITED STOCK AVAILABLE" */
   h2.glitch-heading-text.is-sans,
   .glitch-heading-text.is-sans {
     font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
     font-weight: 900 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.06em !important;
+    color: #ff0022 !important;
+    text-shadow: 0 0 25px rgba(255, 0, 34, 0.75), 0 0 10px rgba(255, 0, 34, 0.5) !important;
   }
 
   /* Subtle Sleek Cyber Glitch RGB Split Effects */
@@ -110,15 +144,18 @@
 
 <div class="glitch-banner-wrapper">
   <div class="page-width">
-    <h2 
-      id="GlitchHeading-{{ section.id }}"
-      class="glitch-heading-text" 
-      data-text-1="{{ section.settings.heading_text_1 | escape }}" 
-      data-text-2="{{ section.settings.heading_text_2 | escape }}"
-      data-text="{{ section.settings.heading_text_1 | escape }}"
-    >
-      {{ section.settings.heading_text_1 | escape }}
-    </h2>
+    <div id="GlitchContainer-{{ section.id }}" class="glitch-heading-container">
+      <div class="spray-glow"></div>
+      <h2 
+        id="GlitchHeading-{{ section.id }}"
+        class="glitch-heading-text" 
+        data-text-1="{{ section.settings.heading_text_1 | escape }}" 
+        data-text-2="{{ section.settings.heading_text_2 | escape }}"
+        data-text="{{ section.settings.heading_text_1 | escape }}"
+      >
+        {{ section.settings.heading_text_1 | escape }}
+      </h2>
+    </div>
   </div>
 </div>
 
@@ -126,13 +163,14 @@
   (function() {
     function startGlitchController() {
       const heading = document.getElementById('GlitchHeading-{{ section.id }}');
-      if (!heading) return;
+      const container = document.getElementById('GlitchContainer-{{ section.id }}');
+      if (!heading || !container) return;
 
       const phrase1 = heading.dataset.text1 || "Me Against Myself";
       const phrase2 = heading.dataset.text2 || "LIMITED STOCK AVAILABLE";
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       
-      let currentState = 1; // 1 = "Me Against Myself", 2 = "LIMITED STOCK AVAILABLE"
+      let currentState = 1; // 1 = "Me Against Myself" (White), 2 = "LIMITED STOCK AVAILABLE" (Red)
       let isAnimating = false;
 
       function runGlitchTransition(toState) {
@@ -148,8 +186,10 @@
 
         if (toState === 2) {
           heading.classList.add('is-sans');
+          container.classList.add('is-red');
         } else {
           heading.classList.remove('is-sans');
+          container.classList.remove('is-red');
         }
 
         const timer = setInterval(() => {
