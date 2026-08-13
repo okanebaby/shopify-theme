@@ -3574,7 +3574,7 @@ details > .header__submenu {
   100% { clip: rect(20px, 9999px, 35px, 0); }
 }
 
-/* Floating Hero Button: Broken Halo Set Out Now */
+/* Floating Hero Button: Shop Broken Halo Now */
 a[class*="ai-product-hero-button"],
 .ai-product-hero-button-wrapper a {
   background: transparent !important;
@@ -3587,6 +3587,11 @@ a[class*="ai-product-hero-button"],
   text-transform: none !important;
   letter-spacing: 0.02em !important;
   white-space: nowrap !important;
-  text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff, 0 0 45px #ffffff, 0 0 60px rgba(255, 255, 255, 0.95) !important;
+  text-shadow: 
+    0 0 2px #000000,
+    0 0 8px rgba(0, 0, 0, 0.9),
+    0 0 18px #ffffff,
+    0 0 35px #ffffff,
+    0 0 55px rgba(255, 255, 255, 1) !important;
   position: relative !important;
 }
