@@ -56,8 +56,18 @@
       }}
     </div>
   {%- elsif section.settings.image_2 == blank -%}
-    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}">
-      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    <div class="banner__media media">
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"
+      >
+        <source src="{{ 'product-landscape-video.mp4' | asset_url }}" type="video/mp4">
+      </video>
     </div>
   {%- endif -%}
   {%- if section.settings.image_2 != blank -%}

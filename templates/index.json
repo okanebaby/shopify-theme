@@ -243,9 +243,18 @@
     "17794301414a6631ed": {
       "type": "_blocks",
       "settings": {}
+    },
+    "hero_video_banner": {
+      "type": "hero-video-banner",
+      "settings": {
+        "heading": "SUMMER DROP + CLEARANCE",
+        "button_label": "SHOP NOW",
+        "button_link": "/collections/all"
+      }
     }
   },
   "order": [
+    "hero_video_banner",
     "rich_text",
     "slideshow_geQjRX",
     "17716852711bed09c2",
