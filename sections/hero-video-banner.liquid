@@ -1,6 +1,10 @@
 {% comment %}
-  Full-Width Compact Autoplay Video Hero Banner Section
-  Featuring Glitching Text ("Me Against Myself" / "LIMITED STOCK AVAILABLE") & Cursive "Shop Broken Halo Now" Button Overlay
+  Full-Width Autoplay Video Hero Banner Section
+  Features:
+  - High-res video with dark bottom fade into pure black
+  - Seamless black-to-white gradient transition below the video
+  - Center cursive glowing "Shop Broken Halo Now" button
+  - Bottom-left glitching text ("Me Against Myself" / "LIMITED STOCK AVAILABLE")
 {% endcomment %}
 
 <style>
@@ -18,16 +22,16 @@
     position: relative !important;
     width: 100% !important;
     overflow: hidden !important;
-    background: #ffffff !important;
+    background: #000000 !important;
   }
 
-  /* Spacious Hero Height Ratio (16:8 aspect ratio, max-height 650px) */
+  /* Spacious Hero Height Ratio */
   .hero-video-wrapper {
     position: relative !important;
     width: 100% !important;
-    aspect-ratio: 16 / 8 !important;
-    max-height: 650px !important;
-    min-height: 450px !important;
+    aspect-ratio: 16 / 8.5 !important;
+    max-height: 680px !important;
+    min-height: 460px !important;
     display: flex !important;
     align-items: flex-end !important;
     justify-content: space-between !important;
@@ -35,23 +39,23 @@
 
   @media screen and (max-width: 749px) {
     .hero-video-wrapper {
-      aspect-ratio: 16 / 10 !important;
-      min-height: 340px !important;
+      aspect-ratio: 16 / 11 !important;
+      min-height: 360px !important;
       flex-direction: column !important;
       align-items: flex-start !important;
       justify-content: flex-end !important;
     }
   }
 
-  /* Glitch Text Element Overlay */
+  /* Glitch Text Element Overlay (Bottom Left) */
   .hero-glitch-heading {
     font-family: 'Milton One Local', 'Times New Roman', serif !important;
-    font-size: clamp(2.2rem, 5vw, 4.5rem) !important;
-    color: #000000 !important;
+    font-size: clamp(2.4rem, 5.5vw, 4.8rem) !important;
+    color: #ffffff !important;
     margin: 0 !important;
     line-height: 1 !important;
     letter-spacing: 0.02em !important;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 2px 10px rgba(0,0,0,0.15) !important;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 4px 20px rgba(0, 0, 0, 0.9) !important;
     transition: color 0.3s ease, font-family 0.3s ease !important;
     user-select: none !important;
     white-space: nowrap !important;
@@ -63,10 +67,10 @@
     letter-spacing: 0.06em !important;
     text-transform: uppercase !important;
     color: #ff0022 !important;
-    text-shadow: 0 0 16px rgba(255, 0, 34, 0.6), 0 2px 10px rgba(0,0,0,0.2) !important;
+    text-shadow: 0 0 18px rgba(255, 0, 34, 0.8), 0 4px 20px rgba(0, 0, 0, 0.9) !important;
   }
 
-  /* Center Cursive Button Overlay */
+  /* Center Cursive Button Overlay with Glowing White Aura */
   .hero-cursive-button-box {
     position: absolute !important;
     top: 50% !important;
@@ -75,31 +79,70 @@
     z-index: 5 !important;
     text-align: center !important;
     width: 90% !important;
-    max-width: 540px !important;
+    max-width: 600px !important;
     pointer-events: auto !important;
   }
 
   .hero-cursive-button {
-    display: block !important;
-    width: 100% !important;
-    padding: 1.2rem 2rem !important;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(245,245,245,0.9) 60%, rgba(230,230,230,0.85) 100%) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 14px 28px !important;
+    background: transparent !important;
+    background-color: transparent !important;
     color: #000000 !important;
-    font-family: 'Pinyon Script', 'Alex Brush', 'Great Vibes', cursive !important;
-    font-size: clamp(1.8rem, 3.8vw, 3rem) !important;
-    font-weight: 400 !important;
     text-decoration: none !important;
-    border-radius: 4px !important;
-    box-shadow: 0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.4) !important;
-    border: 1px solid rgba(0,0,0,0.15) !important;
-    transition: all 0.3s ease !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-family: 'Milton One Local', 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
+    font-size: clamp(2.4rem, 6vw, 4.8rem) !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+    letter-spacing: 0.02em !important;
+    white-space: nowrap !important;
+    position: relative !important;
+    z-index: 3 !important;
+    text-shadow: 
+      0 0 2px #000000,
+      0 0 8px rgba(0, 0, 0, 0.9),
+      0 0 18px #ffffff,
+      0 0 35px #ffffff,
+      0 0 55px rgba(255, 255, 255, 1) !important;
+    transition: transform 0.3s ease, text-shadow 0.3s ease !important;
+  }
+
+  .hero-cursive-button::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 140% !important;
+    height: 190% !important;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.7) 50%, transparent 85%) !important;
+    filter: blur(28px) !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    border-radius: 50% !important;
   }
 
   .hero-cursive-button:hover {
-    transform: scale(1.02) !important;
-    background: #ffffff !important;
-    box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 30px rgba(255,255,255,0.6) !important;
+    transform: scale(1.06) !important;
+    text-shadow: 
+      0 0 4px #000000,
+      0 0 12px #000000,
+      0 0 25px #ffffff,
+      0 0 45px #ffffff,
+      0 0 65px rgba(255, 255, 255, 1) !important;
+  }
+
+  /* Seamless Black-to-White Bottom Fade Bar */
+  .hero-bottom-fade-bar {
+    width: 100% !important;
+    height: 110px !important;
+    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.88) 25%, rgba(0, 0, 0, 0.45) 60%, rgba(255, 255, 255, 0) 100%) !important;
+    margin-top: -1px !important;
+    pointer-events: none !important;
   }
 </style>
 
@@ -118,8 +161,8 @@
       <source src="{{ 'product-landscape-video.mp4' | asset_url }}" type="video/mp4">
     </video>
 
-    <!-- Smooth Bottom White Gradient Overlay (Fades video seamlessly into pure white background) -->
-    <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.45) 68%, rgba(255,255,255,0.92) 88%, #ffffff 100%); pointer-events: none;"></div>
+    <!-- Bottom Pitch-Black Shadow Overlay on Video -->
+    <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.92) 88%, #000000 100%); pointer-events: none;"></div>
 
     <!-- Center Cursive "Shop Broken Halo Now" Button Overlay -->
     <div class="hero-cursive-button-box">
@@ -141,6 +184,9 @@
     </div>
 
   </div>
+
+  <!-- Smooth Black-to-White Fade Bar Transitioning into White Page Content Below -->
+  <div class="hero-bottom-fade-bar"></div>
 </div>
 
 <script>
