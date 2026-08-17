@@ -1,8 +1,8 @@
 {% comment %}
   Full-Width Autoplay Video Hero Banner Section
   Features:
-  - High-res video with dark bottom fade into pure black
-  - Seamless black-to-white gradient transition below the video
+  - Crystal-clear 100% unblurred looping video
+  - Smooth bottom vertical gradient fade into pure white (#FFFFFF)
   - Center cursive glowing "Shop Broken Halo Now" button
   - Bottom-left glitching text ("Me Against Myself" / "LIMITED STOCK AVAILABLE")
 {% endcomment %}
@@ -22,10 +22,12 @@
     position: relative !important;
     width: 100% !important;
     overflow: hidden !important;
-    background: #000000 !important;
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* Spacious Hero Height Ratio */
+  /* Video Wrapper - Maintains full video clarity and responsive aspect ratio */
   .hero-video-wrapper {
     position: relative !important;
     width: 100% !important;
@@ -35,6 +37,8 @@
     display: flex !important;
     align-items: flex-end !important;
     justify-content: space-between !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
   }
 
   @media screen and (max-width: 749px) {
@@ -47,15 +51,37 @@
     }
   }
 
+  /* Seamless Bottom White Gradient Overlay */
+  /* Starts transparent ~25% before bottom edge, transitions smoothly into solid #FFFFFF */
+  .hero-video-wrapper::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 30% !important;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 20%,
+      rgba(255, 255, 255, 0.2) 40%,
+      rgba(255, 255, 255, 0.5) 65%,
+      rgba(255, 255, 255, 0.85) 85%,
+      #ffffff 100%
+    ) !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+
   /* Glitch Text Element Overlay (Bottom Left) */
   .hero-glitch-heading {
     font-family: 'Milton One Local', 'Times New Roman', serif !important;
     font-size: clamp(2.4rem, 5.5vw, 4.8rem) !important;
-    color: #ffffff !important;
+    color: #000000 !important;
     margin: 0 !important;
     line-height: 1 !important;
     letter-spacing: 0.02em !important;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 4px 20px rgba(0, 0, 0, 0.9) !important;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.25) !important;
     transition: color 0.3s ease, font-family 0.3s ease !important;
     user-select: none !important;
     white-space: nowrap !important;
@@ -67,7 +93,7 @@
     letter-spacing: 0.06em !important;
     text-transform: uppercase !important;
     color: #ff0022 !important;
-    text-shadow: 0 0 18px rgba(255, 0, 34, 0.8), 0 4px 20px rgba(0, 0, 0, 0.9) !important;
+    text-shadow: 0 0 16px rgba(255, 0, 34, 0.6), 0 2px 8px rgba(0, 0, 0, 0.2) !important;
   }
 
   /* Center Cursive Button Overlay with Glowing White Aura */
@@ -135,20 +161,12 @@
       0 0 45px #ffffff,
       0 0 65px rgba(255, 255, 255, 1) !important;
   }
-
-  /* Seamless Black-to-White Bottom Fade Bar */
-  .hero-bottom-fade-bar {
-    width: 100% !important;
-    height: 110px !important;
-    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.88) 25%, rgba(0, 0, 0, 0.45) 60%, rgba(255, 255, 255, 0) 100%) !important;
-    margin-top: -1px !important;
-    pointer-events: none !important;
-  }
 </style>
 
 <div class="hero-video-banner-container">
   <div class="hero-video-wrapper">
     
+    <!-- Video Player (100% unblurred and unedited) -->
     <video
       autoplay
       loop
@@ -161,9 +179,6 @@
       <source src="{{ 'product-landscape-video.mp4' | asset_url }}" type="video/mp4">
     </video>
 
-    <!-- Bottom Pitch-Black Shadow Overlay on Video -->
-    <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.92) 88%, #000000 100%); pointer-events: none;"></div>
-
     <!-- Center Cursive "Shop Broken Halo Now" Button Overlay -->
     <div class="hero-cursive-button-box">
       <a href="/collections/all" class="hero-cursive-button">
@@ -172,7 +187,7 @@
     </div>
 
     <!-- Bottom Left Glitching Heading Overlay -->
-    <div style="position: relative; z-index: 4; padding: 2rem 2.5rem; color: #ffffff; max-width: 700px; pointer-events: auto;">
+    <div style="position: relative; z-index: 4; padding: 2rem 2.5rem; max-width: 700px; pointer-events: auto;">
       <h2 
         id="HeroGlitchHeading" 
         class="hero-glitch-heading"
@@ -184,9 +199,6 @@
     </div>
 
   </div>
-
-  <!-- Smooth Black-to-White Fade Bar Transitioning into White Page Content Below -->
-  <div class="hero-bottom-fade-bar"></div>
 </div>
 
 <script>
