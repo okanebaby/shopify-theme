@@ -1,8 +1,8 @@
 {% comment %}
   Full-Width Autoplay Video Hero Banner Section
   Features:
-  - Exact Milton One script font for "Me Against Myself" (loaded via Milton_One.otf)
-  - Original glitch animation timing, transitions, and behavior
+  - Exact cursive calligraphy font for "Me Against Myself" matching "Shop Broken Halo Now" (Pinyon Script)
+  - Original glitch animation timing and transitions
   - Crystal-clear 100% unblurred looping video
   - Smooth bottom vertical gradient fade into pure white (#FFFFFF)
   - Center cursive glowing "Shop Broken Halo Now" button
@@ -11,30 +11,6 @@
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Italianno&family=Monsieur+La+Doulaise&family=MonteCarlo&family=Alex+Brush&display=swap');
-
-  @font-face {
-    font-family: 'Milton One';
-    src: url('{{ "Milton_One.otf" | asset_url }}') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'Milton One Local';
-    src: url('{{ "Milton_One.otf" | asset_url }}') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'Milton_One';
-    src: url('{{ "Milton_One.otf" | asset_url }}') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
 
   .hero-video-banner-container {
     position: relative !important;
@@ -91,15 +67,16 @@
     z-index: 2 !important;
   }
 
-  /* Glitch Text Element Overlay (Bottom Left) - Matches Password Page Script & Thick Glow */
+  /* Glitch Text Element Overlay (Bottom Left) - EXACT SAME CURSIVE CALLIGRAPHY FONT (Pinyon Script) */
   #HeroGlitchHeading,
   .hero-glitch-heading {
-    font-family: 'Pinyon Script', 'Great Vibes', 'Milton One Local', cursive !important;
+    font-family: 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
     font-size: clamp(3.2rem, 8vw, 7.5rem) !important;
     color: #000000 !important;
     margin: 0 !important;
     line-height: 1 !important;
     letter-spacing: 0.02em !important;
+    text-transform: none !important;
     text-shadow: 0 0 4px #000000, 0 0 14px rgba(0, 0, 0, 0.85), 0 0 28px rgba(0, 0, 0, 0.55) !important;
     transition: all 0.3s ease !important;
     user-select: none !important;
@@ -122,7 +99,7 @@
   @media screen and (max-width: 749px) {
     #HeroGlitchHeading,
     .hero-glitch-heading {
-      font-size: clamp(2.2rem, 9vw, 3.6rem) !important;
+      font-size: clamp(2.4rem, 9.5vw, 4.2rem) !important;
       white-space: normal !important;
     }
   }
@@ -151,7 +128,7 @@
     text-decoration: none !important;
     border: none !important;
     box-shadow: none !important;
-    font-family: 'Pinyon Script', 'Great Vibes', 'Milton One Local', cursive !important;
+    font-family: 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
     font-size: clamp(2.8rem, 6.8vw, 5.4rem) !important;
     font-weight: 400 !important;
     text-transform: none !important;
@@ -184,11 +161,9 @@
   .hero-cursive-button:hover {
     transform: scale(1.06) !important;
     text-shadow: 
-      0 0 4px #000000,
-      0 0 12px #000000,
-      0 0 25px #ffffff,
-      0 0 45px #ffffff,
-      0 0 65px rgba(255, 255, 255, 1) !important;
+      0 0 6px #000000,
+      0 0 18px #000000,
+      0 0 30px rgba(0, 0, 0, 0.9) !important;
   }
 </style>
 
@@ -215,7 +190,7 @@
       </a>
     </div>
 
-    <!-- Bottom Left Glitching Heading Overlay (Milton One Script Font) -->
+    <!-- Bottom Left Glitching Heading Overlay (Cursive Calligraphy Font) -->
     <div style="position: relative; z-index: 4; padding: 2rem 2.5rem; max-width: 800px; pointer-events: auto;">
       <h2 
         id="HeroGlitchHeading" 
@@ -254,9 +229,11 @@
         if (toState === 2) {
           heading.classList.add('is-sans');
           heading.style.setProperty('font-family', "'Roboto Condensed', 'Arial Black', sans-serif", 'important');
+          heading.style.setProperty('text-transform', 'uppercase', 'important');
         } else {
           heading.classList.remove('is-sans');
-          heading.style.setProperty('font-family', "'Pinyon Script', 'Great Vibes', 'Milton One Local', cursive", 'important');
+          heading.style.setProperty('font-family', "'Pinyon Script', 'Great Vibes', 'Italianno', cursive", 'important');
+          heading.style.setProperty('text-transform', 'none', 'important');
         }
 
         const timer = setInterval(() => {
