@@ -8,8 +8,14 @@
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
-    {%- if settings.favicon != blank -%}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- assign favicon_source = settings.favicon | default: shop.brand.square_logo | default: shop.brand.logo | default: 'shopify://shop_images/IMG_9497.jpg' -%}
+    {%- if favicon_source != blank -%}
+      <link rel="icon" type="image/png" href="{{ favicon_source | image_url: width: 32, height: 32 }}" sizes="32x32">
+      <link rel="icon" type="image/png" href="{{ favicon_source | image_url: width: 48, height: 48 }}" sizes="48x48">
+      <link rel="icon" type="image/png" href="{{ favicon_source | image_url: width: 96, height: 96 }}" sizes="96x96">
+      <link rel="icon" type="image/png" href="{{ favicon_source | image_url: width: 192, height: 192 }}" sizes="192x192">
+      <link rel="shortcut icon" href="{{ favicon_source | image_url: width: 48, height: 48 }}">
+      <link rel="apple-touch-icon" href="{{ favicon_source | image_url: width: 180, height: 180 }}">
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
@@ -17,15 +23,21 @@
     {%- endunless -%}
 
     <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if request.page_type == 'index' -%}
+        Okane Baby | Official Online Store
+      {%- else -%}
+        {{ page_title }}
+        {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+        {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+        {%- unless page_title contains 'Okane Baby' or page_title contains shop.name %} &ndash; Okane Baby{% endunless -%}
+      {%- endif -%}
     </title>
 
-    {% if page_description %}
+    {%- if request.page_type == 'index' -%}
+      <meta name="description" content="Shop Okane Baby — independent streetwear built around bold design, limited releases and the Me Against Myself philosophy. Explore the latest collection.">
+    {%- elsif page_description -%}
       <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {%- endif -%}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
