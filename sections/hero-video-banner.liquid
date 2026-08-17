@@ -1,9 +1,110 @@
 {% comment %}
-  Full-Width Widescreen Autoplay Video Hero Banner Section
+  Full-Width Compact Autoplay Video Hero Banner Section
+  Featuring Glitching Text ("Me Against Myself" / "LIMITED STOCK AVAILABLE") & Cursive "Shop Broken Halo Now" Button Overlay
 {% endcomment %}
 
-<div class="hero-video-banner-container" style="position: relative; width: 100%; overflow: hidden; background: #000000; font-family: 'Times New Roman', Times, serif;">
-  <div class="hero-video-wrapper" style="position: relative; width: 100%; aspect-ratio: 16 / 7; min-height: 480px; display: flex; align-items: flex-end; justify-content: flex-start;">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Italianno&family=Monsieur+La+Doulaise&family=MonteCarlo&family=Alex+Brush&display=swap');
+
+  @font-face {
+    font-family: 'Milton One Local';
+    src: url('https://fonts.cdnfonts.com/s/85257/MiltonOne.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .hero-video-banner-container {
+    position: relative !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    background: #000000 !important;
+  }
+
+  /* Compact top-to-bottom height ratio (16:5.2 widescreen aspect ratio) */
+  .hero-video-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 5.2 !important;
+    max-height: 420px !important;
+    min-height: 320px !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .hero-video-wrapper {
+      aspect-ratio: 16 / 9 !important;
+      min-height: 280px !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      justify-content: flex-end !important;
+    }
+  }
+
+  /* Glitch Text Element Overlay */
+  .hero-glitch-heading {
+    font-family: 'Milton One Local', 'Times New Roman', serif !important;
+    font-size: clamp(2rem, 4.5vw, 4.2rem) !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.02em !important;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 4px 20px rgba(0,0,0,0.9) !important;
+    transition: color 0.3s ease, font-family 0.3s ease !important;
+    user-select: none !important;
+    white-space: nowrap !important;
+  }
+
+  .hero-glitch-heading.is-sans {
+    font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: #ff0022 !important;
+    text-shadow: 0 0 16px rgba(255, 0, 34, 0.6), 0 4px 20px rgba(0,0,0,0.9) !important;
+  }
+
+  /* Center Cursive Button Overlay */
+  .hero-cursive-button-box {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 5 !important;
+    text-align: center !important;
+    width: 90% !important;
+    max-width: 540px !important;
+    pointer-events: auto !important;
+  }
+
+  .hero-cursive-button {
+    display: block !important;
+    width: 100% !important;
+    padding: 1.2rem 2rem !important;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(245,245,245,0.9) 60%, rgba(230,230,230,0.85) 100%) !important;
+    color: #000000 !important;
+    font-family: 'Pinyon Script', 'Alex Brush', 'Great Vibes', cursive !important;
+    font-size: clamp(1.8rem, 3.8vw, 3rem) !important;
+    font-weight: 400 !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.4) !important;
+    border: 1px solid rgba(0,0,0,0.15) !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+  }
+
+  .hero-cursive-button:hover {
+    transform: scale(1.02) !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 30px rgba(255,255,255,0.6) !important;
+  }
+</style>
+
+<div class="hero-video-banner-container">
+  <div class="hero-video-wrapper">
     
     <video
       autoplay
@@ -17,23 +118,105 @@
       <source src="{{ 'product-landscape-video.mp4' | asset_url }}" type="video/mp4">
     </video>
 
-    <!-- Bottom Dark Gradient Overlay for Seamless Aesthetic -->
-    <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.95) 100%); pointer-events: none;"></div>
+    <!-- Dark Ambient Vignette Overlay -->
+    <div style="position: absolute; inset: 0; z-index: 2; background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 70%, rgba(0,0,0,0.85) 100%); pointer-events: none;"></div>
 
-    <!-- Text & Button Overlay (Bottom Left) -->
-    <div style="position: relative; z-index: 3; padding: 2.5rem 3rem; color: #ffffff; max-width: 600px;">
-      <h2 style="font-family: 'Roboto Condensed', 'Arial Black', sans-serif; font-size: clamp(1.4rem, 3.5vw, 2.2rem); font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 1rem 0; color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
-        {{ section.settings.heading | default: "SUMMER DROP + CLEARANCE" }}
-      </h2>
-      
-      {% if section.settings.button_label != blank %}
-        <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="button" style="display: inline-block; padding: 0.6rem 1.6rem; background: #ffffff; color: #000000; border: 1.5px solid #ffffff; font-family: 'Roboto Condensed', 'Arial Black', sans-serif; font-weight: 900; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; border-radius: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.2s ease;">
-          {{ section.settings.button_label | default: "SHOP NOW" }}
-        </a>
-      {% endif %}
+    <!-- Center Cursive "Shop Broken Halo Now" Button Overlay -->
+    <div class="hero-cursive-button-box">
+      <a href="/collections/all" class="hero-cursive-button">
+        Shop Broken Halo Now
+      </a>
     </div>
+
+    <!-- Bottom Left Glitching Heading Overlay -->
+    <div style="position: relative; z-index: 4; padding: 2rem 2.5rem; color: #ffffff; max-width: 700px; pointer-events: auto;">
+      <h2 
+        id="HeroGlitchHeading" 
+        class="hero-glitch-heading"
+        data-text1="{{ section.settings.heading_text_1 | default: 'Me Against Myself' }}"
+        data-text2="{{ section.settings.heading_text_2 | default: 'LIMITED STOCK AVAILABLE' }}"
+      >
+        {{ section.settings.heading_text_1 | default: "Me Against Myself" }}
+      </h2>
+    </div>
+
   </div>
 </div>
+
+<script>
+  (function() {
+    function initHeroGlitch() {
+      const heading = document.getElementById('HeroGlitchHeading');
+      if (!heading) return;
+
+      const phrase1 = heading.dataset.text1 || "Me Against Myself";
+      const phrase2 = heading.dataset.text2 || "LIMITED STOCK AVAILABLE";
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      
+      let currentState = 1;
+      let isAnimating = false;
+
+      function runGlitch(toState) {
+        if (isAnimating || currentState === toState) return;
+        isAnimating = true;
+
+        const targetText = toState === 2 ? phrase2 : phrase1;
+        const length = Math.max(heading.textContent.trim().length, targetText.length);
+        let iteration = 0;
+
+        if (toState === 2) {
+          heading.classList.add('is-sans');
+        } else {
+          heading.classList.remove('is-sans');
+        }
+
+        const timer = setInterval(() => {
+          let scramble = '';
+          for (let i = 0; i < length; i++) {
+            if (i < iteration) {
+              scramble += targetText[i] || '';
+            } else {
+              scramble += chars[Math.floor(Math.random() * chars.length)];
+            }
+          }
+          heading.textContent = scramble;
+          iteration += 1.2;
+
+          if (iteration >= length) {
+            clearInterval(timer);
+            heading.textContent = targetText;
+            isAnimating = false;
+            currentState = toState;
+          }
+        }, 35);
+      }
+
+      // Scroll glitch listener
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (Math.abs(currentScrollY - lastScrollY) > 15) {
+          lastScrollY = currentScrollY;
+          runGlitch(currentState === 1 ? 2 : 1);
+        }
+      }, { passive: true });
+
+      // Auto loop glitch every 5.5s
+      setInterval(() => {
+        runGlitch(currentState === 1 ? 2 : 1);
+      }, 5500);
+
+      heading.addEventListener('mouseenter', () => runGlitch(currentState === 1 ? 2 : 1));
+      heading.addEventListener('click', () => runGlitch(currentState === 1 ? 2 : 1));
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeroGlitch);
+    } else {
+      initHeroGlitch();
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -43,20 +226,15 @@
   "settings": [
     {
       "type": "text",
-      "id": "heading",
-      "label": "Heading Text",
-      "default": "SUMMER DROP + CLEARANCE"
+      "id": "heading_text_1",
+      "label": "Initial Glitch Text",
+      "default": "Me Against Myself"
     },
     {
       "type": "text",
-      "id": "button_label",
-      "label": "Button Label",
-      "default": "SHOP NOW"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link"
+      "id": "heading_text_2",
+      "label": "Secondary Glitch Text",
+      "default": "LIMITED STOCK AVAILABLE"
     }
   ],
   "presets": [
