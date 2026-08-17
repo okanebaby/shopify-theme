@@ -1,20 +1,36 @@
 {% comment %}
   Full-Width Autoplay Video Hero Banner Section
   Features:
-  - Original Milton One script font for "Me Against Myself"
-  - Original glitch animation timing and behavior
+  - Exact Milton One script font for "Me Against Myself" (loaded via Milton_One.otf)
+  - Original glitch animation timing, transitions, and behavior
   - Crystal-clear 100% unblurred looping video
   - Smooth bottom vertical gradient fade into pure white (#FFFFFF)
   - Center cursive glowing "Shop Broken Halo Now" button
-  - Bold layout and positioning across the white fade horizon
+  - Dominant, responsive layout across the white fade horizon
 {% endcomment %}
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Italianno&family=Monsieur+La+Doulaise&family=MonteCarlo&family=Alex+Brush&display=swap');
 
   @font-face {
+    font-family: 'Milton One';
+    src: url('{{ "Milton_One.otf" | asset_url }}') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
     font-family: 'Milton One Local';
-    src: url('https://fonts.cdnfonts.com/s/85257/MiltonOne.woff') format('woff');
+    src: url('{{ "Milton_One.otf" | asset_url }}') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Milton_One';
+    src: url('{{ "Milton_One.otf" | asset_url }}') format('opentype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -75,9 +91,10 @@
     z-index: 2 !important;
   }
 
-  /* Glitch Text Element Overlay (Bottom Left) - Milton One Script Font */
+  /* Glitch Text Element Overlay (Bottom Left) - ACTUAL MILTON ONE SCRIPT FONT */
+  #HeroGlitchHeading,
   .hero-glitch-heading {
-    font-family: 'Milton One Local', 'Times New Roman', serif !important;
+    font-family: 'Milton One', 'Milton One Local', 'Milton_One', 'Pinyon Script', cursive !important;
     font-size: clamp(2.8rem, 6.5vw, 5.8rem) !important;
     color: #000000 !important;
     margin: 0 !important;
@@ -88,8 +105,11 @@
     user-select: none !important;
     white-space: nowrap !important;
     cursor: pointer !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
   }
 
+  #HeroGlitchHeading.is-sans,
   .hero-glitch-heading.is-sans {
     font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
     font-weight: 900 !important;
@@ -100,6 +120,7 @@
   }
 
   @media screen and (max-width: 749px) {
+    #HeroGlitchHeading,
     .hero-glitch-heading {
       font-size: clamp(2.2rem, 9vw, 3.6rem) !important;
       white-space: normal !important;
@@ -130,7 +151,7 @@
     text-decoration: none !important;
     border: none !important;
     box-shadow: none !important;
-    font-family: 'Milton One Local', 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
+    font-family: 'Milton One', 'Milton One Local', 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
     font-size: clamp(2.4rem, 6vw, 4.8rem) !important;
     font-weight: 400 !important;
     text-transform: none !important;
@@ -196,7 +217,7 @@
       </a>
     </div>
 
-    <!-- Bottom Left Glitching Heading Overlay (Milton One Font) -->
+    <!-- Bottom Left Glitching Heading Overlay (Milton One Script Font) -->
     <div style="position: relative; z-index: 4; padding: 2rem 2.5rem; max-width: 800px; pointer-events: auto;">
       <h2 
         id="HeroGlitchHeading" 
@@ -234,8 +255,10 @@
 
         if (toState === 2) {
           heading.classList.add('is-sans');
+          heading.style.setProperty('font-family', "'Roboto Condensed', 'Arial Black', sans-serif", 'important');
         } else {
           heading.classList.remove('is-sans');
+          heading.style.setProperty('font-family', "'Milton One', 'Milton One Local', 'Milton_One', 'Pinyon Script', cursive", 'important');
         }
 
         const timer = setInterval(() => {

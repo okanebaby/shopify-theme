@@ -30,6 +30,31 @@
     {% render 'meta-tags' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    
+    <style>
+      @font-face {
+        font-family: 'Milton One';
+        src: url('{{ "Milton_One.otf" | asset_url }}') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Milton One Local';
+        src: url('{{ "Milton_One.otf" | asset_url }}') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Milton_One';
+        src: url('{{ "Milton_One.otf" | asset_url }}') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+
     {{ content_for_header }}
 
     {%- liquid
