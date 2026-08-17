@@ -7,150 +7,200 @@
 {% style %}
   .ai-product-grid-{{ ai_gen_id }} {
     display: block;
-    width: {{ block.settings.desktop_width_percent }}%;
+    width: 100%;
     max-width: 100%;
-    padding: {{ block.settings.section_padding }}px 0;
+    padding: 30px 0 60px;
+    background-color: #ffffff;
   }
 
   .ai-product-grid-container-{{ ai_gen_id }} {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
   }
 
   .ai-product-grid-header-{{ ai_gen_id }} {
-    text-align: {{ block.settings.heading_alignment }};
-    margin-bottom: 32px;
+    text-align: {{ block.settings.heading_alignment | default: 'center' }};
+    margin-bottom: 24px;
   }
 
   .ai-product-grid-title-{{ ai_gen_id }} {
-    font-size: {{ block.settings.heading_size }}px;
-    color: {{ block.settings.heading_color }};
-    margin: 0 0 12px;
-    font-weight: 600;
+    font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: uppercase !important;
+    color: #000000 !important;
+    margin: 0 0 8px !important;
   }
 
   .ai-product-grid-description-{{ ai_gen_id }} {
-    font-size: 16px;
-    color: {{ block.settings.text_color }};
-    margin: 0;
+    font-family: 'Roboto Condensed', 'Helvetica Neue', sans-serif !important;
+    font-size: 15px !important;
+    color: #555555 !important;
+    margin: 0 !important;
   }
 
   .ai-product-grid-items-{{ ai_gen_id }} {
-    display: grid;
-    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
-    gap: {{ block.settings.grid_gap }}px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 32px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
   }
 
   .ai-product-card-{{ ai_gen_id }} {
-    display: flex;
-    flex-direction: column;
-    background-color: {{ block.settings.card_background }};
-    border-radius: {{ block.settings.card_border_radius }}px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: transparent !important;
+    width: 100% !important;
+    max-width: 460px !important;
+    min-width: 280px !important;
+    border-radius: 0px !important;
+    overflow: hidden !important;
+    transition: transform 0.25s ease !important;
   }
 
   .ai-product-card-{{ ai_gen_id }}:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px) !important;
   }
 
   .ai-product-card-link-{{ ai_gen_id }} {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    text-decoration: none !important;
+    color: inherit !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
   }
 
+  /* Large, dominant product image viewport with 80-90% clothing scale */
   .ai-product-image-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    width: 100%;
-    padding-bottom: 100%;
-    overflow: hidden;
-    background-color: #f4f4f4;
+    position: relative !important;
+    width: 100% !important;
+    padding-bottom: 128% !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
   }
 
-  .ai-product-image-{{ ai_gen_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .ai-product-image-primary-{{ ai_gen_id }} {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    transform: scale(1.04) !important;
+    transition: opacity 0.22s ease-in-out, transform 0.3s ease !important;
+    z-index: 1 !important;
+  }
+
+  .ai-product-image-secondary-{{ ai_gen_id }} {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    transform: scale(1.04) !important;
+    opacity: 0 !important;
+    transition: opacity 0.22s ease-in-out, transform 0.3s ease !important;
+    z-index: 2 !important;
+  }
+
+  @media (hover: hover) {
+    .ai-product-card-{{ ai_gen_id }}:hover .ai-product-image-secondary-{{ ai_gen_id }} {
+      opacity: 1 !important;
+    }
+    .ai-product-card-{{ ai_gen_id }}:hover .ai-product-image-primary-{{ ai_gen_id }} {
+      opacity: 0 !important;
+    }
   }
 
   .ai-product-image-placeholder-{{ ai_gen_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f4;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #f9f9f9 !important;
   }
 
   .ai-product-image-placeholder-{{ ai_gen_id }} svg {
-    width: 60%;
-    height: 60%;
-    opacity: 0.3;
+    width: 60% !important;
+    height: 60% !important;
+    opacity: 0.3 !important;
   }
 
+  /* Minimal badge with thin rectangular border */
+  .ai-product-badge-{{ ai_gen_id }} {
+    position: absolute !important;
+    top: 12px !important;
+    left: 12px !important;
+    background: #ffffff !important;
+    border: 1px solid #000000 !important;
+    color: #000000 !important;
+    padding: 3px 8px !important;
+    border-radius: 2px !important;
+    font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    z-index: 3 !important;
+    box-shadow: none !important;
+  }
+
+  /* Product details with tight intentional gap */
   .ai-product-info-{{ ai_gen_id }} {
-    padding: 16px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    padding: 14px 4px 0 4px !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background: transparent !important;
   }
 
   .ai-product-vendor-{{ ai_gen_id }} {
-    font-size: 12px;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
+    font-family: 'Roboto Condensed', sans-serif !important;
+    font-size: 0.75rem !important;
+    color: #888888 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    margin-bottom: 3px !important;
   }
 
+  /* Bold Condensed Streetwear Title */
   .ai-product-title-{{ ai_gen_id }} {
-    font-size: 16px;
-    font-weight: 500;
-    color: {{ block.settings.text_color }};
-    margin: 0 0 8px;
-    line-height: 1.4;
+    font-family: 'Roboto Condensed', 'Helvetica Neue', 'Arial Black', sans-serif !important;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem) !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    margin: 0 0 6px !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.03em !important;
+    text-transform: uppercase !important;
   }
 
+  /* Distinct Clean Price */
   .ai-product-price-{{ ai_gen_id }} {
-    font-size: 18px;
-    font-weight: 600;
-    color: {{ block.settings.price_color }};
-    margin-top: auto;
+    font-family: 'Roboto Condensed', 'Helvetica Neue', sans-serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    color: #222222 !important;
+    letter-spacing: 0.02em !important;
+    margin-top: 0 !important;
   }
 
   .ai-product-price-compare-{{ ai_gen_id }} {
-    font-size: 14px;
-    color: #999;
-    text-decoration: line-through;
-    margin-left: 8px;
-  }
-
-  .ai-product-badge-{{ ai_gen_id }} {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background-color: {{ block.settings.badge_background }};
-    color: {{ block.settings.badge_text_color }};
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.95rem !important;
+    color: #888888 !important;
+    text-decoration: line-through !important;
+    margin-left: 8px !important;
+    font-weight: 400 !important;
   }
 
   .ai-product-grid-empty-{{ ai_gen_id }} {
@@ -164,19 +214,9 @@
     margin: 0;
   }
 
-  @media screen and (max-width: 989px) {
-    .ai-product-grid-items-{{ ai_gen_id }} {
-      grid-template-columns: repeat({{ block.settings.columns_tablet }}, 1fr);
-    }
-  }
-
   @media screen and (max-width: 749px) {
-    .ai-product-grid-items-{{ ai_gen_id }} {
-      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
-    }
-
-    .ai-product-grid-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    .ai-product-card-{{ ai_gen_id }} {
+      max-width: 100% !important;
     }
   }
 {% endstyle %}
@@ -202,13 +242,23 @@
               <div class="ai-product-image-wrapper-{{ ai_gen_id }}">
                 {% if product.featured_image %}
                   <img
-                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    src="{{ product.featured_image | image_url: width: 900 }}"
                     alt="{{ product.featured_image.alt | escape }}"
-                    class="ai-product-image-{{ ai_gen_id }}"
+                    class="ai-product-image-primary-{{ ai_gen_id }}"
                     loading="lazy"
-                    width="600"
-                    height="600"
+                    width="900"
+                    height="1150"
                   >
+                  {% if product.images.size > 1 %}
+                    <img
+                      src="{{ product.images[1] | image_url: width: 900 }}"
+                      alt="{{ product.images[1].alt | escape }}"
+                      class="ai-product-image-secondary-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="900"
+                      height="1150"
+                    >
+                  {% endif %}
                 {% else %}
                   <div class="ai-product-image-placeholder-{{ ai_gen_id }}">
                     {{ 'product-1' | placeholder_svg_tag }}
@@ -246,43 +296,14 @@
   </div>
 </product-grid-{{ ai_gen_id }}>
 
-<script>
-  (function() {
-    class ProductGrid{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-      }
-
-      connectedCallback() {
-        this.initializeGrid();
-      }
-
-      initializeGrid() {
-        const cards = this.querySelectorAll('.ai-product-card-{{ ai_gen_id }}');
-        cards.forEach((card, index) => {
-          card.style.animationDelay = `${index * 0.05}s`;
-        });
-      }
-    }
-
-    customElements.define('product-grid-{{ ai_gen_id }}', ProductGrid{{ ai_gen_id }});
-  })();
-</script>
-
 {% schema %}
 {
-  "name": "Product grid",
-  "tag": null,
+  "name": "Featured Products Grid",
   "settings": [
     {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "inline_richtext",
+      "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "Featured products"
+      "label": "Heading"
     },
     {
       "type": "richtext",
@@ -294,178 +315,36 @@
       "id": "heading_alignment",
       "label": "Heading alignment",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "center"
     },
     {
       "type": "product_list",
       "id": "products",
-      "label": "Products",
-      "limit": 12
+      "label": "Products"
     },
     {
       "type": "range",
       "id": "products_to_show",
-      "label": "Products to show",
-      "min": 2,
+      "min": 1,
       "max": 12,
       "step": 1,
-      "default": 8
+      "default": 4,
+      "label": "Products to show"
     },
     {
       "type": "checkbox",
       "id": "show_vendor",
-      "label": "Show vendor",
-      "default": false
-    },
-    {
-      "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "label": "Columns on desktop",
-      "min": 2,
-      "max": 5,
-      "step": 1,
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "columns_tablet",
-      "label": "Columns on tablet",
-      "min": 2,
-      "max": 4,
-      "step": 1,
-      "default": 3
-    },
-    {
-      "type": "select",
-      "id": "columns_mobile",
-      "label": "Columns on mobile",
-      "options": [
-        {
-          "value": "1",
-          "label": "1"
-        },
-        {
-          "value": "2",
-          "label": "2"
-        }
-      ],
-      "default": "2"
-    },
-    {
-      "type": "range",
-      "id": "grid_gap",
-      "label": "Grid gap",
-      "min": 8,
-      "max": 40,
-      "step": 4,
-      "unit": "px",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "section_padding",
-      "label": "Section padding",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "desktop_width_percent",
-      "label": "Desktop width",
-      "min": 50,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 100
-    },
-    {
-      "type": "header",
-      "content": "Style"
-    },
-    {
-      "type": "range",
-      "id": "heading_size",
-      "label": "Heading size",
-      "min": 20,
-      "max": 60,
-      "step": 2,
-      "unit": "px",
-      "default": 32
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "price_color",
-      "label": "Price color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "card_background",
-      "label": "Card background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "card_border_radius",
-      "label": "Card border radius",
-      "min": 0,
-      "max": 20,
-      "step": 2,
-      "unit": "px",
-      "default": 8
-    },
-    {
-      "type": "header",
-      "content": "Badge"
-    },
-    {
-      "type": "color",
-      "id": "badge_background",
-      "label": "Badge background",
-      "default": "#334fb4"
-    },
-    {
-      "type": "color",
-      "id": "badge_text_color",
-      "label": "Badge text color",
-      "default": "#ffffff"
+      "default": false,
+      "label": "Show vendor"
     }
   ],
   "presets": [
     {
-      "name": "Product grid"
+      "name": "Featured Products Grid"
     }
   ]
 }

@@ -223,33 +223,34 @@
   outline: 0;
 }
 
-@media screen and (min-width: 990px) {
-  .card .media.media--hover-effect > img:only-child,
-  .card-wrapper .media.media--hover-effect > img:only-child {
-    transition: transform var(--duration-long) ease;
+@media (hover: hover) {
+  .media.media--hover-effect > img {
+    transition: opacity 0.22s ease-in-out, transform 0.3s ease !important;
   }
 
   .card:hover .media.media--hover-effect > img:first-child:only-child,
   .card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
-    transform: scale(1.03);
+    transform: scale(1.04);
   }
 
   .card-wrapper:hover
     .media.media--hover-effect
     > img:first-child:not(:only-child) {
-    opacity: 0;
+    opacity: 0 !important;
   }
 
   .card-wrapper:hover .media.media--hover-effect > img + img {
-    opacity: 1;
-    transition: transform var(--duration-long) ease;
-    transform: scale(1.03);
+    opacity: 1 !important;
+    transform: scale(1.04);
   }
+}
 
-  .underline-links-hover:hover a {
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
-  }
+.card__media .media img {
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center center;
+  width: 100%;
+  transform: scale(1.03);
 }
 
 .card--standard.card--media .card__inner .card__information,
