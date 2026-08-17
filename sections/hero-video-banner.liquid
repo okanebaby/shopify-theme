@@ -18,16 +18,16 @@
     position: relative !important;
     width: 100% !important;
     overflow: hidden !important;
-    background: #000000 !important;
+    background: #ffffff !important;
   }
 
-  /* Widescreen height ratio (16:6.5 aspect ratio for ideal video height) */
+  /* Spacious Hero Height Ratio (16:8 aspect ratio, max-height 650px) */
   .hero-video-wrapper {
     position: relative !important;
     width: 100% !important;
-    aspect-ratio: 16 / 6.5 !important;
-    max-height: 540px !important;
-    min-height: 400px !important;
+    aspect-ratio: 16 / 8 !important;
+    max-height: 650px !important;
+    min-height: 450px !important;
     display: flex !important;
     align-items: flex-end !important;
     justify-content: space-between !important;
@@ -35,8 +35,8 @@
 
   @media screen and (max-width: 749px) {
     .hero-video-wrapper {
-      aspect-ratio: 16 / 9 !important;
-      min-height: 280px !important;
+      aspect-ratio: 16 / 10 !important;
+      min-height: 340px !important;
       flex-direction: column !important;
       align-items: flex-start !important;
       justify-content: flex-end !important;
@@ -46,12 +46,12 @@
   /* Glitch Text Element Overlay */
   .hero-glitch-heading {
     font-family: 'Milton One Local', 'Times New Roman', serif !important;
-    font-size: clamp(2rem, 4.5vw, 4.2rem) !important;
-    color: #ffffff !important;
+    font-size: clamp(2.2rem, 5vw, 4.5rem) !important;
+    color: #000000 !important;
     margin: 0 !important;
     line-height: 1 !important;
     letter-spacing: 0.02em !important;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 4px 20px rgba(0,0,0,0.9) !important;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 2px 10px rgba(0,0,0,0.15) !important;
     transition: color 0.3s ease, font-family 0.3s ease !important;
     user-select: none !important;
     white-space: nowrap !important;
@@ -63,7 +63,7 @@
     letter-spacing: 0.06em !important;
     text-transform: uppercase !important;
     color: #ff0022 !important;
-    text-shadow: 0 0 16px rgba(255, 0, 34, 0.6), 0 4px 20px rgba(0,0,0,0.9) !important;
+    text-shadow: 0 0 16px rgba(255, 0, 34, 0.6), 0 2px 10px rgba(0,0,0,0.2) !important;
   }
 
   /* Center Cursive Button Overlay */
@@ -118,8 +118,8 @@
       <source src="{{ 'product-landscape-video.mp4' | asset_url }}" type="video/mp4">
     </video>
 
-    <!-- Dark Ambient Vignette Overlay -->
-    <div style="position: absolute; inset: 0; z-index: 2; background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 70%, rgba(0,0,0,0.85) 100%); pointer-events: none;"></div>
+    <!-- Smooth Bottom White Gradient Overlay (Fades video seamlessly into pure white background) -->
+    <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.45) 68%, rgba(255,255,255,0.92) 88%, #ffffff 100%); pointer-events: none;"></div>
 
     <!-- Center Cursive "Shop Broken Halo Now" Button Overlay -->
     <div class="hero-cursive-button-box">
