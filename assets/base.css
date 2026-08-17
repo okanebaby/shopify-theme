@@ -2962,21 +2962,6 @@ details-disclosure > details {
    COMPLETE INTERACTIVE TYPOGRAPHY, NAV DROPDOWNS, SIZING PILLS & MEDIA SYSTEM
    ========================================================================== */
 
-/* 1. Global Typography: Times New Roman Bold Italic with Black Ambient Glow */
-body,
-p,
-h1, h2, h3, h4, h5, h6,
-a,
-span,
-li,
-label,
-input,
-button,
-select,
-option,
-summary,
-details,
-.header__menu-item,
 /* Streetwear Product Title Typography */
 .card__heading,
 .card__heading a,
@@ -2993,6 +2978,19 @@ details,
   color: #000000 !important;
   text-shadow: none !important;
   line-height: 1.25 !important;
+}
+
+/* Fix Live Demand Badge in Product Section */
+.product-live-demand-badge,
+.product-live-demand-badge span,
+.product-live-demand-badge #live-viewer-count {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+.product-live-demand-badge strong {
+  color: #ff0022 !important;
+  text-shadow: 0 0 8px rgba(255, 0, 34, 0.6) !important;
 }
 
 /* Distinct Clean Pricing */
