@@ -150,8 +150,8 @@
       </span>
     </div>
 
-    <!-- Centered Announcement Message -->
-    {%- assign announcement_text = "THEY CAN'T BE US" -%}
+    <!-- Optional Announcement Message (only rendered if text is added in customizer) -->
+    {%- assign announcement_text = "" -%}
     {%- assign announcement_link = "" -%}
     {%- if section.blocks.size > 0 -%}
       {%- for block in section.blocks -%}
@@ -163,17 +163,19 @@
       {%- endfor -%}
     {%- endif -%}
 
-    {%- if announcement_link != blank -%}
-      <a href="{{ announcement_link }}" class="announcement-bar__link">
+    {%- if announcement_text != blank -%}
+      {%- if announcement_link != blank -%}
+        <a href="{{ announcement_link }}" class="announcement-bar__link">
+          <p class="announcement-bar__message">
+            {{ announcement_text | escape }}
+            {% render 'icon-arrow' %}
+          </p>
+        </a>
+      {%- else -%}
         <p class="announcement-bar__message">
           {{ announcement_text | escape }}
-          {% render 'icon-arrow' %}
         </p>
-      </a>
-    {%- else -%}
-      <p class="announcement-bar__message">
-        {{ announcement_text | escape }}
-      </p>
+      {%- endif -%}
     {%- endif -%}
 
   </div>
