@@ -1,14 +1,15 @@
 {% comment %}
   Full-Width Autoplay Video Hero Banner Section
   Features:
+  - Luxury underground streetwear campaign typography & digital glitch sequence
   - Crystal-clear 100% unblurred looping video
-  - Smooth bottom vertical gradient fade into pure white (#FFFFFF)
+  - Seamless bottom vertical gradient fade into pure white (#FFFFFF)
   - Center cursive glowing "Shop Broken Halo Now" button
-  - Bottom-left glitching text ("Me Against Myself" / "LIMITED STOCK AVAILABLE")
+  - Dominant editorial rotating slogans ("Me Against Myself" / "LIMITED STOCK AVAILABLE")
 {% endcomment %}
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Italianno&family=Monsieur+La+Doulaise&family=MonteCarlo&family=Alex+Brush&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@1,400;1,700;1,900&family=Pinyon+Script&family=Great+Vibes&display=swap');
 
   @font-face {
     font-family: 'Milton One Local';
@@ -32,8 +33,8 @@
     position: relative !important;
     width: 100% !important;
     aspect-ratio: 16 / 8.5 !important;
-    max-height: 680px !important;
-    min-height: 460px !important;
+    max-height: 700px !important;
+    min-height: 480px !important;
     display: flex !important;
     align-items: flex-end !important;
     justify-content: space-between !important;
@@ -43,8 +44,8 @@
 
   @media screen and (max-width: 749px) {
     .hero-video-wrapper {
-      aspect-ratio: 16 / 11 !important;
-      min-height: 360px !important;
+      aspect-ratio: 16 / 11.5 !important;
+      min-height: 380px !important;
       flex-direction: column !important;
       align-items: flex-start !important;
       justify-content: flex-end !important;
@@ -59,47 +60,142 @@
     bottom: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 30% !important;
+    height: 32% !important;
     background: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.05) 20%,
-      rgba(255, 255, 255, 0.2) 40%,
-      rgba(255, 255, 255, 0.5) 65%,
-      rgba(255, 255, 255, 0.85) 85%,
+      rgba(255, 255, 255, 0.04) 18%,
+      rgba(255, 255, 255, 0.2) 38%,
+      rgba(255, 255, 255, 0.55) 62%,
+      rgba(255, 255, 255, 0.88) 85%,
       #ffffff 100%
     ) !important;
     pointer-events: none !important;
     z-index: 2 !important;
   }
 
-  /* Glitch Text Element Overlay (Bottom Left) */
-  .hero-glitch-heading {
-    font-family: 'Milton One Local', 'Times New Roman', serif !important;
-    font-size: clamp(2.4rem, 5.5vw, 4.8rem) !important;
-    color: #000000 !important;
-    margin: 0 !important;
-    line-height: 1 !important;
-    letter-spacing: 0.02em !important;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.25) !important;
-    transition: color 0.3s ease, font-family 0.3s ease !important;
-    user-select: none !important;
-    white-space: nowrap !important;
+  /* Campaign Glitch Stage & Positioner across the White Gradient Horizon */
+  .hero-glitch-positioner {
+    position: relative !important;
+    z-index: 4 !important;
+    width: 100% !important;
+    padding: 2rem 3.5vw 2.2rem 3.5vw !important;
+    pointer-events: auto !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
   }
 
-  .hero-glitch-heading.is-sans {
-    font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+  @media screen and (max-width: 749px) {
+    .hero-glitch-positioner {
+      padding: 1.5rem 1.2rem 1.8rem 1.2rem !important;
+    }
+  }
+
+  .hero-glitch-stage {
+    position: relative !important;
+    display: inline-block !important;
+    max-width: 100% !important;
+    user-select: none !important;
+    cursor: pointer !important;
+  }
+
+  /* Base Campaign Headline */
+  .hero-glitch-heading {
+    display: inline-block !important;
+    margin: 0 !important;
+    line-height: 0.92 !important;
+    white-space: nowrap !important;
+    position: relative !important;
+    transform-origin: left bottom !important;
+    transition: color 0.2s ease, transform 0.2s ease !important;
+    will-change: transform, clip-path, text-shadow;
+  }
+
+  /* Style 1: "Me Against Myself" - Luxury Underground Editorial Serif Personality */
+  .hero-glitch-heading.style-serif {
+    font-family: 'Milton One Local', 'Playfair Display', 'Times New Roman', serif !important;
+    font-size: clamp(3rem, 7.2vw, 6.6rem) !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.015em !important;
+    color: #0a0a0a !important;
+    text-transform: none !important;
+    text-shadow: 
+      0 1px 2px rgba(255, 255, 255, 0.9), 
+      0 2px 12px rgba(0, 0, 0, 0.12) !important;
+    transform: none !important;
+  }
+
+  /* Style 2: "LIMITED STOCK AVAILABLE" - Heavy Condensed Bold / Italic Streetwear Campaign */
+  .hero-glitch-heading.style-sans {
+    font-family: 'Anton', 'Impact', 'Haettenschweiler', 'Arial Black', sans-serif !important;
+    font-size: clamp(3.4rem, 8.2vw, 7.8rem) !important;
     font-weight: 900 !important;
-    letter-spacing: 0.06em !important;
+    font-style: italic !important;
+    letter-spacing: -0.015em !important;
     text-transform: uppercase !important;
-    color: #ff0022 !important;
-    text-shadow: 0 0 16px rgba(255, 0, 34, 0.6), 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    color: #e60021 !important;
+    text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.15) !important;
+    transform: skewX(-3deg) !important;
+  }
+
+  /* Fast Digital Distortion / Horizontal Slicing Transition (active only for ~220ms) */
+  .hero-glitch-heading.is-glitching {
+    animation: digital-slice-flicker 0.22s steps(2, end) forwards !important;
+    text-shadow: 
+      -3px 0 0 rgba(0, 240, 255, 0.85), 
+      3px 0 0 rgba(255, 0, 50, 0.85) !important;
+  }
+
+  @keyframes digital-slice-flicker {
+    0% {
+      transform: translate(0, 0);
+      clip-path: inset(0 0 0 0);
+    }
+    15% {
+      transform: translate(-5px, 2px) skewX(4deg);
+      clip-path: inset(18% 0 45% 0);
+    }
+    35% {
+      transform: translate(6px, -2px) skewX(-4deg);
+      clip-path: inset(55% 0 10% 0);
+    }
+    55% {
+      transform: translate(-4px, 1px) skewX(3deg);
+      clip-path: inset(5% 0 68% 0);
+    }
+    75% {
+      transform: translate(4px, -1px) skewX(-2deg);
+      clip-path: inset(42% 0 22% 0);
+    }
+    90% {
+      transform: translate(-1px, 1px) skewX(1deg);
+      clip-path: inset(12% 0 48% 0);
+    }
+    100% {
+      transform: translate(0, 0);
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .hero-glitch-heading.style-serif {
+      font-size: clamp(2.4rem, 10vw, 3.8rem) !important;
+      white-space: normal !important;
+    }
+    .hero-glitch-heading.style-sans {
+      font-size: clamp(2.5rem, 10.5vw, 4.2rem) !important;
+      white-space: normal !important;
+    }
   }
 
   /* Center Cursive Button Overlay with Glowing White Aura */
   .hero-cursive-button-box {
     position: absolute !important;
-    top: 50% !important;
+    top: 48% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     z-index: 5 !important;
@@ -186,16 +282,18 @@
       </a>
     </div>
 
-    <!-- Bottom Left Glitching Heading Overlay -->
-    <div style="position: relative; z-index: 4; padding: 2rem 2.5rem; max-width: 700px; pointer-events: auto;">
-      <h2 
-        id="HeroGlitchHeading" 
-        class="hero-glitch-heading"
-        data-text1="{{ section.settings.heading_text_1 | default: 'Me Against Myself' }}"
-        data-text2="{{ section.settings.heading_text_2 | default: 'LIMITED STOCK AVAILABLE' }}"
-      >
-        {{ section.settings.heading_text_1 | default: "Me Against Myself" }}
-      </h2>
+    <!-- Streetwear Campaign Rotating Headline across White Fade Horizon -->
+    <div class="hero-glitch-positioner">
+      <div class="hero-glitch-stage" id="HeroGlitchStage" title="Click to trigger glitch">
+        <h2 
+          id="HeroGlitchHeading" 
+          class="hero-glitch-heading style-serif"
+          data-text1="{{ section.settings.heading_text_1 | default: 'Me Against Myself' }}"
+          data-text2="{{ section.settings.heading_text_2 | default: 'LIMITED STOCK AVAILABLE' }}"
+        >
+          {{ section.settings.heading_text_1 | default: "Me Against Myself" }}
+        </h2>
+      </div>
     </div>
 
   </div>
@@ -203,75 +301,102 @@
 
 <script>
   (function() {
-    function initHeroGlitch() {
+    function initHeroCampaignGlitch() {
       const heading = document.getElementById('HeroGlitchHeading');
+      const stage = document.getElementById('HeroGlitchStage');
       if (!heading) return;
 
       const phrase1 = heading.dataset.text1 || "Me Against Myself";
       const phrase2 = heading.dataset.text2 || "LIMITED STOCK AVAILABLE";
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      const glitchGlyphs = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789/_-#%<>';
       
-      let currentState = 1;
-      let isAnimating = false;
+      let currentState = 1; // 1 = "Me Against Myself" (Editorial Serif), 2 = "LIMITED STOCK AVAILABLE" (Condensed Bold Italic)
+      let isTransitioning = false;
 
-      function runGlitch(toState) {
-        if (isAnimating || currentState === toState) return;
-        isAnimating = true;
+      function triggerGlitchTransition(toState) {
+        if (isTransitioning || currentState === toState) return;
+        isTransitioning = true;
 
-        const targetText = toState === 2 ? phrase2 : phrase1;
-        const length = Math.max(heading.textContent.trim().length, targetText.length);
-        let iteration = 0;
+        const targetPhrase = toState === 2 ? phrase2 : phrase1;
+        const currentLength = heading.textContent.trim().length;
+        const targetLength = targetPhrase.length;
+        const maxLength = Math.max(currentLength, targetLength);
+        
+        // 1. Activate digital slice & chromatic aberration
+        heading.classList.add('is-glitching');
 
-        if (toState === 2) {
-          heading.classList.add('is-sans');
-        } else {
-          heading.classList.remove('is-sans');
-        }
+        let step = 0;
+        const totalSteps = 7;
+        const stepInterval = 30; // ~210ms total glitch time
 
-        const timer = setInterval(() => {
-          let scramble = '';
-          for (let i = 0; i < length; i++) {
-            if (i < iteration) {
-              scramble += targetText[i] || '';
+        const scrambleTimer = setInterval(() => {
+          step++;
+
+          // Midpoint swap of typography style
+          if (step === 3) {
+            if (toState === 2) {
+              heading.classList.remove('style-serif');
+              heading.classList.add('style-sans');
             } else {
-              scramble += chars[Math.floor(Math.random() * chars.length)];
+              heading.classList.remove('style-sans');
+              heading.classList.add('style-serif');
             }
           }
-          heading.textContent = scramble;
-          iteration += 1.2;
 
-          if (iteration >= length) {
-            clearInterval(timer);
-            heading.textContent = targetText;
-            isAnimating = false;
-            currentState = toState;
+          // Generate digital fragment scramble
+          let scrambleStr = '';
+          const revealedCount = Math.floor((step / totalSteps) * targetLength);
+
+          for (let i = 0; i < maxLength; i++) {
+            if (i < revealedCount) {
+              scrambleStr += targetPhrase[i] || '';
+            } else if (i < targetLength) {
+              scrambleStr += glitchGlyphs[Math.floor(Math.random() * glitchGlyphs.length)];
+            }
           }
-        }, 35);
+          heading.textContent = scrambleStr;
+
+          if (step >= totalSteps) {
+            clearInterval(scrambleTimer);
+            // 2. Snap cleanly into final phrase with zero residual blur
+            heading.textContent = targetPhrase;
+            heading.classList.remove('is-glitching');
+            currentState = toState;
+            isTransitioning = false;
+          }
+        }, stepInterval);
       }
 
-      // Scroll glitch listener
+      // 1. Scroll-triggered glitch (debounced)
       let lastScrollY = window.scrollY;
+      let scrollTimeout;
       window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
-        if (Math.abs(currentScrollY - lastScrollY) > 15) {
+        if (Math.abs(currentScrollY - lastScrollY) > 20) {
           lastScrollY = currentScrollY;
-          runGlitch(currentState === 1 ? 2 : 1);
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            triggerGlitchTransition(currentState === 1 ? 2 : 1);
+          }, 40);
         }
       }, { passive: true });
 
-      // Auto loop glitch every 5.5s
+      // 2. Clean 4.8s loop holding each phrase clearly
       setInterval(() => {
-        runGlitch(currentState === 1 ? 2 : 1);
-      }, 5500);
+        triggerGlitchTransition(currentState === 1 ? 2 : 1);
+      }, 4800);
 
-      heading.addEventListener('mouseenter', () => runGlitch(currentState === 1 ? 2 : 1));
-      heading.addEventListener('click', () => runGlitch(currentState === 1 ? 2 : 1));
+      // 3. User interaction triggers (hover / tap)
+      if (stage) {
+        stage.addEventListener('mouseenter', () => triggerGlitchTransition(currentState === 1 ? 2 : 1));
+        stage.addEventListener('click', () => triggerGlitchTransition(currentState === 1 ? 2 : 1));
+      }
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initHeroGlitch);
+      document.addEventListener('DOMContentLoaded', initHeroCampaignGlitch);
     } else {
-      initHeroGlitch();
+      initHeroCampaignGlitch();
     }
   })();
 </script>
