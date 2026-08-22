@@ -2980,19 +2980,6 @@ details-disclosure > details {
   line-height: 1.25 !important;
 }
 
-/* Fix Live Demand Badge in Product Section */
-.product-live-demand-badge,
-.product-live-demand-badge span,
-.product-live-demand-badge #live-viewer-count {
-  color: #ffffff !important;
-  text-shadow: none !important;
-}
-
-.product-live-demand-badge strong {
-  color: #ff0022 !important;
-  text-shadow: 0 0 8px rgba(255, 0, 34, 0.6) !important;
-}
-
 /* Distinct Clean Pricing */
 .price,
 .price *,
