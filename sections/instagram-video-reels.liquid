@@ -1,12 +1,14 @@
 {% comment %}
-  Instagram Video Reels Carousel Section
+  3D Perspective Coverflow Instagram Video Reels Carousel
   Matches Worstwork.com 1:1:
-  - 9:16 Vertical Video Reels in a smooth horizontal scroll gallery
-  - Individual Audio Mute / Unmute Button (🔊 / 🔇)
-  - Individual Play / Pause Toggle (▶ / ⏸)
-  - Left & Right Circular Slider Navigation Arrows (‹ and ›)
-  - Direct Links to https://www.instagram.com/okanebaby/
-  - Touch-friendly swipe on mobile
+  - 3D Tilted Coverflow Perspective Carousel
+  - Only the center active video plays automatically and is prominently enlarged
+  - Side videos tilt inward with 3D rotation, reduced scale, and soft dimming
+  - Clicking any side video rotates it directly to the center and plays it
+  - Left & Right Navigation Arrows (‹ and ›)
+  - Audio Mute / Unmute (🔊 / 🔇) & Play / Pause (▶ / ⏸) controls on active video
+  - Touch-friendly swipe on mobile and mouse drag on desktop
+  - Direct Instagram integration (@okanebaby)
 {% endcomment %}
 
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
@@ -15,7 +17,7 @@
   .instagram-reels-section {
     position: relative;
     width: 100%;
-    padding: {{ section.settings.padding_top | default: 40 }}px 0 {{ section.settings.padding_bottom | default: 50 }}px 0;
+    padding: {{ section.settings.padding_top | default: 40 }}px 0 {{ section.settings.padding_bottom | default: 60 }}px 0;
     background-color: {{ section.settings.background_color | default: '#ffffff' }};
     overflow: hidden;
   }
@@ -24,7 +26,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 48px 20px 48px;
+    padding: 0 48px 24px 48px;
     max-width: 1400px;
     margin: 0 auto;
   }
@@ -57,57 +59,61 @@
     opacity: 0.7;
   }
 
-  .instagram-reels-slider-wrapper {
+  /* 3D Perspective Stage Container */
+  .instagram-reels-stage-wrapper {
     position: relative;
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 48px;
-    box-sizing: border-box;
-  }
-
-  .instagram-reels-slider {
     display: flex;
-    gap: 18px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding: 10px 0 20px 0;
+    align-items: center;
+    justify-content: center;
   }
 
-  .instagram-reels-slider::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Individual Reel Card - 9:16 Aspect Ratio */
-  .instagram-reel-card {
-    flex: 0 0 270px;
-    aspect-ratio: 9 / 16;
-    height: 480px;
-    border-radius: 8px;
-    overflow: hidden;
+  .instagram-reels-stage {
     position: relative;
-    scroll-snap-align: start;
-    background-color: #000000;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
-    cursor: pointer;
+    width: 100%;
+    height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1300px;
+    perspective-origin: 50% 50%;
+    overflow: hidden;
+    touch-action: pan-y;
     user-select: none;
   }
 
   @media screen and (max-width: 749px) {
     .instagram-reels-header {
-      padding: 0 20px 14px 20px;
+      padding: 0 20px 16px 20px;
     }
-    .instagram-reels-slider-wrapper {
-      padding: 0 16px;
+    .instagram-reels-stage {
+      height: 430px;
+      perspective: 900px;
     }
+  }
+
+  /* 3D Individual Card */
+  .instagram-reel-card {
+    position: absolute;
+    width: 280px;
+    height: 490px;
+    aspect-ratio: 9 / 16;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #000000;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease;
+    cursor: pointer;
+    will-change: transform, opacity;
+  }
+
+  @media screen and (max-width: 749px) {
     .instagram-reel-card {
-      flex: 0 0 220px;
-      height: 390px;
-      border-radius: 6px;
+      width: 215px;
+      height: 380px;
+      border-radius: 8px;
     }
   }
 
@@ -119,7 +125,24 @@
     pointer-events: auto;
   }
 
-  /* Top-Right Floating Controls (Mute/Unmute and Play/Pause) */
+  /* Non-active Card Overlay: Darker tint to make the center video pop */
+  .reel-dimmer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .instagram-reel-card.is-active .reel-dimmer-overlay {
+    opacity: 0;
+  }
+
+  /* Top-Right Floating Controls on Active Video */
   .reel-controls-bar {
     position: absolute;
     top: 14px;
@@ -129,16 +152,22 @@
     gap: 8px;
     z-index: 5;
     pointer-events: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .instagram-reel-card.is-active .reel-controls-bar {
+    opacity: 1;
   }
 
   .reel-control-btn {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: #ffffff;
     display: flex;
     align-items: center;
@@ -149,7 +178,7 @@
   }
 
   .reel-control-btn:hover {
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.9);
     transform: scale(1.08);
   }
 
@@ -170,21 +199,27 @@
     justify-content: space-between;
     z-index: 5;
     pointer-events: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .instagram-reel-card.is-active .reel-bottom-badge {
+    opacity: 1;
   }
 
   .reel-ig-handle {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 20px;
-    padding: 4px 12px;
+    padding: 5px 13px;
     color: #ffffff;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -193,7 +228,7 @@
   }
 
   .reel-ig-handle:hover {
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.9);
     transform: scale(1.03);
   }
 
@@ -203,44 +238,44 @@
     fill: currentColor;
   }
 
-  /* Slider Circular Navigation Arrows (Matching Worstwork.com) */
+  /* Circular Navigation Arrows */
   .reels-nav-arrow {
     position: absolute;
-    top: calc(50% - 10px);
+    top: 50%;
     transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background-color: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
     color: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 10;
+    z-index: 25;
     transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     padding: 0;
   }
 
   .reels-nav-arrow:hover {
-    transform: translateY(-50%) scale(1.1);
-    background-color: #f7f7f7;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-50%) scale(1.12);
+    background-color: #f8f8f8;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
   }
 
   .reels-nav-arrow.prev {
-    left: 20px;
+    left: 24px;
   }
 
   .reels-nav-arrow.next {
-    right: 20px;
+    right: 24px;
   }
 
   .reels-nav-arrow svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     fill: none;
     stroke: currentColor;
     stroke-width: 2.5;
@@ -250,7 +285,14 @@
 
   @media screen and (max-width: 749px) {
     .reels-nav-arrow {
-      display: none;
+      width: 38px;
+      height: 38px;
+    }
+    .reels-nav-arrow.prev {
+      left: 10px;
+    }
+    .reels-nav-arrow.next {
+      right: 10px;
     }
   }
 </style>
@@ -267,15 +309,15 @@
     </a>
   </div>
 
-  <div class="instagram-reels-slider-wrapper">
+  <div class="instagram-reels-stage-wrapper">
     
-    <!-- Prev Arrow Button -->
-    <button type="button" class="reels-nav-arrow prev" id="ReelsPrevBtn" aria-label="Previous Videos">
+    <!-- Prev Navigation Arrow -->
+    <button type="button" class="reels-nav-arrow prev" id="ReelsPrevBtn" aria-label="Previous Video">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </button>
 
-    <!-- Carousel Slider -->
-    <div class="instagram-reels-slider" id="InstagramReelsSlider">
+    <!-- 3D Coverflow Stage -->
+    <div class="instagram-reels-stage" id="InstagramReelsStage">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
           {%- liquid
@@ -285,12 +327,15 @@
             endif
           -%}
           {%- if video_src != blank -%}
-            <div class="instagram-reel-card" {{ block.shopify_attributes }}>
+            <div class="instagram-reel-card" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
               
-              <!-- Floating Top Controls -->
+              <!-- Darkening overlay for non-active side cards -->
+              <div class="reel-dimmer-overlay"></div>
+
+              <!-- Top-Right Controls on Active Video -->
               <div class="reel-controls-bar">
                 <button type="button" class="reel-control-btn reel-audio-toggle" aria-label="Toggle Sound">
-                  <!-- Muted Icon (Default) -->
+                  <!-- Muted Icon -->
                   <svg class="icon-muted" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
                   </svg>
@@ -312,11 +357,10 @@
                 </button>
               </div>
 
-              <!-- HTML5 Autoplaying Video -->
+              <!-- HTML5 Video -->
               <video
                 class="instagram-reel-video"
                 src="{{ video_src }}"
-                autoplay
                 loop
                 muted
                 playsinline
@@ -338,8 +382,8 @@
       {%- endif -%}
     </div>
 
-    <!-- Next Arrow Button -->
-    <button type="button" class="reels-nav-arrow next" id="ReelsNextBtn" aria-label="Next Videos">
+    <!-- Next Navigation Arrow -->
+    <button type="button" class="reels-nav-arrow next" id="ReelsNextBtn" aria-label="Next Video">
       <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </button>
 
@@ -349,93 +393,209 @@
 
 <script>
   (function() {
-    function initInstagramReels() {
-      const slider = document.getElementById('InstagramReelsSlider');
+    function init3DInstagramReels() {
+      const stage = document.getElementById('InstagramReelsStage');
       const prevBtn = document.getElementById('ReelsPrevBtn');
       const nextBtn = document.getElementById('ReelsNextBtn');
 
-      if (!slider) return;
+      if (!stage) return;
 
-      // Scroll arrows
+      const cards = Array.from(stage.querySelectorAll('.instagram-reel-card'));
+      const total = cards.length;
+      if (total === 0) return;
+
+      // Start centered on index 0 or index 1
+      let currentIndex = 0;
+      let isSoundUnmuted = false;
+
+      function updateCoverflow() {
+        const isMobile = window.innerWidth < 750;
+        const spacing = isMobile ? 150 : 255;
+        const outerSpacing = isMobile ? 275 : 460;
+
+        cards.forEach((card, index) => {
+          let offset = index - currentIndex;
+
+          // Wrap around shortest distance for infinite carousel feel
+          if (offset > total / 2) offset -= total;
+          if (offset < -total / 2) offset += total;
+
+          const video = card.querySelector('video');
+          const playbackBtn = card.querySelector('.reel-playback-toggle');
+          const audioBtn = card.querySelector('.reel-audio-toggle');
+
+          if (offset === 0) {
+            // CENTER ACTIVE CARD: Prominent, scale 1.15, 0deg tilt, crystal clear, autoplay
+            card.classList.add('is-active');
+            card.style.transform = `translateX(0px) translateZ(60px) scale(${isMobile ? 1.08 : 1.16}) rotateY(0deg)`;
+            card.style.zIndex = '15';
+            card.style.opacity = '1';
+            card.style.filter = 'brightness(1)';
+            card.style.boxShadow = '0 20px 45px rgba(0, 0, 0, 0.45)';
+            card.style.pointerEvents = 'auto';
+
+            if (video) {
+              video.muted = !isSoundUnmuted;
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+              }
+              if (playbackBtn) {
+                playbackBtn.querySelector('.icon-pause').style.display = 'block';
+                playbackBtn.querySelector('.icon-play').style.display = 'none';
+              }
+            }
+          } else if (offset === -1) {
+            // IMMEDIATE LEFT CARD: Tilted inward right (rotateY 22deg), scaled down, paused
+            card.classList.remove('is-active');
+            card.style.transform = `translateX(-${spacing}px) translateZ(0px) scale(${isMobile ? 0.84 : 0.91}) rotateY(${isMobile ? 18 : 24}deg)`;
+            card.style.zIndex = '10';
+            card.style.opacity = '0.85';
+            card.style.filter = 'brightness(0.72)';
+            card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.25)';
+            card.style.pointerEvents = 'auto';
+            if (video) video.pause();
+          } else if (offset === 1) {
+            // IMMEDIATE RIGHT CARD: Tilted inward left (rotateY -22deg), scaled down, paused
+            card.classList.remove('is-active');
+            card.style.transform = `translateX(${spacing}px) translateZ(0px) scale(${isMobile ? 0.84 : 0.91}) rotateY(-${isMobile ? 18 : 24}deg)`;
+            card.style.zIndex = '10';
+            card.style.opacity = '0.85';
+            card.style.filter = 'brightness(0.72)';
+            card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.25)';
+            card.style.pointerEvents = 'auto';
+            if (video) video.pause();
+          } else if (offset === -2) {
+            // OUTER LEFT CARD: Tilted even more (rotateY 35deg), smaller scale, paused
+            card.classList.remove('is-active');
+            card.style.transform = `translateX(-${outerSpacing}px) translateZ(-60px) scale(${isMobile ? 0.68 : 0.76}) rotateY(${isMobile ? 26 : 35}deg)`;
+            card.style.zIndex = '5';
+            card.style.opacity = isMobile ? '0.25' : '0.6';
+            card.style.filter = 'brightness(0.5)';
+            card.style.boxShadow = '0 6px 18px rgba(0, 0, 0, 0.18)';
+            card.style.pointerEvents = 'auto';
+            if (video) video.pause();
+          } else if (offset === 2) {
+            // OUTER RIGHT CARD: Tilted even more (rotateY -35deg), smaller scale, paused
+            card.classList.remove('is-active');
+            card.style.transform = `translateX(${outerSpacing}px) translateZ(-60px) scale(${isMobile ? 0.68 : 0.76}) rotateY(-${isMobile ? 26 : 35}deg)`;
+            card.style.zIndex = '5';
+            card.style.opacity = isMobile ? '0.25' : '0.6';
+            card.style.filter = 'brightness(0.5)';
+            card.style.boxShadow = '0 6px 18px rgba(0, 0, 0, 0.18)';
+            card.style.pointerEvents = 'auto';
+            if (video) video.pause();
+          } else {
+            // FAR OFF-STAGE CARDS: Hidden
+            card.classList.remove('is-active');
+            const direction = offset > 0 ? 1 : -1;
+            card.style.transform = `translateX(${direction * (outerSpacing + 200)}px) translateZ(-120px) scale(0.6) rotateY(${-direction * 45}deg)`;
+            card.style.zIndex = '1';
+            card.style.opacity = '0';
+            card.style.pointerEvents = 'none';
+            if (video) video.pause();
+          }
+        });
+      }
+
+      function goToSlide(index) {
+        currentIndex = (index + total) % total;
+        updateCoverflow();
+      }
+
+      // Arrows
       if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-          slider.scrollBy({ left: -320, behavior: 'smooth' });
+        prevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          goToSlide(currentIndex - 1);
         });
       }
+
       if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-          slider.scrollBy({ left: 320, behavior: 'smooth' });
+        nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          goToSlide(currentIndex + 1);
         });
       }
 
-      // Initialize all cards
-      const cards = slider.querySelectorAll('.instagram-reel-card');
-      cards.forEach(card => {
-        const video = card.querySelector('video');
+      // Card clicks: click a side card to bring it to center!
+      cards.forEach((card, index) => {
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.reel-control-btn') || e.target.closest('.reel-ig-handle')) {
+            return;
+          }
+          if (currentIndex !== index) {
+            e.preventDefault();
+            goToSlide(index);
+          }
+        });
+
+        // Audio button
         const audioBtn = card.querySelector('.reel-audio-toggle');
-        const playbackBtn = card.querySelector('.reel-playback-toggle');
-
-        if (!video) return;
-
-        // Audio toggle
-        if (audioBtn) {
+        const video = card.querySelector('video');
+        if (audioBtn && video) {
           audioBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const iconMuted = audioBtn.querySelector('.icon-muted');
-            const iconUnmuted = audioBtn.querySelector('.icon-unmuted');
+            isSoundUnmuted = !isSoundUnmuted;
+            video.muted = !isSoundUnmuted;
 
-            if (video.muted) {
-              // Mute all other videos first
-              document.querySelectorAll('.instagram-reel-video').forEach(v => {
-                v.muted = true;
-              });
-              document.querySelectorAll('.reel-audio-toggle').forEach(btn => {
-                btn.querySelector('.icon-muted').style.display = 'block';
-                btn.querySelector('.icon-unmuted').style.display = 'none';
-              });
-
-              video.muted = false;
-              video.volume = 1.0;
-              iconMuted.style.display = 'none';
-              iconUnmuted.style.display = 'block';
-            } else {
-              video.muted = true;
-              iconMuted.style.display = 'block';
-              iconUnmuted.style.display = 'none';
-            }
+            document.querySelectorAll('.reel-audio-toggle').forEach(btn => {
+              btn.querySelector('.icon-muted').style.display = isSoundUnmuted ? 'none' : 'block';
+              btn.querySelector('.icon-unmuted').style.display = isSoundUnmuted ? 'block' : 'none';
+            });
           });
         }
 
-        // Playback toggle
-        if (playbackBtn) {
+        // Play/Pause button
+        const playbackBtn = card.querySelector('.reel-playback-toggle');
+        if (playbackBtn && video) {
           playbackBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const iconPause = playbackBtn.querySelector('.icon-pause');
-            const iconPlay = playbackBtn.querySelector('.icon-play');
-
             if (video.paused) {
               video.play();
-              iconPause.style.display = 'block';
-              iconPlay.style.display = 'none';
+              playbackBtn.querySelector('.icon-pause').style.display = 'block';
+              playbackBtn.querySelector('.icon-play').style.display = 'none';
             } else {
               video.pause();
-              iconPause.style.display = 'none';
-              iconPlay.style.display = 'block';
+              playbackBtn.querySelector('.icon-pause').style.display = 'none';
+              playbackBtn.querySelector('.icon-play').style.display = 'block';
             }
           });
         }
-
-        // Click on video to toggle play/pause
-        video.addEventListener('click', () => {
-          if (playbackBtn) playbackBtn.click();
-        });
       });
+
+      // Swipe / Drag gestures
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      stage.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      stage.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleGesture();
+      }, { passive: true });
+
+      function handleGesture() {
+        const threshold = 40;
+        if (touchEndX < touchStartX - threshold) {
+          goToSlide(currentIndex + 1);
+        } else if (touchEndX > touchStartX + threshold) {
+          goToSlide(currentIndex - 1);
+        }
+      }
+
+      window.addEventListener('resize', updateCoverflow);
+
+      // Initialize initial state
+      updateCoverflow();
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initInstagramReels);
+      document.addEventListener('DOMContentLoaded', init3DInstagramReels);
     } else {
-      initInstagramReels();
+      init3DInstagramReels();
     }
   })();
 </script>
@@ -476,7 +636,7 @@
       "step": 5,
       "unit": "px",
       "label": "Bottom padding",
-      "default": 50
+      "default": 60
     }
   ],
   "blocks": [
