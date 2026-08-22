@@ -14,7 +14,7 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 
 <style>
-  .instagram-reels-section {
+  .instagram-reels-section-{{ section.id }} {
     position: relative;
     width: 100%;
     padding: {{ section.settings.padding_top | default: 40 }}px 0 {{ section.settings.padding_bottom | default: 60 }}px 0;
@@ -22,7 +22,7 @@
     overflow: hidden;
   }
 
-  .instagram-reels-header {
+  .instagram-reels-header-{{ section.id }} {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -31,7 +31,7 @@
     margin: 0 auto;
   }
 
-  .instagram-reels-title {
+  .instagram-reels-title-{{ section.id }} {
     font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-size: clamp(1.25rem, 2.2vw, 1.85rem) !important;
     font-weight: 800 !important;
@@ -41,7 +41,7 @@
     margin: 0 !important;
   }
 
-  .instagram-reels-profile-link {
+  .instagram-reels-profile-link-{{ section.id }} {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -55,12 +55,12 @@
     transition: opacity 0.2s ease;
   }
 
-  .instagram-reels-profile-link:hover {
+  .instagram-reels-profile-link-{{ section.id }}:hover {
     opacity: 0.7;
   }
 
   /* 3D Perspective Stage Container */
-  .instagram-reels-stage-wrapper {
+  .instagram-reels-stage-wrapper-{{ section.id }} {
     position: relative;
     width: 100%;
     max-width: 100%;
@@ -70,7 +70,7 @@
     justify-content: center;
   }
 
-  .instagram-reels-stage {
+  .instagram-reels-stage-{{ section.id }} {
     position: relative;
     width: 100%;
     height: 560px;
@@ -85,17 +85,17 @@
   }
 
   @media screen and (max-width: 749px) {
-    .instagram-reels-header {
+    .instagram-reels-header-{{ section.id }} {
       padding: 0 20px 16px 20px;
     }
-    .instagram-reels-stage {
+    .instagram-reels-stage-{{ section.id }} {
       height: 430px;
       perspective: 900px;
     }
   }
 
   /* 3D Individual Card */
-  .instagram-reel-card {
+  .instagram-reel-card-{{ section.id }} {
     position: absolute;
     width: 280px;
     height: 490px;
@@ -110,14 +110,14 @@
   }
 
   @media screen and (max-width: 749px) {
-    .instagram-reel-card {
+    .instagram-reel-card-{{ section.id }} {
       width: 215px;
       height: 380px;
       border-radius: 8px;
     }
   }
 
-  .instagram-reel-video {
+  .instagram-reel-video-{{ section.id }} {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -126,7 +126,7 @@
   }
 
   /* Non-active Card Overlay: Darker tint to make the center video pop */
-  .reel-dimmer-overlay {
+  .reel-dimmer-overlay-{{ section.id }} {
     position: absolute;
     top: 0;
     left: 0;
@@ -138,12 +138,12 @@
     z-index: 2;
   }
 
-  .instagram-reel-card.is-active .reel-dimmer-overlay {
+  .instagram-reel-card-{{ section.id }}.is-active .reel-dimmer-overlay-{{ section.id }} {
     opacity: 0;
   }
 
   /* Top-Right Floating Controls on Active Video */
-  .reel-controls-bar {
+  .reel-controls-bar-{{ section.id }} {
     position: absolute;
     top: 14px;
     right: 14px;
@@ -156,11 +156,11 @@
     transition: opacity 0.3s ease;
   }
 
-  .instagram-reel-card.is-active .reel-controls-bar {
+  .instagram-reel-card-{{ section.id }}.is-active .reel-controls-bar-{{ section.id }} {
     opacity: 1;
   }
 
-  .reel-control-btn {
+  .reel-control-btn-{{ section.id }} {
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -177,19 +177,19 @@
     padding: 0;
   }
 
-  .reel-control-btn:hover {
+  .reel-control-btn-{{ section.id }}:hover {
     background: rgba(0, 0, 0, 0.9);
     transform: scale(1.08);
   }
 
-  .reel-control-btn svg {
+  .reel-control-btn-{{ section.id }} svg {
     width: 16px;
     height: 16px;
     fill: currentColor;
   }
 
   /* Bottom Instagram Badge Overlay */
-  .reel-bottom-badge {
+  .reel-bottom-badge-{{ section.id }} {
     position: absolute;
     bottom: 14px;
     left: 14px;
@@ -203,11 +203,11 @@
     transition: opacity 0.3s ease;
   }
 
-  .instagram-reel-card.is-active .reel-bottom-badge {
+  .instagram-reel-card-{{ section.id }}.is-active .reel-bottom-badge-{{ section.id }} {
     opacity: 1;
   }
 
-  .reel-ig-handle {
+  .reel-ig-handle-{{ section.id }} {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -227,19 +227,19 @@
     transition: background 0.2s ease, transform 0.2s ease;
   }
 
-  .reel-ig-handle:hover {
+  .reel-ig-handle-{{ section.id }}:hover {
     background: rgba(0, 0, 0, 0.9);
     transform: scale(1.03);
   }
 
-  .reel-ig-handle svg {
+  .reel-ig-handle-{{ section.id }} svg {
     width: 14px;
     height: 14px;
     fill: currentColor;
   }
 
   /* Circular Navigation Arrows */
-  .reels-nav-arrow {
+  .reels-nav-arrow-{{ section.id }} {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -259,21 +259,21 @@
     padding: 0;
   }
 
-  .reels-nav-arrow:hover {
+  .reels-nav-arrow-{{ section.id }}:hover {
     transform: translateY(-50%) scale(1.12);
     background-color: #f8f8f8;
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
   }
 
-  .reels-nav-arrow.prev {
+  .reels-nav-arrow-{{ section.id }}.prev {
     left: 24px;
   }
 
-  .reels-nav-arrow.next {
+  .reels-nav-arrow-{{ section.id }}.next {
     right: 24px;
   }
 
-  .reels-nav-arrow svg {
+  .reels-nav-arrow-{{ section.id }} svg {
     width: 20px;
     height: 20px;
     fill: none;
@@ -284,40 +284,40 @@
   }
 
   @media screen and (max-width: 749px) {
-    .reels-nav-arrow {
+    .reels-nav-arrow-{{ section.id }} {
       width: 38px;
       height: 38px;
     }
-    .reels-nav-arrow.prev {
+    .reels-nav-arrow-{{ section.id }}.prev {
       left: 10px;
     }
-    .reels-nav-arrow.next {
+    .reels-nav-arrow-{{ section.id }}.next {
       right: 10px;
     }
   }
 </style>
 
-<div class="instagram-reels-section">
+<div class="instagram-reels-section-{{ section.id }}">
   
-  <div class="instagram-reels-header">
-    <h2 class="instagram-reels-title">
+  <div class="instagram-reels-header-{{ section.id }}">
+    <h2 class="instagram-reels-title-{{ section.id }}">
       {{ section.settings.heading | default: 'ME AGAINST MYSELF' }}
     </h2>
-    <a href="https://www.instagram.com/okanebaby/" target="_blank" rel="noopener noreferrer" class="instagram-reels-profile-link">
+    <a href="https://www.instagram.com/okanebaby/" target="_blank" rel="noopener noreferrer" class="instagram-reels-profile-link-{{ section.id }}">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       @okanebaby
     </a>
   </div>
 
-  <div class="instagram-reels-stage-wrapper">
+  <div class="instagram-reels-stage-wrapper-{{ section.id }}">
     
     <!-- Prev Navigation Arrow -->
-    <button type="button" class="reels-nav-arrow prev" id="ReelsPrevBtn" aria-label="Previous Video">
+    <button type="button" class="reels-nav-arrow-{{ section.id }} prev" id="ReelsPrevBtn-{{ section.id }}" aria-label="Previous Video">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </button>
 
     <!-- 3D Coverflow Stage -->
-    <div class="instagram-reels-stage" id="InstagramReelsStage">
+    <div class="instagram-reels-stage-{{ section.id }}" id="InstagramReelsStage-{{ section.id }}">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
           {%- liquid
@@ -327,14 +327,14 @@
             endif
           -%}
           {%- if video_src != blank -%}
-            <div class="instagram-reel-card" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <div class="instagram-reel-card-{{ section.id }}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
               
               <!-- Darkening overlay for non-active side cards -->
-              <div class="reel-dimmer-overlay"></div>
+              <div class="reel-dimmer-overlay-{{ section.id }}"></div>
 
               <!-- Top-Right Controls on Active Video -->
-              <div class="reel-controls-bar">
-                <button type="button" class="reel-control-btn reel-audio-toggle" aria-label="Toggle Sound">
+              <div class="reel-controls-bar-{{ section.id }}">
+                <button type="button" class="reel-control-btn-{{ section.id }} reel-audio-toggle" aria-label="Toggle Sound">
                   <!-- Muted Icon -->
                   <svg class="icon-muted" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
@@ -345,7 +345,7 @@
                   </svg>
                 </button>
 
-                <button type="button" class="reel-control-btn reel-playback-toggle" aria-label="Play or Pause">
+                <button type="button" class="reel-control-btn-{{ section.id }} reel-playback-toggle" aria-label="Play or Pause">
                   <!-- Pause Icon (Default when playing) -->
                   <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
@@ -359,7 +359,7 @@
 
               <!-- HTML5 Video -->
               <video
-                class="instagram-reel-video"
+                class="instagram-reel-video-{{ section.id }}"
                 src="{{ video_src }}"
                 loop
                 muted
@@ -369,8 +369,8 @@
               ></video>
 
               <!-- Bottom Instagram Tag Link -->
-              <div class="reel-bottom-badge">
-                <a href="{{ block.settings.instagram_link | default: 'https://www.instagram.com/okanebaby/' }}" target="_blank" rel="noopener noreferrer" class="reel-ig-handle">
+              <div class="reel-bottom-badge-{{ section.id }}">
+                <a href="{{ block.settings.instagram_link | default: 'https://www.instagram.com/okanebaby/' }}" target="_blank" rel="noopener noreferrer" class="reel-ig-handle-{{ section.id }}">
                   <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                   <span>@okanebaby</span>
                 </a>
@@ -383,7 +383,7 @@
     </div>
 
     <!-- Next Navigation Arrow -->
-    <button type="button" class="reels-nav-arrow next" id="ReelsNextBtn" aria-label="Next Video">
+    <button type="button" class="reels-nav-arrow-{{ section.id }} next" id="ReelsNextBtn-{{ section.id }}" aria-label="Next Video">
       <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </button>
 
@@ -393,18 +393,17 @@
 
 <script>
   (function() {
-    function init3DInstagramReels() {
-      const stage = document.getElementById('InstagramReelsStage');
-      const prevBtn = document.getElementById('ReelsPrevBtn');
-      const nextBtn = document.getElementById('ReelsNextBtn');
+    function init3DInstagramReels_{{ section.id | replace: '-', '_' }}() {
+      const stage = document.getElementById('InstagramReelsStage-{{ section.id }}');
+      const prevBtn = document.getElementById('ReelsPrevBtn-{{ section.id }}');
+      const nextBtn = document.getElementById('ReelsNextBtn-{{ section.id }}');
 
       if (!stage) return;
 
-      const cards = Array.from(stage.querySelectorAll('.instagram-reel-card'));
+      const cards = Array.from(stage.querySelectorAll('.instagram-reel-card-{{ section.id }}'));
       const total = cards.length;
       if (total === 0) return;
 
-      // Start centered on index 0 or index 1
       let currentIndex = 0;
       let isSoundUnmuted = false;
 
@@ -416,7 +415,6 @@
         cards.forEach((card, index) => {
           let offset = index - currentIndex;
 
-          // Wrap around shortest distance for infinite carousel feel
           if (offset > total / 2) offset -= total;
           if (offset < -total / 2) offset += total;
 
@@ -425,7 +423,6 @@
           const audioBtn = card.querySelector('.reel-audio-toggle');
 
           if (offset === 0) {
-            // CENTER ACTIVE CARD: Prominent, scale 1.15, 0deg tilt, crystal clear, autoplay
             card.classList.add('is-active');
             card.style.transform = `translateX(0px) translateZ(60px) scale(${isMobile ? 1.08 : 1.16}) rotateY(0deg)`;
             card.style.zIndex = '15';
@@ -446,7 +443,6 @@
               }
             }
           } else if (offset === -1) {
-            // IMMEDIATE LEFT CARD: Tilted inward right (rotateY 22deg), scaled down, paused
             card.classList.remove('is-active');
             card.style.transform = `translateX(-${spacing}px) translateZ(0px) scale(${isMobile ? 0.84 : 0.91}) rotateY(${isMobile ? 18 : 24}deg)`;
             card.style.zIndex = '10';
@@ -456,7 +452,6 @@
             card.style.pointerEvents = 'auto';
             if (video) video.pause();
           } else if (offset === 1) {
-            // IMMEDIATE RIGHT CARD: Tilted inward left (rotateY -22deg), scaled down, paused
             card.classList.remove('is-active');
             card.style.transform = `translateX(${spacing}px) translateZ(0px) scale(${isMobile ? 0.84 : 0.91}) rotateY(-${isMobile ? 18 : 24}deg)`;
             card.style.zIndex = '10';
@@ -466,7 +461,6 @@
             card.style.pointerEvents = 'auto';
             if (video) video.pause();
           } else if (offset === -2) {
-            // OUTER LEFT CARD: Tilted even more (rotateY 35deg), smaller scale, paused
             card.classList.remove('is-active');
             card.style.transform = `translateX(-${outerSpacing}px) translateZ(-60px) scale(${isMobile ? 0.68 : 0.76}) rotateY(${isMobile ? 26 : 35}deg)`;
             card.style.zIndex = '5';
@@ -476,7 +470,6 @@
             card.style.pointerEvents = 'auto';
             if (video) video.pause();
           } else if (offset === 2) {
-            // OUTER RIGHT CARD: Tilted even more (rotateY -35deg), smaller scale, paused
             card.classList.remove('is-active');
             card.style.transform = `translateX(${outerSpacing}px) translateZ(-60px) scale(${isMobile ? 0.68 : 0.76}) rotateY(-${isMobile ? 26 : 35}deg)`;
             card.style.zIndex = '5';
@@ -486,7 +479,6 @@
             card.style.pointerEvents = 'auto';
             if (video) video.pause();
           } else {
-            // FAR OFF-STAGE CARDS: Hidden
             card.classList.remove('is-active');
             const direction = offset > 0 ? 1 : -1;
             card.style.transform = `translateX(${direction * (outerSpacing + 200)}px) translateZ(-120px) scale(0.6) rotateY(${-direction * 45}deg)`;
@@ -503,7 +495,6 @@
         updateCoverflow();
       }
 
-      // Arrows
       if (prevBtn) {
         prevBtn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -518,10 +509,9 @@
         });
       }
 
-      // Card clicks: click a side card to bring it to center!
       cards.forEach((card, index) => {
         card.addEventListener('click', (e) => {
-          if (e.target.closest('.reel-control-btn') || e.target.closest('.reel-ig-handle')) {
+          if (e.target.closest('.reel-control-btn-{{ section.id }}') || e.target.closest('.reel-ig-handle-{{ section.id }}')) {
             return;
           }
           if (currentIndex !== index) {
@@ -530,7 +520,6 @@
           }
         });
 
-        // Audio button
         const audioBtn = card.querySelector('.reel-audio-toggle');
         const video = card.querySelector('video');
         if (audioBtn && video) {
@@ -539,14 +528,13 @@
             isSoundUnmuted = !isSoundUnmuted;
             video.muted = !isSoundUnmuted;
 
-            document.querySelectorAll('.reel-audio-toggle').forEach(btn => {
+            stage.querySelectorAll('.reel-audio-toggle').forEach(btn => {
               btn.querySelector('.icon-muted').style.display = isSoundUnmuted ? 'none' : 'block';
               btn.querySelector('.icon-unmuted').style.display = isSoundUnmuted ? 'block' : 'none';
             });
           });
         }
 
-        // Play/Pause button
         const playbackBtn = card.querySelector('.reel-playback-toggle');
         if (playbackBtn && video) {
           playbackBtn.addEventListener('click', (e) => {
@@ -564,7 +552,6 @@
         }
       });
 
-      // Swipe / Drag gestures
       let touchStartX = 0;
       let touchEndX = 0;
 
@@ -587,15 +574,13 @@
       }
 
       window.addEventListener('resize', updateCoverflow);
-
-      // Initialize initial state
       updateCoverflow();
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init3DInstagramReels);
+      document.addEventListener('DOMContentLoaded', init3DInstagramReels_{{ section.id | replace: '-', '_' }});
     } else {
-      init3DInstagramReels();
+      init3DInstagramReels_{{ section.id | replace: '-', '_' }}();
     }
   })();
 </script>

@@ -185,6 +185,7 @@
     },
     "1779372229f18e6bb2": {
       "type": "apps",
+      "disabled": true,
       "blocks": {
         "instafeed_app_block_4zqFYW": {
           "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
@@ -212,6 +213,123 @@
         "include_margins": true
       }
     },
+    "instagram_reels": {
+      "type": "instagram-video-reels",
+      "blocks": {
+        "reel_1": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-1.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_2": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-2.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_3": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-3.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_4": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-4.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_5": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-5.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_6": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-6.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_7": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-7.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_8": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-8.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_9": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-9.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_10": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-10.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_11": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-11.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_12": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-12.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        },
+        "reel_13": {
+          "type": "reel",
+          "settings": {
+            "video_asset": "reel-13.mp4",
+            "instagram_link": "https://www.instagram.com/okanebaby/"
+          }
+        }
+      },
+      "block_order": [
+        "reel_1",
+        "reel_2",
+        "reel_3",
+        "reel_4",
+        "reel_5",
+        "reel_6",
+        "reel_7",
+        "reel_8",
+        "reel_9",
+        "reel_10",
+        "reel_11",
+        "reel_12",
+        "reel_13"
+      ],
+      "settings": {
+        "heading": "ME AGAINST MYSELF",
+        "background_color": "#ffffff",
+        "padding_top": 20,
+        "padding_bottom": 50
+      }
+    },
     "17794301414a6631ed": {
       "type": "_blocks",
       "settings": {}
@@ -234,6 +352,7 @@
     "multicolumn",
     "177942673551d4cf7e",
     "1779429724a15fc265",
+    "instagram_reels",
     "1779372229f18e6bb2",
     "17794301414a6631ed"
   ]
