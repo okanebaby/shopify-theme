@@ -539,10 +539,8 @@
         <div class="okane-footer-col">
           <h3 class="okane-footer-col-title">INFORMATION</h3>
           <ul class="okane-footer-links">
-            <li><a href="{{ pages['about-us'].url | default: pages['about'].url | default: '/pages/about-us' }}">About Us</a></li>
-            <li><a href="{{ pages['contact'].url | default: '/pages/contact' }}">Contact</a></li>
-            <li><a href="{{ pages['track-your-order'].url | default: pages['tracking'].url | default: pages['order-lookup'].url | default: '/pages/track-your-order' }}">Track Your Order</a></li>
-            <li><a href="#size-guide" onclick="const btn = document.getElementById('open-fit-quiz-btn'); if (btn) { btn.click(); return false; }">Size Guide</a></li>
+            <li><a href="/pages/contact-1">Contact</a></li>
+            <li><a href="/pages/size-chart">Size Guide</a></li>
           </ul>
         </div>
 
@@ -550,10 +548,10 @@
         <div class="okane-footer-col">
           <h3 class="okane-footer-col-title">POLICIES</h3>
           <ul class="okane-footer-links">
-            <li><a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">Shipping Policy</a></li>
-            <li><a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">Refund Policy</a></li>
-            <li><a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}">Privacy Policy</a></li>
-            <li><a href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}">Terms of Service</a></li>
+            <li><a href="/pages/shipping">Shipping Policy</a></li>
+            <li><a href="/pages/contact">Refund Policy</a></li>
+            <li><a href="/pages/privacy-policy-1">Privacy Policy</a></li>
+            <li><a href="/pages/terms-of-service">Terms of Service</a></li>
           </ul>
         </div>
 
