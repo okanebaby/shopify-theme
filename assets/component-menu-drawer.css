@@ -17,7 +17,7 @@
   background: rgba(var(--color-foreground), 0.5);
   opacity: 0;
   visibility: hidden;
-  z-index: 99998 !important;
+  z-index: 2;
   transition: opacity 0s, visibility 0s;
 }
 
@@ -32,7 +32,7 @@ menu-drawer > details[open] > summary::before {
   position: absolute;
   transform: translateX(-100%);
   visibility: hidden;
-  z-index: 99999 !important;
+  z-index: 3;
   left: 0;
   top: 100%;
   width: calc(100vw - 4rem);
