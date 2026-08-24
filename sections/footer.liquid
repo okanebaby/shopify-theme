@@ -101,13 +101,12 @@
   }
 
   .okane-footer-logo-img {
-    height: auto !important;
-    max-height: 52px !important;
-    width: auto !important;
-    max-width: 170px !important;
+    height: 56px !important;
+    width: 56px !important;
+    max-height: 64px !important;
+    max-width: 64px !important;
     object-fit: contain !important;
     display: block !important;
-    filter: brightness(1) invert(0);
   }
 
   .okane-footer-logo-text {
@@ -400,18 +399,24 @@
       <!-- Left Column: OKANE BABY Logo + Newsletter -->
       <div class="okane-footer-brand-section">
         <div class="okane-footer-logo-wrapper">
-          {%- assign footer_logo = section.settings.logo | default: settings.logo | default: shop.brand.logo | default: 'shopify://shop_images/IMG_9497.jpg' -%}
-          {%- if footer_logo != blank -%}
+          {%- if section.settings.logo != blank -%}
             <img 
-              src="{{ footer_logo | image_url: width: 340 }}" 
+              src="{{ section.settings.logo | image_url: width: 340 }}" 
               alt="{{ shop.name | escape }}" 
               class="okane-footer-logo-img" 
               loading="lazy" 
-              width="170" 
-              height="48"
+              width="56" 
+              height="56"
             >
           {%- else -%}
-            <span class="okane-footer-logo-text">{{ shop.name | escape }}</span>
+            <img 
+              src="{{ 'okane-emblem-white.png' | asset_url }}" 
+              alt="OKANE BABY" 
+              class="okane-footer-logo-img" 
+              loading="lazy" 
+              width="56" 
+              height="56"
+            >
           {%- endif -%}
         </div>
 
