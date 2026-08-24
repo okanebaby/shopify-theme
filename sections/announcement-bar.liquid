@@ -342,6 +342,22 @@
       container.addEventListener('mouseenter', stopTimer);
       container.addEventListener('mouseleave', startTimer);
 
+      let touchStartX = 0;
+      let touchEndX = 0;
+      container.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopTimer();
+      }, { passive: true });
+      container.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 25) {
+          nextSlide();
+        } else if (touchEndX > touchStartX + 25) {
+          prevSlide();
+        }
+        startTimer();
+      }, { passive: true });
+
       startTimer();
 
       // Live Visitor Counter
