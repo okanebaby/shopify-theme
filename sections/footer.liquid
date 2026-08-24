@@ -27,11 +27,21 @@
   /* ----------------------------------------------------
      1. TOP TRUST BOXES (Charcoal Rectangular Boxes)
      ---------------------------------------------------- */
+  .okane-trust-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    margin-bottom: 3.5rem !important;
+  }
+
   .okane-trust-boxes {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 1.25rem !important;
-    margin-bottom: 3.5rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .okane-trust-dots {
+    display: none !important;
   }
 
   .okane-trust-box {
@@ -109,15 +119,6 @@
     display: block !important;
   }
 
-  .okane-footer-logo-text {
-    font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
-    font-size: 1.7rem !important;
-    font-weight: 900 !important;
-    letter-spacing: 0.1em !important;
-    color: #ffffff !important;
-    text-transform: uppercase !important;
-  }
-
   .okane-newsletter-label {
     font-family: 'Roboto Condensed', sans-serif !important;
     font-size: 0.78rem !important;
@@ -130,10 +131,10 @@
 
   .okane-newsletter-heading {
     font-family: 'Roboto Condensed', sans-serif !important;
-    font-size: 1.18rem !important;
-    font-weight: 700 !important;
-    line-height: 1.4 !important;
-    color: #ffffff !important;
+    font-size: 1.05rem !important;
+    font-weight: 500 !important;
+    line-height: 1.45 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
     margin: 0 !important;
   }
 
@@ -146,34 +147,33 @@
     display: flex !important;
     align-items: stretch !important;
     width: 100% !important;
-    border-radius: 0px !important;
+    max-width: 440px !important;
   }
 
   .okane-newsletter-input {
     flex: 1 !important;
-    background-color: #121212 !important;
-    color: #ffffff !important;
+    background-color: #141414 !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-right: none !important;
     border-radius: 0px !important;
     padding: 0.85rem 1.1rem !important;
+    color: #ffffff !important;
     font-family: 'Roboto Condensed', sans-serif !important;
     font-size: 0.95rem !important;
-    font-weight: 500 !important;
-    box-sizing: border-box !important;
     outline: none !important;
+    box-sizing: border-box !important;
     transition: border-color 0.2s ease !important;
-  }
-
-  .okane-newsletter-input::placeholder {
-    color: rgba(255, 255, 255, 0.45) !important;
-    text-transform: uppercase !important;
-    font-size: 0.85rem !important;
-    letter-spacing: 0.05em !important;
   }
 
   .okane-newsletter-input:focus {
     border-color: #ffffff !important;
+  }
+
+  .okane-newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+    text-transform: uppercase !important;
+    font-size: 0.88rem !important;
+    letter-spacing: 0.05em !important;
   }
 
   .okane-newsletter-btn {
@@ -183,28 +183,26 @@
     border-radius: 0px !important;
     padding: 0.85rem 1.6rem !important;
     font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
     font-weight: 900 !important;
-    letter-spacing: 0.08em !important;
+    letter-spacing: 0.1em !important;
     text-transform: uppercase !important;
     cursor: pointer !important;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease !important;
     white-space: nowrap !important;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
     box-shadow: none !important;
-    text-shadow: none !important;
   }
 
   .okane-newsletter-btn:hover {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    border-color: #ffffff !important;
+    background-color: #e0e0e0 !important;
+    color: #000000 !important;
   }
 
   .okane-newsletter-message {
-    font-size: 0.85rem !important;
-    margin-top: 0.5rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.03em !important;
+    font-family: 'Roboto Condensed', sans-serif !important;
+    font-size: 0.88rem !important;
+    margin-top: 0.6rem !important;
+    margin-bottom: 0 !important;
   }
 
   .okane-newsletter-message.success {
@@ -219,25 +217,25 @@
   .okane-footer-nav-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 2rem !important;
+    gap: 2.5rem !important;
   }
 
   .okane-footer-col {
     display: flex !important;
     flex-direction: column !important;
-    gap: 1.1rem !important;
   }
 
   .okane-footer-col-title {
     font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
-    font-size: 0.92rem !important;
-    font-weight: 800 !important;
+    font-size: 1.05rem !important;
+    font-weight: 900 !important;
     letter-spacing: 0.12em !important;
     text-transform: uppercase !important;
     color: #ffffff !important;
-    margin: 0 !important;
-    padding-bottom: 0.35rem !important;
+    margin: 0 0 1.25rem 0 !important;
+    padding-bottom: 0.5rem !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    display: inline-block !important;
   }
 
   .okane-footer-links {
@@ -246,15 +244,16 @@
     margin: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.75rem !important;
+    gap: 0.85rem !important;
   }
 
   .okane-footer-links li a {
-    color: rgba(255, 255, 255, 0.65) !important;
+    color: rgba(255, 255, 255, 0.72) !important;
     text-decoration: none !important;
-    font-size: 0.92rem !important;
+    font-family: 'Roboto Condensed', sans-serif !important;
+    font-size: 0.96rem !important;
     font-weight: 500 !important;
-    letter-spacing: 0.02em !important;
+    letter-spacing: 0.03em !important;
     transition: color 0.2s ease, transform 0.2s ease !important;
     display: inline-block !important;
   }
@@ -265,21 +264,19 @@
   }
 
   /* ----------------------------------------------------
-     3. BOTTOM COPYRIGHT BAR
+     3. BOTTOM BAR (Copyright + Social Icons)
      ---------------------------------------------------- */
   .okane-footer-bottom {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
     padding-top: 2rem !important;
-    flex-wrap: wrap !important;
-    gap: 1rem !important;
   }
 
   .okane-footer-copyright {
-    font-size: 0.8rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.06em !important;
+    font-family: 'Roboto Condensed', sans-serif !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.08em !important;
     color: rgba(255, 255, 255, 0.45) !important;
     text-transform: uppercase !important;
     margin: 0 !important;
@@ -292,27 +289,28 @@
   }
 
   .okane-footer-social-icons a {
-    color: rgba(255, 255, 255, 0.65) !important;
-    transition: color 0.2s ease, transform 0.2s ease !important;
+    color: rgba(255, 255, 255, 0.7) !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
+    transition: color 0.2s ease, transform 0.2s ease !important;
   }
 
   .okane-footer-social-icons a:hover {
     color: #ffffff !important;
-    transform: translateY(-2px) !important;
+    transform: scale(1.15) !important;
   }
 
   .okane-footer-social-icons svg {
-    width: 18px !important;
-    height: 18px !important;
+    width: 20px !important;
+    height: 20px !important;
     fill: currentColor !important;
   }
 
   /* ----------------------------------------------------
-     4. RESPONSIVE DESIGN (Tablets & Mobile)
+     RESPONSIVE MEDIA QUERIES
      ---------------------------------------------------- */
-  @media screen and (max-width: 989px) {
+  @media screen and (max-width: 1024px) {
     .okane-footer-main {
       grid-template-columns: 1fr !important;
       gap: 3rem !important;
@@ -326,6 +324,9 @@
     .okane-footer {
       padding: 2.5rem 1rem 2rem 1rem !important;
     }
+    .okane-trust-wrapper {
+      margin-bottom: 2.2rem !important;
+    }
     .okane-trust-boxes {
       display: flex !important;
       position: relative !important;
@@ -336,8 +337,31 @@
       border: 1px solid rgba(255, 255, 255, 0.1) !important;
       border-radius: 0px !important;
       overflow: hidden !important;
-      margin-bottom: 2.5rem !important;
+      margin-bottom: 0.65rem !important;
       padding: 0 !important;
+    }
+    .okane-trust-dots {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 7px !important;
+      width: 100% !important;
+      padding: 2px 0 !important;
+    }
+    .okane-trust-dot {
+      width: 6px !important;
+      height: 6px !important;
+      border-radius: 50% !important;
+      background-color: rgba(255, 255, 255, 0.28) !important;
+      transition: all 0.3s ease !important;
+      display: inline-block !important;
+      cursor: pointer !important;
+    }
+    .okane-trust-dot.is-active {
+      width: 18px !important;
+      border-radius: 3px !important;
+      background-color: #ffffff !important;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.6) !important;
     }
     .okane-trust-box {
       position: absolute !important;
@@ -397,30 +421,38 @@
   <div class="okane-footer-container">
     
     <!-- TOP TRUST BOXES -->
-    <div class="okane-trust-boxes" id="OkaneTrustBoxes">
-      <!-- BOX 1: Fast Global Shipping -->
-      <div class="okane-trust-box is-active" data-trust-index="0">
-        <div class="okane-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"/>
-            <path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"/>
-            <circle cx="7" cy="18" r="2"/>
-            <circle cx="17" cy="18" r="2"/>
-          </svg>
+    <div class="okane-trust-wrapper">
+      <div class="okane-trust-boxes" id="OkaneTrustBoxes">
+        <!-- BOX 1: Fast Global Shipping -->
+        <div class="okane-trust-box is-active" data-trust-index="0">
+          <div class="okane-trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"/>
+              <path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"/>
+              <circle cx="7" cy="18" r="2"/>
+              <circle cx="17" cy="18" r="2"/>
+            </svg>
+          </div>
+          <span class="okane-trust-title">Fast Global Shipping</span>
         </div>
-        <span class="okane-trust-title">Fast Global Shipping</span>
+
+        <!-- BOX 2: 100% Secure Payments -->
+        <div class="okane-trust-box" data-trust-index="1">
+          <div class="okane-trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="0" ry="0"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+              <circle cx="12" cy="16" r="1.5"/>
+            </svg>
+          </div>
+          <span class="okane-trust-title">100% Secure Payments</span>
+        </div>
       </div>
 
-      <!-- BOX 2: 100% Secure Payments -->
-      <div class="okane-trust-box" data-trust-index="1">
-        <div class="okane-trust-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="0" ry="0"/>
-            <path d="M7 11V7a5 5 0 0110 0v4"/>
-            <circle cx="12" cy="16" r="1.5"/>
-          </svg>
-        </div>
-        <span class="okane-trust-title">100% Secure Payments</span>
+      <!-- Mobile Pagination Dots -->
+      <div class="okane-trust-dots" id="OkaneTrustDots" aria-hidden="true">
+        <span class="okane-trust-dot is-active" data-dot-index="0"></span>
+        <span class="okane-trust-dot" data-dot-index="1"></span>
       </div>
     </div>
 
@@ -560,33 +592,51 @@
   (function() {
     function initMobileTrustCarousel() {
       const container = document.getElementById('OkaneTrustBoxes');
+      const dotsContainer = document.getElementById('OkaneTrustDots');
       if (!container) return;
 
       const boxes = Array.from(container.querySelectorAll('.okane-trust-box'));
+      const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.okane-trust-dot')) : [];
       if (boxes.length <= 1) return;
 
       let currentIdx = 0;
 
+      function showTrustSlide(index) {
+        boxes.forEach((b, i) => {
+          if (i === index) b.classList.add('is-active');
+          else b.classList.remove('is-active');
+        });
+        dots.forEach((dot, i) => {
+          if (i === index) dot.classList.add('is-active');
+          else dot.classList.remove('is-active');
+        });
+        currentIdx = index;
+      }
+
       function rotateTrust() {
         if (window.innerWidth < 750) {
-          boxes[currentIdx].classList.remove('is-active');
-          currentIdx = (currentIdx + 1) % boxes.length;
-          boxes[currentIdx].classList.add('is-active');
+          const nextIdx = (currentIdx + 1) % boxes.length;
+          showTrustSlide(nextIdx);
         } else {
           boxes.forEach(b => b.classList.add('is-active'));
         }
       }
 
-      setInterval(rotateTrust, 3200);
+      let trustTimer = setInterval(rotateTrust, 3200);
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          clearInterval(trustTimer);
+          showTrustSlide(i);
+          trustTimer = setInterval(rotateTrust, 3200);
+        });
+      });
 
       window.addEventListener('resize', () => {
         if (window.innerWidth >= 750) {
           boxes.forEach(b => b.classList.add('is-active'));
         } else {
-          boxes.forEach((b, i) => {
-            if (i === currentIdx) b.classList.add('is-active');
-            else b.classList.remove('is-active');
-          });
+          showTrustSlide(currentIdx);
         }
       });
     }
