@@ -19,24 +19,43 @@
             {%- when '@app' -%}
               {% render block %}
             {%- when 'subtotal' -%}
+              {%- assign has_welcome_gift = false -%}
+              {%- assign gift_original_price = 0 -%}
+              {%- for item in cart.items -%}
+                {%- if item.product.handle == 'exclusive-mystery-welcome-gift' or item.variant_id == 56055565025572 or item.title contains 'EXCLUSIVE MYSTERY WELCOME GIFT' -%}
+                  {%- assign has_welcome_gift = true -%}
+                  {%- assign gift_original_price = item.original_line_price -%}
+                {%- endif -%}
+              {%- endfor -%}
+
               <div class="js-contents" {{ block.shopify_attributes }}>
                 <div class="totals">
                   <h2 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h2>
-                  <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
+                  <p class="totals__subtotal-value">
+                    {%- if has_welcome_gift and gift_original_price > 0 and cart.total_price >= gift_original_price -%}
+                      {{ cart.total_price | minus: gift_original_price | money_with_currency }}
+                    {%- else -%}
+                      {{ cart.total_price | money_with_currency }}
+                    {%- endif -%}
+                  </p>
                 </div>
 
                 <div>
-                  {%- if cart.cart_level_discount_applications.size > 0 -%}
-                    <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                      {%- for discount in cart.cart_level_discount_applications -%}
-                        <li class="discounts__discount discounts__discount--position">
-                          {%- render 'icon-discount' -%}
-                          {{ discount.title }}
-                          (-{{ discount.total_allocated_amount | money }})
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  {%- endif -%}
+                  <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                    {%- for discount in cart.cart_level_discount_applications -%}
+                      <li class="discounts__discount discounts__discount--position">
+                        {%- render 'icon-discount' -%}
+                        {{ discount.title }}
+                        (-{{ discount.total_allocated_amount | money }})
+                      </li>
+                    {%- endfor -%}
+                    {%- if has_welcome_gift -%}
+                      <li class="discounts__discount discounts__discount--position">
+                        {%- render 'icon-discount' -%}
+                        MYSTERYGIFT (-{{ gift_original_price | money }})
+                      </li>
+                    {%- endif -%}
+                  </ul>
                 </div>
 
                 <small class="tax-note caption-large rte">

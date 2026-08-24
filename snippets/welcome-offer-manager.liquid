@@ -166,7 +166,8 @@
       GIFT_HANDLE: 'exclusive-mystery-welcome-gift',
       GIFT_ID: 10776156438820,
       GIFT_VARIANT_ID: 56055565025572,
-      DISCOUNT_COMBO_URL: '/discount/OKANE15,MYSTERYGIFT'
+      DISCOUNT_COMBO_URL: '/discount/OKANE15,MYSTERYGIFT',
+      DISCOUNT_GIFT_URL: '/discount/MYSTERYGIFT'
     };
 
     let isSyncingCart = false;
@@ -194,6 +195,14 @@
       const mins = Math.floor(totalSec / 60);
       const secs = totalSec % 60;
       return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function applyMysteryGiftDiscount() {
+      fetch(CONFIG.DISCOUNT_GIFT_URL, { method: 'GET', credentials: 'same-origin' }).catch(() => {});
+      fetch(CONFIG.DISCOUNT_COMBO_URL, { method: 'GET', credentials: 'same-origin' }).catch(() => {});
+      try {
+        document.cookie = "discount_code=OKANE15,MYSTERYGIFT; path=/; max-age=86400";
+      } catch(e) {}
     }
 
     // 2. DOM Updates for Timer & Banners
@@ -293,19 +302,21 @@
                 properties: { '_welcome_gift': 'true' }
               })
             });
-            // Apply combined discounts in background
-            fetch(CONFIG.DISCOUNT_COMBO_URL).catch(() => {});
+            applyMysteryGiftDiscount();
             refreshCartDrawerUI();
-          } else if (giftItem.quantity > 1) {
-            await fetch('/cart/change.js', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify({
-                id: String(giftItem.variant_id || CONFIG.GIFT_VARIANT_ID),
-                quantity: 1
-              })
-            });
-            refreshCartDrawerUI();
+          } else {
+            applyMysteryGiftDiscount();
+            if (giftItem.quantity > 1) {
+              await fetch('/cart/change.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                  id: String(giftItem.variant_id || CONFIG.GIFT_VARIANT_ID),
+                  quantity: 1
+                })
+              });
+              refreshCartDrawerUI();
+            }
           }
         } else {
           // If NOT qualifying and gift is in cart, remove it
