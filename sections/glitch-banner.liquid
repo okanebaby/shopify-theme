@@ -3,16 +3,6 @@
 {%- endcomment -%}
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Italianno&family=Monsieur+La+Doulaise&family=MonteCarlo&family=Alex+Brush&display=swap');
-
-  @font-face {
-    font-family: 'Milton One Local';
-    src: url('https://fonts.cdnfonts.com/s/85257/MiltonOne.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
   .glitch-banner-wrapper {
     background-color: #ffffff !important;
     background: #ffffff !important;
@@ -34,7 +24,7 @@
     background: transparent !important;
   }
 
-  /* Spray Paint Ambient Glow Element - Dark Spray Glow for White Background */
+  /* Ambient Glow Element */
   .spray-glow {
     position: absolute !important;
     top: 50% !important;
@@ -42,7 +32,7 @@
     transform: translate(-50%, -50%) !important;
     width: 125% !important;
     height: 170% !important;
-    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 80%) !important;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.02) 50%, transparent 80%) !important;
     filter: blur(25px) !important;
     z-index: 1 !important;
     pointer-events: none !important;
@@ -50,24 +40,21 @@
     border-radius: 50% !important;
   }
 
-  /* Ambient White Spray Glow when in State 2 ("LIMITED STOCK AVAILABLE") */
   .glitch-heading-container.is-red .spray-glow {
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.15) 50%, transparent 80%) !important;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.04) 50%, transparent 80%) !important;
     filter: blur(25px) !important;
   }
 
   h2.glitch-heading-text,
   .glitch-heading-text {
-    font-family: 'Milton One Local', 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
-    font-size: clamp(1.8rem, 5.2vw, 5.5rem) !important;
-    font-weight: 400 !important;
+    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: clamp(1.8rem, 5.2vw, 4.5rem) !important;
+    font-weight: 900 !important;
     font-style: normal !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
     color: #000000 !important;
-    text-shadow: 
-      0 0 4px #000000,
-      0 0 14px rgba(0, 0, 0, 0.85),
-      0 0 28px rgba(0, 0, 0, 0.55),
-      0 0 42px rgba(0, 0, 0, 0.3) !important;
+    text-shadow: none !important;
     line-height: 1.15 !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -257,7 +244,7 @@
     {
       "type": "text",
       "id": "heading_text_1",
-      "label": "Initial Slogan (Milton One Font)",
+      "label": "Initial Slogan",
       "default": "Me Against Myself"
     },
     {

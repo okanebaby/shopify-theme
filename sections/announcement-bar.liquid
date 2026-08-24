@@ -1,35 +1,44 @@
 {% comment %}
-  Announcement Bar with Live Visitor Indicator
+  OKANE BABY Top Rotating Announcement Bar
   Features:
-  - Far-left bright green status dot + visitor count ("● 127 live visitors")
-  - Approximately 45-50px horizontal padding on desktop
-  - Subtle gradual range fluctuation (100–150 range, gentle transitions)
-  - Centered announcement message with responsive mobile layout
+  - Full-width dark luxury/streetwear black & white aesthetic
+  - Automatic rotation between 3 core messages:
+      1. FREE SHIPPING ACROSS AUSTRALIA
+      2. USE CODE "LIMITED" FOR 10% OFF
+      3. SHOP THE BROKEN HALO COLLECTION (clickable link)
+  - Manual previous/next arrow controls for user navigation
+  - Far-left subtle live visitor indicator (desktop)
+  - Fully responsive on mobile
+  - Clean bold sans-serif typography matching site-wide aesthetic
 {% endcomment %}
 
 <style>
   .announcement-bar {
     position: relative !important;
     width: 100% !important;
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    min-height: 38px !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    min-height: 40px !important;
     display: flex !important;
     align-items: center !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    z-index: 50 !important;
   }
 
-  .announcement-bar-wrapper {
+  .announcement-bar-inner {
     position: relative !important;
     width: 100% !important;
+    max-width: 1440px !important;
+    margin: 0 auto !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 0.55rem 1rem !important;
+    padding: 0.5rem 48px !important;
     box-sizing: border-box !important;
+    min-height: 40px !important;
   }
 
-  /* Far-left live visitor indicator with ~48px desktop horizontal padding */
+  /* Live Visitor Counter (Desktop Far Left) */
   .announcement-live-visitors {
     position: absolute !important;
     left: 48px !important;
@@ -38,31 +47,24 @@
     display: inline-flex !important;
     align-items: center !important;
     gap: 7px !important;
-    color: #000000 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
     font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.82rem !important;
+    font-size: 0.8rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.04em !important;
     text-transform: uppercase !important;
     user-select: none !important;
-    z-index: 3 !important;
+    z-index: 5 !important;
     white-space: nowrap !important;
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
   }
 
-  /* Small bright green status dot */
   .live-visitor-green-dot {
-    width: 7.5px !important;
-    height: 7.5px !important;
+    width: 7px !important;
+    height: 7px !important;
     background-color: #00d659 !important;
     border-radius: 50% !important;
     display: inline-block !important;
-    box-shadow: 0 0 6px rgba(0, 214, 89, 0.85) !important;
+    box-shadow: 0 0 8px rgba(0, 214, 89, 0.9) !important;
     flex-shrink: 0 !important;
     animation: live-green-dot-pulse 2.2s infinite ease-in-out !important;
   }
@@ -71,78 +73,158 @@
     0%, 100% {
       opacity: 1;
       transform: scale(1);
-      box-shadow: 0 0 6px rgba(0, 214, 89, 0.85);
+      box-shadow: 0 0 8px rgba(0, 214, 89, 0.9);
     }
     50% {
-      opacity: 0.65;
+      opacity: 0.6;
       transform: scale(0.85);
-      box-shadow: 0 0 2px rgba(0, 214, 89, 0.4);
+      box-shadow: 0 0 3px rgba(0, 214, 89, 0.4);
     }
   }
 
-  .live-visitor-text {
-    color: #000000 !important;
-    line-height: 1 !important;
-    display: inline-flex !important;
+  /* Rotating Message Carousel */
+  .announcement-carousel-container {
+    position: relative !important;
+    display: flex !important;
     align-items: center !important;
-    gap: 4px !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 600px !important;
+    min-height: 24px !important;
+    overflow: hidden !important;
   }
 
-  .announcement-bar__link {
-    text-decoration: none !important;
-    color: inherit !important;
-    display: inline-flex !important;
+  .announcement-slide {
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: translateY(-50%) !important;
+    display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s !important;
+    text-align: center !important;
+    pointer-events: none !important;
   }
 
-  .announcement-bar__message {
-    font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
-    font-size: 0.85rem !important;
+  .announcement-slide.is-active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(-50%) !important;
+    pointer-events: auto !important;
+  }
+
+  .announcement-text {
+    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 0.86rem !important;
     font-weight: 800 !important;
-    letter-spacing: 0.12em !important;
+    letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
     color: #ffffff !important;
     margin: 0 !important;
     padding: 0 !important;
-    text-align: center !important;
-    text-shadow: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    white-space: nowrap !important;
+  }
+
+  .announcement-link {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: opacity 0.2s ease !important;
+  }
+
+  .announcement-link:hover {
+    opacity: 0.8 !important;
+  }
+
+  .announcement-link svg {
+    width: 12px !important;
+    height: 12px !important;
+    fill: currentColor !important;
+    transition: transform 0.2s ease !important;
+  }
+
+  .announcement-link:hover svg {
+    transform: translateX(3px) !important;
+  }
+
+  /* Carousel Manual Navigation Arrows */
+  .announcement-arrow {
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    cursor: pointer !important;
+    padding: 4px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: color 0.2s ease, transform 0.2s ease !important;
+    z-index: 10 !important;
+    position: relative !important;
+  }
+
+  .announcement-arrow:hover {
+    color: #ffffff !important;
+    transform: scale(1.15) !important;
+  }
+
+  .announcement-arrow svg {
+    width: 14px !important;
+    height: 14px !important;
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 2.5 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
   }
 
   @media screen and (max-width: 989px) {
+    .announcement-bar-inner {
+      padding: 0.45rem 20px !important;
+    }
     .announcement-live-visitors {
-      left: 20px !important;
-      font-size: 0.76rem !important;
+      left: 16px !important;
+      font-size: 0.74rem !important;
     }
   }
 
   @media screen and (max-width: 749px) {
-    .announcement-bar-wrapper {
-      flex-direction: row !important;
-      justify-content: space-between !important;
-      padding: 0.45rem 12px !important;
-      gap: 8px !important;
+    .announcement-bar-inner {
+      padding: 0.45rem 8px !important;
+      justify-content: center !important;
     }
     .announcement-live-visitors {
-      position: static !important;
-      transform: none !important;
-      font-size: 0.72rem !important;
-      gap: 5px !important;
+      display: none !important;
     }
-    .live-visitor-green-dot {
-      width: 6.5px !important;
-      height: 6.5px !important;
+    .announcement-carousel-container {
+      max-width: calc(100% - 60px) !important;
     }
-    .announcement-bar__message {
-      font-size: 0.74rem !important;
+    .announcement-text {
+      font-size: 0.76rem !important;
       letter-spacing: 0.05em !important;
+    }
+    .announcement-arrow {
+      padding: 2px 6px !important;
+    }
+    .announcement-arrow svg {
+      width: 12px !important;
+      height: 12px !important;
     }
   }
 </style>
 
-<div class="announcement-bar color-{{ section.settings.color_scheme | default: 'accent-1' }}" role="region" aria-label="{{ 'sections.header.announcement' | t }}">
-  <div class="announcement-bar-wrapper">
+<div class="announcement-bar" role="region" aria-label="Announcement">
+  <div class="announcement-bar-inner">
     
-    <!-- Far-Left Live Visitor Indicator -->
+    <!-- Far-Left Live Visitor Indicator (Desktop) -->
     <div class="announcement-live-visitors" id="AnnouncementLiveVisitors">
       <span class="live-visitor-green-dot" aria-hidden="true"></span>
       <span class="live-visitor-text">
@@ -150,64 +232,137 @@
       </span>
     </div>
 
-    <!-- Optional Announcement Message (only rendered if text is added in customizer) -->
-    {%- assign announcement_text = "" -%}
-    {%- assign announcement_link = "" -%}
-    {%- if section.blocks.size > 0 -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'announcement' and block.settings.text != blank -%}
-          {%- assign announcement_text = block.settings.text -%}
-          {%- assign announcement_link = block.settings.link -%}
-          {%- break -%}
-        {%- endif -%}
-      {%- endfor -%}
-    {%- endif -%}
+    <!-- Prev Manual Arrow -->
+    <button type="button" class="announcement-arrow prev" id="AnnouncementPrevBtn" aria-label="Previous announcement">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
 
-    {%- if announcement_text != blank -%}
-      {%- if announcement_link != blank -%}
-        <a href="{{ announcement_link }}" class="announcement-bar__link">
-          <p class="announcement-bar__message">
-            {{ announcement_text | escape }}
-            {% render 'icon-arrow' %}
+    <!-- Rotating Messages -->
+    <div class="announcement-carousel-container" id="AnnouncementCarousel">
+      
+      <!-- Slide 1 -->
+      <div class="announcement-slide is-active" data-index="0">
+        <p class="announcement-text">
+          FREE SHIPPING ACROSS AUSTRALIA
+        </p>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="announcement-slide" data-index="1">
+        <p class="announcement-text">
+          USE CODE "LIMITED" FOR 10% OFF
+        </p>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="announcement-slide" data-index="2">
+        <a href="/products/broken-halo-set-ash-black" class="announcement-link">
+          <p class="announcement-text">
+            SHOP THE BROKEN HALO COLLECTION
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </p>
         </a>
-      {%- else -%}
-        <p class="announcement-bar__message">
-          {{ announcement_text | escape }}
-        </p>
-      {%- endif -%}
-    {%- endif -%}
+      </div>
+
+    </div>
+
+    <!-- Next Manual Arrow -->
+    <button type="button" class="announcement-arrow next" id="AnnouncementNextBtn" aria-label="Next announcement">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
 
   </div>
 </div>
 
 <script>
   (function() {
-    function initLiveVisitorCounter() {
-      const countEl = document.getElementById('AnnouncementVisitorCount');
-      if (!countEl) return;
+    function initAnnouncementBar() {
+      const container = document.getElementById('AnnouncementCarousel');
+      if (!container) return;
 
-      let currentCount = 127;
+      const slides = Array.from(container.querySelectorAll('.announcement-slide'));
+      const prevBtn = document.getElementById('AnnouncementPrevBtn');
+      const nextBtn = document.getElementById('AnnouncementNextBtn');
+      
+      if (slides.length <= 1) return;
 
-      function updateCounter() {
-        // Subtle gradual fluctuation: +/- 1 or 2 within 118 to 142
-        const change = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.3 ? 2 : 1);
-        currentCount = Math.max(118, Math.min(142, currentCount + change));
-        countEl.textContent = currentCount;
+      let currentSlide = 0;
+      let timer = null;
+      const intervalDelay = 3800; // 3.8 seconds auto-rotation
 
-        // Schedule next update between 14 to 26 seconds
-        const nextDelay = Math.floor(Math.random() * 12000) + 14000;
-        setTimeout(updateCounter, nextDelay);
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          if (i === index) {
+            slide.classList.add('is-active');
+          } else {
+            slide.classList.remove('is-active');
+          }
+        });
+        currentSlide = index;
       }
 
-      // Initial schedule
-      setTimeout(updateCounter, 16000);
+      function nextSlide() {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+      }
+
+      function prevSlide() {
+        const prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
+      }
+
+      function startTimer() {
+        stopTimer();
+        timer = setInterval(nextSlide, intervalDelay);
+      }
+
+      function stopTimer() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          prevSlide();
+          startTimer();
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          nextSlide();
+          startTimer();
+        });
+      }
+
+      container.addEventListener('mouseenter', stopTimer);
+      container.addEventListener('mouseleave', startTimer);
+
+      startTimer();
+
+      // Live Visitor Counter
+      const countEl = document.getElementById('AnnouncementVisitorCount');
+      if (countEl) {
+        let currentCount = 127;
+        function updateCounter() {
+          const change = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.3 ? 2 : 1);
+          currentCount = Math.max(118, Math.min(142, currentCount + change));
+          countEl.textContent = currentCount;
+          const nextDelay = Math.floor(Math.random() * 12000) + 14000;
+          setTimeout(updateCounter, nextDelay);
+        }
+        setTimeout(updateCounter, 16000);
+      }
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initLiveVisitorCounter);
+      document.addEventListener('DOMContentLoaded', initAnnouncementBar);
     } else {
-      initLiveVisitorCounter();
+      initAnnouncementBar();
     }
   })();
 </script>
@@ -216,21 +371,7 @@
 {
   "name": "Announcement Bar",
   "max_blocks": 12,
-  "settings": [
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        { "value": "accent-1", "label": "Accent 1" },
-        { "value": "accent-2", "label": "Accent 2" },
-        { "value": "background-1", "label": "Background 1" },
-        { "value": "background-2", "label": "Background 2" },
-        { "value": "inverse", "label": "Inverse" }
-      ],
-      "default": "accent-1",
-      "label": "Color scheme"
-    }
-  ],
+  "settings": [],
   "blocks": [
     {
       "type": "announcement",
@@ -239,7 +380,6 @@
         {
           "type": "text",
           "id": "text",
-          "default": "THEY CAN'T BE US",
           "label": "Text"
         },
         {
