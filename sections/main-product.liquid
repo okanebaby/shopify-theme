@@ -830,6 +830,20 @@
                     >
                     <div class="product-form__buttons">
                       
+                      {%- if product.handle == 'broken-halo-set-ash-black' or product.id == 10765967917348 or product.title contains 'Broken Halo' -%}
+                        <div id="WelcomeOfferProductBanner" class="welcome-offer-product-banner">
+                          <div class="welcome-offer-banner-row">
+                            <span class="welcome-offer-banner-title">YOUR WELCOME OFFER IS ACTIVE</span>
+                          </div>
+                          <div class="welcome-offer-banner-details">
+                            15% OFF + FREE $100 MYSTERY GIFT
+                          </div>
+                          <div class="welcome-offer-banner-timer">
+                            EXPIRES IN <span class="welcome-timer-digits" id="WelcomeOfferTimerDigits">15:00</span>
+                          </div>
+                        </div>
+                      {%- endif -%}
+
                       <!-- 1. Urgency Notice -->
                       <div class="product-urgency-notice">
                         LIMITED STOCK — NO GUARANTEED RESTOCK

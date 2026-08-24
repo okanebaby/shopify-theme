@@ -1,0 +1,420 @@
+﻿{% comment %}
+  OKANE BABY - Welcome Offer Manager
+  Features:
+  - Per-visitor 15-minute persistent localStorage countdown timer (never resets on refresh/navigation)
+  - Automatic qualification & sync for Mystery Gift (1x EXCLUSIVE MYSTERY WELCOME GIFT when Broken Halo is in cart)
+  - Automatic removal if Broken Halo is removed, timer expires, or unqualified
+  - Real Shopify discount combination (OKANE15 + MYSTERYGIFT)
+  - Omnisend popup timer synchronization
+  - Safe execution with designMode protection
+{% endcomment %}
+
+<style>
+  /* Product Page Welcome Offer Box */
+  .welcome-offer-product-banner {
+    display: block;
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1.5px solid #000000;
+    border-radius: 0px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif;
+    user-select: none;
+    box-shadow: none;
+    text-shadow: none;
+    transition: all 0.2s ease;
+  }
+
+  .welcome-offer-product-banner.is-expired {
+    background-color: #f6f6f6;
+    color: #666666;
+    border-color: #cccccc;
+    text-align: center;
+    padding: 10px 14px;
+  }
+
+  .welcome-offer-banner-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .welcome-offer-banner-title {
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .welcome-offer-product-banner.is-expired .welcome-offer-banner-title {
+    color: #888888;
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  .welcome-offer-banner-details {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .welcome-offer-banner-timer {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #00d659;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3px 8px;
+    border-radius: 0px;
+    width: fit-content;
+  }
+
+  .welcome-offer-banner-timer .welcome-timer-digits {
+    font-variant-numeric: tabular-nums;
+    font-weight: 900;
+    color: #00d659;
+    letter-spacing: 0.08em;
+  }
+
+  /* Cart Drawer & Cart Page Gift Styling */
+  .welcome-gift-badge {
+    display: inline-block !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 0.68rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    padding: 2px 6px !important;
+    border-radius: 0px !important;
+    margin-top: 4px !important;
+    margin-bottom: 2px !important;
+    width: fit-content !important;
+  }
+
+  .welcome-gift-free-price {
+    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 900 !important;
+    color: #000000 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    margin-left: 6px !important;
+  }
+
+  .welcome-gift-quantity-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .welcome-gift-qty-fixed {
+    font-family: 'Roboto Condensed', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    padding: 0.4rem 0.8rem !important;
+    border: 1px solid #000000 !important;
+    background: #f9f9f9 !important;
+    user-select: none !important;
+    display: inline-block !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .welcome-offer-product-banner {
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+    .welcome-offer-banner-title {
+      font-size: 0.78rem;
+    }
+    .welcome-offer-banner-details {
+      font-size: 0.76rem;
+    }
+    .welcome-offer-banner-timer {
+      font-size: 0.74rem;
+      padding: 2px 6px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    if (window.Shopify && window.Shopify.designMode) return;
+
+    const CONFIG = {
+      TIMER_KEY: 'okane_welcome_timer_expires_at',
+      UNLOCKED_KEY: 'okane_welcome_offer_unlocked',
+      DURATION_MS: 15 * 60 * 1000, // 15 Minutes
+      BROKEN_HALO_HANDLE: 'broken-halo-set-ash-black',
+      BROKEN_HALO_ID: 10765967917348,
+      GIFT_HANDLE: 'exclusive-mystery-welcome-gift',
+      GIFT_ID: 10776156438820,
+      GIFT_VARIANT_ID: 56055565025572,
+      DISCOUNT_COMBO_URL: '/discount/OKANE15,MYSTERYGIFT'
+    };
+
+    let isSyncingCart = false;
+    let bannerExpiredLogged = false;
+
+    // 1. Timer Logic (15-Minute Persistent Timer)
+    function initTimer() {
+      let expiresAtStr = localStorage.getItem(CONFIG.TIMER_KEY);
+      let expiresAt = expiresAtStr ? parseInt(expiresAtStr, 10) : null;
+
+      if (!expiresAt || isNaN(expiresAt)) {
+        expiresAt = Date.now() + CONFIG.DURATION_MS;
+        localStorage.setItem(CONFIG.TIMER_KEY, expiresAt.toString());
+      }
+      return expiresAt;
+    }
+
+    function getRemainingSeconds() {
+      const expiresAt = initTimer();
+      const diffMs = expiresAt - Date.now();
+      return Math.max(0, Math.floor(diffMs / 1000));
+    }
+
+    function formatTime(totalSec) {
+      const mins = Math.floor(totalSec / 60);
+      const secs = totalSec % 60;
+      return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function checkUnlocked() {
+      const url = window.location.href;
+      if (url.includes('OKANE15') || url.includes('MYSTERYGIFT') || url.includes('welcome_unlocked=1') || url.includes('discount=')) {
+        localStorage.setItem(CONFIG.UNLOCKED_KEY, 'true');
+      }
+      return localStorage.getItem(CONFIG.UNLOCKED_KEY) === 'true';
+    }
+
+    // 2. DOM Updates for Timer & Banners
+    function updateTimerDOM() {
+      const remainingSec = getRemainingSeconds();
+      const timeStr = formatTime(remainingSec);
+      const isExpired = remainingSec === 0;
+
+      // Update Product Page Banner
+      const banners = document.querySelectorAll('.welcome-offer-product-banner');
+      banners.forEach(banner => {
+        if (isExpired) {
+          banner.classList.add('is-expired');
+          banner.innerHTML = '<div class="welcome-offer-banner-title">WELCOME OFFER EXPIRED</div>';
+        } else {
+          banner.classList.remove('is-expired');
+          const digits = banner.querySelector('.welcome-timer-digits');
+          if (digits) {
+            digits.textContent = timeStr;
+          }
+        }
+      });
+
+      // Update Omnisend Popup Timer (if present in DOM)
+      const popupTimers = document.querySelectorAll('[data-welcome-timer], .omnisend-welcome-timer, .omnisend-timer');
+      popupTimers.forEach(el => {
+        el.textContent = isExpired ? '00:00' : timeStr;
+      });
+
+      // Scan Omnisend iframes / shadow DOM or text placeholders for MM:SS
+      const omnisendElements = document.querySelectorAll('#omnisend-form-container, .omnisend-popup, [id^="omnisend-"]');
+      omnisendElements.forEach(container => {
+        const textNodes = findTextNodes(container);
+        textNodes.forEach(node => {
+          if (/\b\d{2}:\d{2}\b/.test(node.nodeValue)) {
+            node.nodeValue = node.nodeValue.replace(/\b\d{2}:\d{2}\b/, timeStr);
+          }
+        });
+      });
+
+      if (isExpired && !bannerExpiredLogged) {
+        bannerExpiredLogged = true;
+        syncCartOffer();
+      }
+    }
+
+    function findTextNodes(el) {
+      const textNodes = [];
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+      let node;
+      while (node = walker.nextNode()) {
+        textNodes.push(node);
+      }
+      return textNodes;
+    }
+
+    // 3. Cart Synchronization Engine
+    async function syncCartOffer() {
+      if (isSyncingCart) return;
+      isSyncingCart = true;
+
+      try {
+        const cartRes = await fetch('/cart.js', { headers: { 'Accept': 'application/json' } });
+        if (!cartRes.ok) throw new Error('Cart fetch failed');
+        const cart = await cartRes.json();
+
+        const remainingSec = getRemainingSeconds();
+        const isExpired = remainingSec === 0;
+        const isUnlocked = checkUnlocked();
+
+        // Check qualifying item (Broken Halo Set)
+        const hasBrokenHalo = cart.items.some(item => 
+          item.handle === CONFIG.BROKEN_HALO_HANDLE || 
+          item.product_id === CONFIG.BROKEN_HALO_ID || 
+          (item.title && item.title.toLowerCase().includes('broken halo'))
+        );
+
+        // Check gift item in cart
+        const giftItem = cart.items.find(item => 
+          item.handle === CONFIG.GIFT_HANDLE || 
+          item.product_id === CONFIG.GIFT_ID || 
+          item.variant_id === CONFIG.GIFT_VARIANT_ID ||
+          (item.title && item.title.toLowerCase().includes('mystery welcome gift'))
+        );
+
+        const isQualifying = isUnlocked && !isExpired && hasBrokenHalo;
+
+        if (isQualifying) {
+          // Ensure Mystery Gift is present and quantity is exactly 1
+          if (!giftItem) {
+            await fetch('/cart/add.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({
+                id: CONFIG.GIFT_VARIANT_ID,
+                quantity: 1,
+                properties: { '_welcome_gift': 'true' }
+              })
+            });
+            // Apply combined discounts in background
+            fetch(CONFIG.DISCOUNT_COMBO_URL).catch(() => {});
+            refreshCartDrawerUI();
+          } else if (giftItem.quantity > 1) {
+            await fetch('/cart/change.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({
+                id: String(giftItem.variant_id || CONFIG.GIFT_VARIANT_ID),
+                quantity: 1
+              })
+            });
+            refreshCartDrawerUI();
+          }
+        } else {
+          // If NOT qualifying and gift is in cart, remove it
+          if (giftItem) {
+            await fetch('/cart/change.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({
+                id: String(giftItem.variant_id || CONFIG.GIFT_VARIANT_ID),
+                quantity: 0
+              })
+            });
+            refreshCartDrawerUI();
+          }
+        }
+      } catch (err) {
+        console.warn('[WelcomeOfferManager] syncCart error:', err);
+      } finally {
+        isSyncingCart = false;
+      }
+    }
+
+    // 4. Refresh Cart Drawer
+    function refreshCartDrawerUI() {
+      const cartDrawer = document.querySelector('cart-drawer');
+      if (cartDrawer && cartDrawer.getSectionsToRender) {
+        const sections = cartDrawer.getSectionsToRender().map(s => s.id).join(',');
+        fetch(`${window.location.pathname}?sections=${sections}`)
+          .then(res => res.json())
+          .then(data => {
+            cartDrawer.getSectionsToRender().forEach(section => {
+              const el = section.selector ? document.querySelector(section.selector) : document.getElementById(section.id);
+              if (el && data[section.id]) {
+                const sectionHtml = new DOMParser().parseFromString(data[section.id], 'text/html').querySelector(section.selector || `#${section.id}`);
+                if (sectionHtml) {
+                  el.innerHTML = sectionHtml.innerHTML;
+                }
+              }
+            });
+          })
+          .catch(() => {});
+      }
+    }
+
+    // 5. Intercept AJAX Cart Modifications
+    const originalFetch = window.fetch;
+    window.fetch = function() {
+      const url = arguments[0];
+      const promise = originalFetch.apply(this, arguments);
+
+      if (typeof url === 'string' && (url.includes('/cart/add') || url.includes('/cart/change') || url.includes('/cart/update') || url.includes('/cart/clear'))) {
+        promise.then(() => {
+          setTimeout(syncCartOffer, 250);
+        }).catch(() => {});
+      }
+
+      return promise;
+    };
+
+    // 6. Omnisend Events & Message Listeners
+    window.addEventListener('message', function(e) {
+      if (e && e.data && typeof e.data === 'string') {
+        if (e.data.includes('omnisend') || e.data.includes('formSubmitted') || e.data.includes('OKANE15')) {
+          localStorage.setItem(CONFIG.UNLOCKED_KEY, 'true');
+          setTimeout(syncCartOffer, 500);
+        }
+      }
+    });
+
+    document.addEventListener('omnisend:formSubmitted', function() {
+      localStorage.setItem(CONFIG.UNLOCKED_KEY, 'true');
+      setTimeout(syncCartOffer, 500);
+    });
+
+    // 7. Checkout Interception to guarantee combined discounts in checkout
+    document.addEventListener('click', function(e) {
+      const checkoutBtn = e.target.closest('#CartDrawer-Checkout, #checkout, [name="checkout"], .cart__checkout-button');
+      if (checkoutBtn) {
+        const isUnlocked = checkUnlocked();
+        const isExpired = getRemainingSeconds() === 0;
+        if (isUnlocked && !isExpired) {
+          e.preventDefault();
+          window.location.href = '/discount/OKANE15,MYSTERYGIFT?redirect=/checkout';
+        }
+      }
+    }, true);
+
+    // 8. Initialize
+    initTimer();
+    checkUnlocked();
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        updateTimerDOM();
+        setInterval(updateTimerDOM, 1000);
+        setTimeout(syncCartOffer, 600);
+      });
+    } else {
+      updateTimerDOM();
+      setInterval(updateTimerDOM, 1000);
+      setTimeout(syncCartOffer, 600);
+    }
+  })();
+</script>
