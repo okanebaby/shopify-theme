@@ -598,7 +598,212 @@
                 </div>
               </noscript>
             {%- when 'buy_buttons' -%}
-              <div {{ block.shopify_attributes }}>
+              <div {{ block.shopify_attributes }} class="product-buy-buttons-block">
+                <style>
+                  .product-buy-buttons-block {
+                    width: 100% !important;
+                    margin-top: 1rem !important;
+                    margin-bottom: 1.2rem !important;
+                  }
+
+                  .product-form__buttons {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    width: 100% !important;
+                    gap: 0 !important;
+                  }
+
+                  /* 1. Urgency Message */
+                  .product-urgency-notice {
+                    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                    font-size: 0.78rem !important;
+                    font-weight: 800 !important;
+                    letter-spacing: 0.08em !important;
+                    text-transform: uppercase !important;
+                    color: #000000 !important;
+                    margin-bottom: 4px !important;
+                    text-align: left !important;
+                    line-height: 1.2 !important;
+                    user-select: none !important;
+                  }
+
+                  /* 2. Promo Discount Line */
+                  .product-promo-discount-line {
+                    font-family: 'Roboto Condensed', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                    font-size: 0.82rem !important;
+                    font-weight: 600 !important;
+                    letter-spacing: 0.05em !important;
+                    text-transform: uppercase !important;
+                    color: #222222 !important;
+                    margin-bottom: 12px !important;
+                    text-align: left !important;
+                    line-height: 1.2 !important;
+                    user-select: none !important;
+                  }
+
+                  .product-promo-discount-line .promo-code-bold {
+                    font-weight: 900 !important;
+                    color: #000000 !important;
+                    letter-spacing: 0.07em !important;
+                  }
+
+                  /* 3. Redesigned Rectangular Full-Width ADD TO CART Button */
+                  .product-atc-btn-redesigned,
+                  button.product-form__submit.product-atc-btn-redesigned {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: 52px !important;
+                    min-height: 52px !important;
+                    padding: 0 24px !important;
+                    background-color: #000000 !important;
+                    color: #ffffff !important;
+                    border: 1.5px solid #000000 !important;
+                    border-radius: 0px !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    cursor: pointer !important;
+                    box-sizing: border-box !important;
+                    margin: 0 !important;
+                    box-shadow: none !important;
+                    text-shadow: none !important;
+                    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease !important;
+                    outline: none !important;
+                  }
+
+                  .product-atc-btn-redesigned:before,
+                  .product-atc-btn-redesigned:after {
+                    display: none !important;
+                  }
+
+                  .product-atc-btn-redesigned .product-atc-text,
+                  .product-atc-btn-redesigned span {
+                    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                    font-size: 0.95rem !important;
+                    font-weight: 800 !important;
+                    letter-spacing: 0.1em !important;
+                    text-transform: uppercase !important;
+                    color: #ffffff !important;
+                    line-height: 1 !important;
+                  }
+
+                  .product-atc-btn-redesigned:hover:not(:disabled) {
+                    background-color: #1a1a1a !important;
+                    border-color: #1a1a1a !important;
+                    color: #ffffff !important;
+                  }
+
+                  .product-atc-btn-redesigned:active:not(:disabled) {
+                    background-color: #262626 !important;
+                    transform: scale(0.995) !important;
+                  }
+
+                  .product-atc-btn-redesigned:disabled {
+                    background-color: #888888 !important;
+                    border-color: #888888 !important;
+                    color: #ffffff !important;
+                    cursor: not-allowed !important;
+                    opacity: 0.7 !important;
+                  }
+
+                  /* 4. Benefits / Trust Area */
+                  .product-benefits-trust-area {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    gap: 6px !important;
+                    margin-top: 14px !important;
+                    margin-bottom: 14px !important;
+                    padding: 2px 0 !important;
+                  }
+
+                  .product-benefit-item {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 8px !important;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+                    font-size: 0.81rem !important;
+                    font-weight: 500 !important;
+                    color: #333333 !important;
+                    line-height: 1.35 !important;
+                    letter-spacing: 0.01em !important;
+                  }
+
+                  .product-benefit-item .benefit-check {
+                    color: #000000 !important;
+                    font-weight: 800 !important;
+                    font-size: 0.88rem !important;
+                    line-height: 1 !important;
+                    flex-shrink: 0 !important;
+                  }
+
+                  .product-benefit-item .benefit-icon {
+                    font-size: 0.82rem !important;
+                    line-height: 1 !important;
+                    flex-shrink: 0 !important;
+                  }
+
+                  /* Most Prominent Free Shipping Benefit */
+                  .product-benefit-item.product-benefit-item--free-shipping {
+                    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                    font-size: 0.88rem !important;
+                    font-weight: 800 !important;
+                    color: #000000 !important;
+                    letter-spacing: 0.04em !important;
+                    text-transform: uppercase !important;
+                    margin-bottom: 2px !important;
+                  }
+
+                  .product-benefit-item.product-benefit-item--free-shipping .benefit-check {
+                    font-size: 0.95rem !important;
+                    font-weight: 900 !important;
+                  }
+
+                  /* Dynamic Checkout / Shop Pay Overrides */
+                  .product-form__buttons .shopify-payment-button {
+                    width: 100% !important;
+                    margin-top: 2px !important;
+                  }
+
+                  .shopify-payment-button__button--unbranded {
+                    border-radius: 0px !important;
+                    min-height: 48px !important;
+                    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                    font-weight: 800 !important;
+                    letter-spacing: 0.08em !important;
+                    text-transform: uppercase !important;
+                  }
+
+                  @media screen and (max-width: 749px) {
+                    .product-urgency-notice {
+                      font-size: 0.74rem !important;
+                    }
+                    .product-promo-discount-line {
+                      font-size: 0.78rem !important;
+                      margin-bottom: 10px !important;
+                    }
+                    .product-atc-btn-redesigned,
+                    button.product-form__submit.product-atc-btn-redesigned {
+                      height: 48px !important;
+                      min-height: 48px !important;
+                    }
+                    .product-atc-btn-redesigned .product-atc-text,
+                    .product-atc-btn-redesigned span {
+                      font-size: 0.9rem !important;
+                    }
+                    .product-benefits-trust-area {
+                      margin-top: 12px !important;
+                      margin-bottom: 12px !important;
+                      gap: 5px !important;
+                    }
+                    .product-benefit-item.product-benefit-item--free-shipping {
+                      font-size: 0.82rem !important;
+                    }
+                    .product-benefit-item {
+                      font-size: 0.78rem !important;
+                    }
+                  }
+                </style>
+
                 <product-form class="product-form">
                   <div class="product-form__error-message-wrapper" role="alert" hidden>
                     <svg
@@ -624,17 +829,29 @@
                       disabled
                     >
                     <div class="product-form__buttons">
+                      
+                      <!-- 1. Urgency Notice -->
+                      <div class="product-urgency-notice">
+                        LIMITED STOCK — NO GUARANTEED RESTOCK
+                      </div>
+
+                      <!-- 2. Promo Discount Line -->
+                      <div class="product-promo-discount-line">
+                        10% OFF WITH CODE <span class="promo-code-bold">"LIMITED"</span>
+                      </div>
+
+                      <!-- 3. Redesigned Full-Width Rectangular ADD TO CART CTA Button -->
                       <button
                         type="submit"
                         name="add"
-                        class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+                        class="product-form__submit button button--full-width product-atc-btn-redesigned"
                         {% if product.selected_or_first_available_variant.available == false %}
                           disabled
                         {% endif %}
                       >
-                        <span>
+                        <span class="product-atc-text">
                           {%- if product.selected_or_first_available_variant.available -%}
-                            {{ 'products.product.add_to_cart' | t }}
+                            ADD TO CART
                           {%- else -%}
                             {{ 'products.product.sold_out' | t }}
                           {%- endif -%}
@@ -652,6 +869,28 @@
                           </svg>
                         </div>
                       </button>
+
+                      <!-- 4. Premium Shipping & Trust Benefits Area -->
+                      <div class="product-benefits-trust-area">
+                        <div class="product-benefit-item product-benefit-item--free-shipping">
+                          <span class="benefit-check">✓</span>
+                          <span class="benefit-text">FREE SHIPPING ACROSS AUSTRALIA</span>
+                        </div>
+                        <div class="product-benefit-item">
+                          <span class="benefit-check">✓</span>
+                          <span class="benefit-text">Affordable &amp; reliable worldwide shipping</span>
+                        </div>
+                        <div class="product-benefit-item">
+                          <span class="benefit-check">✓</span>
+                          <span class="benefit-text">Easy size exchanges</span>
+                        </div>
+                        <div class="product-benefit-item">
+                          <span class="benefit-icon">🔒</span>
+                          <span class="benefit-text">100% secure checkout</span>
+                        </div>
+                      </div>
+
+                      <!-- 5. Shop Pay Dynamic Checkout Button -->
                       {%- if block.settings.show_dynamic_checkout -%}
                         {{ form | payment_button }}
                       {%- endif -%}
