@@ -2,9 +2,13 @@
   OKANE BABY Infinite Seamless Marquee Announcement Bar
   Features:
   - Continuous right-to-left seamless infinite scrolling marquee loop (no pauses, no blank gaps)
-  - Custom marquee text: FREE SHIPPING ACROSS AUSTRALIA ✦ USE CODE ‘LIMITED’ FOR 10% OFF ✦ BROKEN HALO COLLECTION ✦ LIMITED STOCK AVAILABLE ✦
-  - Desktop Live Visitor Counter at top left
-  - Clean bold sans-serif typography
+  - Messages in exact order:
+      1. FREE SHIPPING ACROSS AUSTRALIA
+      2. USE CODE 'LIMITED' FOR 10% OFF
+      3. LIMITED STOCK AVAILABLE
+      4. BROKEN HALO COLLECTION
+  - Separated by ✦ symbols
+  - Clean, bold, premium streetwear typography
 {% endcomment %}
 
 <style>
@@ -20,53 +24,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
     z-index: 10 !important;
     overflow: hidden !important;
-  }
-
-  /* Live Visitor Counter Badge (Desktop Top Left) */
-  .announcement-live-visitors {
-    position: absolute !important;
-    left: 20px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 7px !important;
-    color: rgba(255, 255, 255, 0.95) !important;
-    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.76rem !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase !important;
-    user-select: none !important;
-    z-index: 10 !important;
-    background: #000000 !important;
-    padding: 3px 12px 3px 6px !important;
-    box-shadow: 12px 0 16px 4px #000000 !important;
-    white-space: nowrap !important;
-  }
-
-  .live-visitor-green-dot {
-    width: 7px !important;
-    height: 7px !important;
-    background-color: #00d659 !important;
-    border-radius: 50% !important;
-    display: inline-block !important;
-    box-shadow: 0 0 8px rgba(0, 214, 89, 0.9) !important;
-    flex-shrink: 0 !important;
-    animation: live-green-dot-pulse 2.2s infinite ease-in-out !important;
-  }
-
-  @keyframes live-green-dot-pulse {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-      box-shadow: 0 0 8px rgba(0, 214, 89, 0.9);
-    }
-    50% {
-      opacity: 0.6;
-      transform: scale(0.85);
-      box-shadow: 0 0 3px rgba(0, 214, 89, 0.4);
-    }
+    box-sizing: border-box !important;
   }
 
   /* Infinite Seamless Marquee Container */
@@ -83,7 +41,7 @@
     display: flex !important;
     width: max-content !important;
     will-change: transform !important;
-    animation: announcement-marquee-scroll 28s linear infinite !important;
+    animation: announcement-marquee-scroll 26s linear infinite !important;
   }
 
   .announcement-marquee-track:hover {
@@ -93,21 +51,22 @@
   .announcement-marquee-content {
     display: flex !important;
     align-items: center !important;
-    gap: 1.8rem !important;
-    padding-right: 1.8rem !important;
+    gap: 1.75rem !important;
+    padding-right: 1.75rem !important;
     flex-shrink: 0 !important;
     font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.82rem !important;
-    font-weight: 800 !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
     letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
     color: #ffffff !important;
+    line-height: 1 !important;
   }
 
   .announcement-marquee-content .marquee-star {
     color: #ffffff !important;
-    font-size: 0.85rem !important;
-    opacity: 0.75 !important;
+    font-size: 11px !important;
+    opacity: 0.8 !important;
   }
 
   .announcement-marquee-content .marquee-link {
@@ -129,15 +88,19 @@
     }
   }
 
-  @media screen and (max-width: 860px) {
+  @media screen and (max-width: 749px) {
     .announcement-bar {
-      height: 34px !important;
-      min-height: 34px !important;
+      height: 36px !important;
+      min-height: 36px !important;
     }
     .announcement-marquee-content {
-      font-size: 0.75rem !important;
-      gap: 1.4rem !important;
-      padding-right: 1.4rem !important;
+      font-size: 11px !important;
+      gap: 1.35rem !important;
+      padding-right: 1.35rem !important;
+      letter-spacing: 0.06em !important;
+    }
+    .announcement-marquee-content .marquee-star {
+      font-size: 10px !important;
     }
     .announcement-marquee-track {
       animation-duration: 22s !important;
@@ -157,9 +120,9 @@
         <span class="marquee-star">✦</span>
         <span>USE CODE ‘LIMITED’ FOR 10% OFF</span>
         <span class="marquee-star">✦</span>
-        <a href="/collections/all" class="marquee-link">BROKEN HALO COLLECTION</a>
-        <span class="marquee-star">✦</span>
         <span>LIMITED STOCK AVAILABLE</span>
+        <span class="marquee-star">✦</span>
+        <a href="/collections/all" class="marquee-link">BROKEN HALO COLLECTION</a>
         <span class="marquee-star">✦</span>
       </div>
 
@@ -169,9 +132,9 @@
         <span class="marquee-star">✦</span>
         <span>USE CODE ‘LIMITED’ FOR 10% OFF</span>
         <span class="marquee-star">✦</span>
-        <a href="/collections/all" class="marquee-link">BROKEN HALO COLLECTION</a>
-        <span class="marquee-star">✦</span>
         <span>LIMITED STOCK AVAILABLE</span>
+        <span class="marquee-star">✦</span>
+        <a href="/collections/all" class="marquee-link">BROKEN HALO COLLECTION</a>
         <span class="marquee-star">✦</span>
       </div>
 
@@ -181,9 +144,9 @@
         <span class="marquee-star">✦</span>
         <span>USE CODE ‘LIMITED’ FOR 10% OFF</span>
         <span class="marquee-star">✦</span>
-        <a href="/collections/all" class="marquee-link">BROKEN HALO COLLECTION</a>
-        <span class="marquee-star">✦</span>
         <span>LIMITED STOCK AVAILABLE</span>
+        <span class="marquee-star">✦</span>
+        <a href="/collections/all" class="marquee-link">BROKEN HALO COLLECTION</a>
         <span class="marquee-star">✦</span>
       </div>
 
