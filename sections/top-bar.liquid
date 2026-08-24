@@ -1,0 +1,97 @@
+﻿{% comment %}
+  OKANE BABY Top Live Shoppers Bar
+  Positioned at the very top of the page above the header.
+{% endcomment %}
+
+<style>
+  .top-live-bar {
+    position: relative !important;
+    width: 100% !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    z-index: 55 !important;
+  }
+
+  .top-live-inner {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 0.76rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    user-select: none !important;
+  }
+
+  .top-live-green-dot {
+    width: 7px !important;
+    height: 7px !important;
+    background-color: #00d659 !important;
+    border-radius: 50% !important;
+    display: inline-block !important;
+    box-shadow: 0 0 8px rgba(0, 214, 89, 0.9) !important;
+    flex-shrink: 0 !important;
+    animation: top-live-pulse 2.2s infinite ease-in-out !important;
+  }
+
+  @keyframes top-live-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 8px rgba(0, 214, 89, 0.9);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(0.85);
+      box-shadow: 0 0 3px rgba(0, 214, 89, 0.4);
+    }
+  }
+</style>
+
+<div class="top-live-bar" role="region" aria-label="Live Activity">
+  <div class="top-live-inner">
+    <span class="top-live-green-dot" aria-hidden="true"></span>
+    <span id="TopLiveShoppersCount">127</span>
+    <span>SHOPPING NOW</span>
+  </div>
+</div>
+
+<script>
+  (function() {
+    function initTopLiveShoppers() {
+      const countEl = document.getElementById('TopLiveShoppersCount');
+      if (!countEl) return;
+      let currentCount = 127;
+      function updateCounter() {
+        const change = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.3 ? 2 : 1);
+        currentCount = Math.max(118, Math.min(142, currentCount + change));
+        countEl.textContent = currentCount;
+        const nextDelay = Math.floor(Math.random() * 12000) + 14000;
+        setTimeout(updateCounter, nextDelay);
+      }
+      setTimeout(updateCounter, 16000);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTopLiveShoppers);
+    } else {
+      initTopLiveShoppers();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Top Live Bar",
+  "settings": []
+}
+{% endschema %}

@@ -130,9 +130,6 @@
   }
 
   @media screen and (max-width: 860px) {
-    .announcement-live-visitors {
-      display: none !important;
-    }
     .announcement-bar {
       height: 34px !important;
       min-height: 34px !important;
@@ -150,13 +147,6 @@
 
 <div class="announcement-bar color-{{ section.settings.color_scheme }}" role="region" aria-label="Announcements">
   
-  <!-- Live Visitor Counter Badge (Desktop Left) -->
-  <div class="announcement-live-visitors" aria-hidden="true">
-    <span class="live-visitor-green-dot"></span>
-    <span id="AnnouncementVisitorCount">127</span>
-    <span>SHOPPING NOW</span>
-  </div>
-
   <!-- Continuous Infinite Marquee Track (Repeated 3x for Seamless Loop) -->
   <div class="announcement-marquee-wrapper">
     <div class="announcement-marquee-track">
@@ -201,30 +191,6 @@
   </div>
 
 </div>
-
-<script>
-  (function() {
-    function initVisitorCounter() {
-      const countEl = document.getElementById('AnnouncementVisitorCount');
-      if (!countEl) return;
-      let currentCount = 127;
-      function updateCounter() {
-        const change = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.3 ? 2 : 1);
-        currentCount = Math.max(118, Math.min(142, currentCount + change));
-        countEl.textContent = currentCount;
-        const nextDelay = Math.floor(Math.random() * 12000) + 14000;
-        setTimeout(updateCounter, nextDelay);
-      }
-      setTimeout(updateCounter, 16000);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initVisitorCounter);
-    } else {
-      initVisitorCounter();
-    }
-  })();
-</script>
 
 {% schema %}
 {
