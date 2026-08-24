@@ -21,19 +21,69 @@ if (!customElements.get('product-form')) {
       this.submitButton.classList.add('loading');
       this.querySelector('.loading-overlay__spinner').classList.remove('hidden');
 
-      const config = fetchConfig('javascript');
-      config.headers['X-Requested-With'] = 'XMLHttpRequest';
-      delete config.headers['Content-Type'];
+      const variantInput = this.form.querySelector('[name=id]');
+      const selectedVariantId = variantInput ? parseInt(variantInput.value, 10) : null;
+      const isBrokenHalo = [56017324835108, 56017324867876, 56017324900644].includes(selectedVariantId) || window.location.pathname.includes('broken-halo');
 
-      const formData = new FormData(this.form);
-      if (this.cart) {
-        formData.append('sections', this.cart.getSectionsToRender().map((section) => section.id));
-        formData.append('sections_url', window.location.pathname);
-        this.cart.setActiveElement(document.activeElement);
+      let isTimerActive = true;
+      try {
+        const expiresAtStr = localStorage.getItem('okane_welcome_timer_expires_at');
+        if (expiresAtStr) {
+          isTimerActive = (parseInt(expiresAtStr, 10) - Date.now()) > 0;
+        }
+      } catch(e) {}
+
+      let fetchPromise;
+      if (isBrokenHalo && isTimerActive) {
+        const payload = {
+          items: [
+            {
+              id: selectedVariantId,
+              quantity: 1
+            },
+            {
+              id: 56055565025572,
+              quantity: 1,
+              properties: {
+                '_welcome_gift': 'true'
+              }
+            }
+          ]
+        };
+        if (this.cart) {
+          payload.sections = this.cart.getSectionsToRender().map((section) => section.id);
+          payload.sections_url = window.location.pathname;
+          this.cart.setActiveElement(document.activeElement);
+        }
+
+        fetch('/discount/OKANE15,MYSTERYGIFT').catch(() => {});
+
+        fetchPromise = fetch(`${routes.cart_add_url}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: JSON.stringify(payload)
+        });
+      } else {
+        const config = fetchConfig('javascript');
+        config.headers['X-Requested-With'] = 'XMLHttpRequest';
+        delete config.headers['Content-Type'];
+
+        const formData = new FormData(this.form);
+        if (this.cart) {
+          formData.append('sections', this.cart.getSectionsToRender().map((section) => section.id));
+          formData.append('sections_url', window.location.pathname);
+          this.cart.setActiveElement(document.activeElement);
+        }
+        config.body = formData;
+
+        fetchPromise = fetch(`${routes.cart_add_url}`, config);
       }
-      config.body = formData;
 
-      fetch(`${routes.cart_add_url}`, config)
+      fetchPromise
         .then((response) => response.json())
         .then((response) => {
           if (response.status) {

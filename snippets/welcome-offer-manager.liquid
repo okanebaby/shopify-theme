@@ -159,10 +159,10 @@
 
     const CONFIG = {
       TIMER_KEY: 'okane_welcome_timer_expires_at',
-      UNLOCKED_KEY: 'okane_welcome_offer_unlocked',
       DURATION_MS: 15 * 60 * 1000, // 15 Minutes
       BROKEN_HALO_HANDLE: 'broken-halo-set-ash-black',
       BROKEN_HALO_ID: 10765967917348,
+      BROKEN_HALO_VARIANTS: [56017324835108, 56017324867876, 56017324900644],
       GIFT_HANDLE: 'exclusive-mystery-welcome-gift',
       GIFT_ID: 10776156438820,
       GIFT_VARIANT_ID: 56055565025572,
@@ -194,14 +194,6 @@
       const mins = Math.floor(totalSec / 60);
       const secs = totalSec % 60;
       return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-    }
-
-    function checkUnlocked() {
-      const url = window.location.href;
-      if (url.includes('OKANE15') || url.includes('MYSTERYGIFT') || url.includes('welcome_unlocked=1') || url.includes('discount=')) {
-        localStorage.setItem(CONFIG.UNLOCKED_KEY, 'true');
-      }
-      return localStorage.getItem(CONFIG.UNLOCKED_KEY) === 'true';
     }
 
     // 2. DOM Updates for Timer & Banners
@@ -270,12 +262,12 @@
 
         const remainingSec = getRemainingSeconds();
         const isExpired = remainingSec === 0;
-        const isUnlocked = checkUnlocked();
 
         // Check qualifying item (Broken Halo Set)
         const hasBrokenHalo = cart.items.some(item => 
           item.handle === CONFIG.BROKEN_HALO_HANDLE || 
           item.product_id === CONFIG.BROKEN_HALO_ID || 
+          CONFIG.BROKEN_HALO_VARIANTS.includes(item.variant_id) ||
           (item.title && item.title.toLowerCase().includes('broken halo'))
         );
 
@@ -287,7 +279,7 @@
           (item.title && item.title.toLowerCase().includes('mystery welcome gift'))
         );
 
-        const isQualifying = isUnlocked && !isExpired && hasBrokenHalo;
+        const isQualifying = !isExpired && hasBrokenHalo;
 
         if (isQualifying) {
           // Ensure Mystery Gift is present and quantity is exactly 1
@@ -336,6 +328,9 @@
       }
     }
 
+    // Expose global sync hook
+    window.syncWelcomeOfferCart = syncCartOffer;
+
     // 4. Refresh Cart Drawer
     function refreshCartDrawerUI() {
       const cartDrawer = document.querySelector('cart-drawer');
@@ -377,24 +372,21 @@
     window.addEventListener('message', function(e) {
       if (e && e.data && typeof e.data === 'string') {
         if (e.data.includes('omnisend') || e.data.includes('formSubmitted') || e.data.includes('OKANE15')) {
-          localStorage.setItem(CONFIG.UNLOCKED_KEY, 'true');
-          setTimeout(syncCartOffer, 500);
+          setTimeout(syncCartOffer, 400);
         }
       }
     });
 
     document.addEventListener('omnisend:formSubmitted', function() {
-      localStorage.setItem(CONFIG.UNLOCKED_KEY, 'true');
-      setTimeout(syncCartOffer, 500);
+      setTimeout(syncCartOffer, 400);
     });
 
     // 7. Checkout Interception to guarantee combined discounts in checkout
     document.addEventListener('click', function(e) {
       const checkoutBtn = e.target.closest('#CartDrawer-Checkout, #checkout, [name="checkout"], .cart__checkout-button');
       if (checkoutBtn) {
-        const isUnlocked = checkUnlocked();
         const isExpired = getRemainingSeconds() === 0;
-        if (isUnlocked && !isExpired) {
+        if (!isExpired) {
           e.preventDefault();
           window.location.href = '/discount/OKANE15,MYSTERYGIFT?redirect=/checkout';
         }
@@ -403,18 +395,17 @@
 
     // 8. Initialize
     initTimer();
-    checkUnlocked();
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
         updateTimerDOM();
         setInterval(updateTimerDOM, 1000);
-        setTimeout(syncCartOffer, 600);
+        setTimeout(syncCartOffer, 400);
       });
     } else {
       updateTimerDOM();
       setInterval(updateTimerDOM, 1000);
-      setTimeout(syncCartOffer, 600);
+      setTimeout(syncCartOffer, 400);
     }
   })();
 </script>
