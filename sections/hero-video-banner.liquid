@@ -67,23 +67,23 @@
     z-index: 2 !important;
   }
 
-  /* Glitch Text Element Overlay (Bottom Left) - EXACT SAME CURSIVE CALLIGRAPHY FONT (Pinyon Script) */
+  /* Glitch Text Element Overlay (Bottom Left) - Bold Sans-Serif Typography */
   #HeroGlitchHeading,
   .hero-glitch-heading {
-    font-family: 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
-    font-size: clamp(3.2rem, 8vw, 7.5rem) !important;
+    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: clamp(2.2rem, 6.5vw, 5.2rem) !important;
     color: #000000 !important;
     margin: 0 !important;
     line-height: 1 !important;
-    letter-spacing: 0.02em !important;
-    text-transform: none !important;
-    text-shadow: 0 0 4px #000000, 0 0 14px rgba(0, 0, 0, 0.85), 0 0 28px rgba(0, 0, 0, 0.55) !important;
-    transition: all 0.3s ease !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    text-shadow: none !important;
+    transition: color 0.3s ease, text-shadow 0.3s ease !important;
     user-select: none !important;
     white-space: nowrap !important;
     cursor: pointer !important;
     font-style: normal !important;
-    font-weight: 400 !important;
+    font-weight: 900 !important;
   }
 
   #HeroGlitchHeading.is-sans,
@@ -99,12 +99,12 @@
   @media screen and (max-width: 749px) {
     #HeroGlitchHeading,
     .hero-glitch-heading {
-      font-size: clamp(2.4rem, 9.5vw, 4.2rem) !important;
+      font-size: clamp(1.8rem, 8vw, 3.6rem) !important;
       white-space: normal !important;
     }
   }
 
-  /* Center Cursive Button Overlay with Glowing White Aura */
+  /* Center Button Overlay with Glowing White Aura */
   .hero-cursive-button-box {
     position: absolute !important;
     top: 50% !important;
@@ -128,19 +128,16 @@
     text-decoration: none !important;
     border: none !important;
     box-shadow: none !important;
-    font-family: 'Pinyon Script', 'Great Vibes', 'Italianno', 'Monsieur La Doulaise', cursive !important;
-    font-size: clamp(2.8rem, 6.8vw, 5.4rem) !important;
-    font-weight: 400 !important;
-    text-transform: none !important;
-    letter-spacing: 0.02em !important;
+    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: clamp(1.6rem, 4.5vw, 3.2rem) !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
     white-space: nowrap !important;
     position: relative !important;
     z-index: 3 !important;
-    text-shadow: 
-      0 0 4px #000000, 
-      0 0 14px rgba(0, 0, 0, 0.85), 
-      0 0 28px rgba(0, 0, 0, 0.55) !important;
-    transition: transform 0.3s ease, text-shadow 0.3s ease !important;
+    text-shadow: none !important;
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
   }
 
   .hero-cursive-button::before {
@@ -159,11 +156,8 @@
   }
 
   .hero-cursive-button:hover {
-    transform: scale(1.06) !important;
-    text-shadow: 
-      0 0 6px #000000,
-      0 0 18px #000000,
-      0 0 30px rgba(0, 0, 0, 0.9) !important;
+    transform: scale(1.05) !important;
+    opacity: 0.85 !important;
   }
 </style>
 

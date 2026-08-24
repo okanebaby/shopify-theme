@@ -1,15 +1,10 @@
 {% comment %}
-  OKANE BABY Top Rotating Announcement Bar
+  OKANE BABY Infinite Seamless Marquee Announcement Bar
   Features:
-  - Full-width dark luxury/streetwear black & white aesthetic
-  - Automatic rotation between 3 core messages:
-      1. FREE SHIPPING ACROSS AUSTRALIA
-      2. USE CODE "LIMITED" FOR 10% OFF
-      3. SHOP THE BROKEN HALO COLLECTION (clickable link)
-  - Manual previous/next arrow controls for user navigation
-  - Far-left subtle live visitor indicator (desktop)
-  - Fully responsive on mobile
-  - Clean bold sans-serif typography matching site-wide aesthetic
+  - Continuous right-to-left seamless infinite scrolling marquee loop (no pauses, no blank gaps)
+  - Custom marquee text: FREE SHIPPING ACROSS AUSTRALIA ✦ USE CODE ‘LIMITED’ FOR 10% OFF ✦ BROKEN HALO COLLECTION ✦ LIMITED STOCK AVAILABLE ✦
+  - Desktop Live Visitor Counter at top left
+  - Clean bold sans-serif typography
 {% endcomment %}
 
 <style>
@@ -18,43 +13,35 @@
     width: 100% !important;
     background-color: #000000 !important;
     color: #ffffff !important;
-    min-height: 40px !important;
+    height: 38px !important;
+    min-height: 38px !important;
     display: flex !important;
     align-items: center !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
     z-index: 50 !important;
+    overflow: hidden !important;
   }
 
-  .announcement-bar-inner {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 1440px !important;
-    margin: 0 auto !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0.5rem 48px !important;
-    box-sizing: border-box !important;
-    min-height: 40px !important;
-  }
-
-  /* Live Visitor Counter (Desktop Far Left) */
+  /* Live Visitor Counter Badge (Desktop Top Left) */
   .announcement-live-visitors {
     position: absolute !important;
-    left: 48px !important;
+    left: 20px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     display: inline-flex !important;
     align-items: center !important;
     gap: 7px !important;
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
     font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.8rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.04em !important;
+    font-size: 0.76rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.05em !important;
     text-transform: uppercase !important;
     user-select: none !important;
-    z-index: 5 !important;
+    z-index: 10 !important;
+    background: #000000 !important;
+    padding: 3px 12px 3px 6px !important;
+    box-shadow: 12px 0 16px 4px #000000 !important;
     white-space: nowrap !important;
   }
 
@@ -82,303 +69,159 @@
     }
   }
 
-  /* Rotating Message Carousel */
-  .announcement-carousel-container {
+  /* Infinite Seamless Marquee Container */
+  .announcement-marquee-wrapper {
     position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     width: 100% !important;
-    max-width: 600px !important;
-    min-height: 24px !important;
     overflow: hidden !important;
-  }
-
-  .announcement-slide {
-    position: absolute !important;
-    top: 50% !important;
-    left: 0 !important;
-    right: 0 !important;
-    transform: translateY(-50%) !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s !important;
-    text-align: center !important;
-    pointer-events: none !important;
+    white-space: nowrap !important;
   }
 
-  .announcement-slide.is-active {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(-50%) !important;
-    pointer-events: auto !important;
+  .announcement-marquee-track {
+    display: flex !important;
+    width: max-content !important;
+    will-change: transform !important;
+    animation: announcement-marquee-scroll 28s linear infinite !important;
   }
 
-  .announcement-text {
+  .announcement-marquee-track:hover {
+    animation-play-state: paused !important;
+  }
+
+  .announcement-marquee-content {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.8rem !important;
+    padding-right: 1.8rem !important;
+    flex-shrink: 0 !important;
     font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.86rem !important;
+    font-size: 0.82rem !important;
     font-weight: 800 !important;
     letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
     color: #ffffff !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    white-space: nowrap !important;
   }
 
-  .announcement-link {
+  .announcement-marquee-content .marquee-star {
+    color: #ffffff !important;
+    font-size: 0.85rem !important;
+    opacity: 0.75 !important;
+  }
+
+  .announcement-marquee-content .marquee-link {
     color: #ffffff !important;
     text-decoration: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
     transition: opacity 0.2s ease !important;
   }
 
-  .announcement-link:hover {
-    opacity: 0.8 !important;
+  .announcement-marquee-content .marquee-link:hover {
+    opacity: 0.75 !important;
   }
 
-  .announcement-link svg {
-    width: 12px !important;
-    height: 12px !important;
-    fill: currentColor !important;
-    transition: transform 0.2s ease !important;
-  }
-
-  .announcement-link:hover svg {
-    transform: translateX(3px) !important;
-  }
-
-  /* Carousel Manual Navigation Arrows */
-  .announcement-arrow {
-    background: transparent !important;
-    border: none !important;
-    color: rgba(255, 255, 255, 0.7) !important;
-    cursor: pointer !important;
-    padding: 4px 10px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    transition: color 0.2s ease, transform 0.2s ease !important;
-    z-index: 10 !important;
-    position: relative !important;
-  }
-
-  .announcement-arrow:hover {
-    color: #ffffff !important;
-    transform: scale(1.15) !important;
-  }
-
-  .announcement-arrow svg {
-    width: 14px !important;
-    height: 14px !important;
-    fill: none !important;
-    stroke: currentColor !important;
-    stroke-width: 2.5 !important;
-    stroke-linecap: round !important;
-    stroke-linejoin: round !important;
-  }
-
-  @media screen and (max-width: 989px) {
-    .announcement-bar-inner {
-      padding: 0.45rem 20px !important;
+  @keyframes announcement-marquee-scroll {
+    0% {
+      transform: translateX(0);
     }
-    .announcement-live-visitors {
-      left: 16px !important;
-      font-size: 0.74rem !important;
+    100% {
+      transform: translateX(-33.3333333333%);
     }
   }
 
-  @media screen and (max-width: 749px) {
-    .announcement-bar-inner {
-      padding: 0.45rem 8px !important;
-      justify-content: center !important;
-    }
+  @media screen and (max-width: 860px) {
     .announcement-live-visitors {
       display: none !important;
     }
-    .announcement-carousel-container {
-      max-width: calc(100% - 60px) !important;
+    .announcement-bar {
+      height: 34px !important;
+      min-height: 34px !important;
     }
-    .announcement-text {
-      font-size: 0.76rem !important;
-      letter-spacing: 0.05em !important;
+    .announcement-marquee-content {
+      font-size: 0.75rem !important;
+      gap: 1.4rem !important;
+      padding-right: 1.4rem !important;
     }
-    .announcement-arrow {
-      padding: 2px 6px !important;
-    }
-    .announcement-arrow svg {
-      width: 12px !important;
-      height: 12px !important;
+    .announcement-marquee-track {
+      animation-duration: 22s !important;
     }
   }
 </style>
 
-<div class="announcement-bar" role="region" aria-label="Announcement">
-  <div class="announcement-bar-inner">
-    
-    <!-- Far-Left Live Visitor Indicator (Desktop) -->
-    <div class="announcement-live-visitors" id="AnnouncementLiveVisitors">
-      <span class="live-visitor-green-dot" aria-hidden="true"></span>
-      <span class="live-visitor-text">
-        <span id="AnnouncementVisitorCount">127</span> live visitors
-      </span>
-    </div>
-
-    <!-- Prev Manual Arrow -->
-    <button type="button" class="announcement-arrow prev" id="AnnouncementPrevBtn" aria-label="Previous announcement">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </button>
-
-    <!-- Rotating Messages -->
-    <div class="announcement-carousel-container" id="AnnouncementCarousel">
-      
-      <!-- Slide 1 -->
-      <div class="announcement-slide is-active" data-index="0">
-        <p class="announcement-text">
-          FREE SHIPPING ACROSS AUSTRALIA
-        </p>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="announcement-slide" data-index="1">
-        <p class="announcement-text">
-          USE CODE "LIMITED" FOR 10% OFF
-        </p>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="announcement-slide" data-index="2">
-        <a href="/products/broken-halo-set-ash-black" class="announcement-link">
-          <p class="announcement-text">
-            SHOP THE BROKEN HALO COLLECTION
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </p>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Next Manual Arrow -->
-    <button type="button" class="announcement-arrow next" id="AnnouncementNextBtn" aria-label="Next announcement">
-      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </button>
-
+<div class="announcement-bar color-{{ section.settings.color_scheme }}" role="region" aria-label="Announcements">
+  
+  <!-- Live Visitor Counter Badge (Desktop Left) -->
+  <div class="announcement-live-visitors" aria-hidden="true">
+    <span class="live-visitor-green-dot"></span>
+    <span id="AnnouncementVisitorCount">127</span>
+    <span>SHOPPING NOW</span>
   </div>
+
+  <!-- Continuous Infinite Marquee Track (Repeated 3x for Seamless Loop) -->
+  <div class="announcement-marquee-wrapper">
+    <div class="announcement-marquee-track">
+      
+      <!-- Content Block 1 -->
+      <div class="announcement-marquee-content">
+        <span>FREE SHIPPING ACROSS AUSTRALIA</span>
+        <span class="marquee-star">✦</span>
+        <span>USE CODE ‘LIMITED’ FOR 10% OFF</span>
+        <span class="marquee-star">✦</span>
+        <a href="/collections/all" class="marquee-link">BROKEN HALO COLLECTION</a>
+        <span class="marquee-star">✦</span>
+        <span>LIMITED STOCK AVAILABLE</span>
+        <span class="marquee-star">✦</span>
+      </div>
+
+      <!-- Content Block 2 (Duplicate for Seamless Loop) -->
+      <div class="announcement-marquee-content" aria-hidden="true">
+        <span>FREE SHIPPING ACROSS AUSTRALIA</span>
+        <span class="marquee-star">✦</span>
+        <span>USE CODE ‘LIMITED’ FOR 10% OFF</span>
+        <span class="marquee-star">✦</span>
+        <a href="/collections/all" class="marquee-link">BROKEN HALO COLLECTION</a>
+        <span class="marquee-star">✦</span>
+        <span>LIMITED STOCK AVAILABLE</span>
+        <span class="marquee-star">✦</span>
+      </div>
+
+      <!-- Content Block 3 (Duplicate for Seamless Loop) -->
+      <div class="announcement-marquee-content" aria-hidden="true">
+        <span>FREE SHIPPING ACROSS AUSTRALIA</span>
+        <span class="marquee-star">✦</span>
+        <span>USE CODE ‘LIMITED’ FOR 10% OFF</span>
+        <span class="marquee-star">✦</span>
+        <a href="/collections/all" class="marquee-link">BROKEN HALO COLLECTION</a>
+        <span class="marquee-star">✦</span>
+        <span>LIMITED STOCK AVAILABLE</span>
+        <span class="marquee-star">✦</span>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
 <script>
   (function() {
-    function initAnnouncementBar() {
-      const container = document.getElementById('AnnouncementCarousel');
-      if (!container) return;
-
-      const slides = Array.from(container.querySelectorAll('.announcement-slide'));
-      const prevBtn = document.getElementById('AnnouncementPrevBtn');
-      const nextBtn = document.getElementById('AnnouncementNextBtn');
-      
-      if (slides.length <= 1) return;
-
-      let currentSlide = 0;
-      let timer = null;
-      const intervalDelay = 3800; // 3.8 seconds auto-rotation
-
-      function showSlide(index) {
-        slides.forEach((slide, i) => {
-          if (i === index) {
-            slide.classList.add('is-active');
-          } else {
-            slide.classList.remove('is-active');
-          }
-        });
-        currentSlide = index;
-      }
-
-      function nextSlide() {
-        const next = (currentSlide + 1) % slides.length;
-        showSlide(next);
-      }
-
-      function prevSlide() {
-        const prev = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(prev);
-      }
-
-      function startTimer() {
-        stopTimer();
-        timer = setInterval(nextSlide, intervalDelay);
-      }
-
-      function stopTimer() {
-        if (timer) {
-          clearInterval(timer);
-          timer = null;
-        }
-      }
-
-      if (prevBtn) {
-        prevBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          prevSlide();
-          startTimer();
-        });
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          nextSlide();
-          startTimer();
-        });
-      }
-
-      container.addEventListener('mouseenter', stopTimer);
-      container.addEventListener('mouseleave', startTimer);
-
-      let touchStartX = 0;
-      let touchEndX = 0;
-      container.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        stopTimer();
-      }, { passive: true });
-      container.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        if (touchEndX < touchStartX - 25) {
-          nextSlide();
-        } else if (touchEndX > touchStartX + 25) {
-          prevSlide();
-        }
-        startTimer();
-      }, { passive: true });
-
-      startTimer();
-
-      // Live Visitor Counter
+    function initVisitorCounter() {
       const countEl = document.getElementById('AnnouncementVisitorCount');
-      if (countEl) {
-        let currentCount = 127;
-        function updateCounter() {
-          const change = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.3 ? 2 : 1);
-          currentCount = Math.max(118, Math.min(142, currentCount + change));
-          countEl.textContent = currentCount;
-          const nextDelay = Math.floor(Math.random() * 12000) + 14000;
-          setTimeout(updateCounter, nextDelay);
-        }
-        setTimeout(updateCounter, 16000);
+      if (!countEl) return;
+      let currentCount = 127;
+      function updateCounter() {
+        const change = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.3 ? 2 : 1);
+        currentCount = Math.max(118, Math.min(142, currentCount + change));
+        countEl.textContent = currentCount;
+        const nextDelay = Math.floor(Math.random() * 12000) + 14000;
+        setTimeout(updateCounter, nextDelay);
       }
+      setTimeout(updateCounter, 16000);
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initAnnouncementBar);
+      document.addEventListener('DOMContentLoaded', initVisitorCounter);
     } else {
-      initAnnouncementBar();
+      initVisitorCounter();
     }
   })();
 </script>
