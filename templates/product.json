@@ -86,9 +86,7 @@
         "collapsible-row-2",
         "share"
       ],
-      "custom_css": [
-        ".product-form__submit {background-color: #ffffff !important; color: #000000 !important; border: none !important;}"
-      ],
+      "custom_css": [],
       "settings": {
         "enable_sticky_info": true,
         "media_position": "left",

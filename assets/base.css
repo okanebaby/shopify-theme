@@ -3126,6 +3126,23 @@ h2.glitch-heading-text,
   box-shadow: none !important;
 }
 
+.product-form__submit.product-atc-btn-redesigned,
+button.product-form__submit {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #000000 !important;
+  border-radius: 0px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.product-form__submit.product-atc-btn-redesigned:hover,
+button.product-form__submit:hover {
+  background-color: #1a1a1a !important;
+  border-color: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
 /* 4. Variant Sizing Option Pills (S, M, L) - Sharp Boxy Rectangular, High Contrast */
 .product-form__input input[type="radio"] + label {
   background-color: #000000 !important;
