@@ -208,6 +208,7 @@
 <script>
   (function() {
     function initHeroGlitch() {
+      if (window.Shopify && window.Shopify.designMode) return;
       const heading = document.getElementById('HeroGlitchHeading');
       if (!heading) return;
 
