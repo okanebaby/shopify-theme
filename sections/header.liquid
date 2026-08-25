@@ -96,9 +96,17 @@
     }
   }
 
-  .header__inline-menu {
-    display: inline-flex !important;
-    align-items: center !important;
+  @media screen and (min-width: 990px) {
+    .header__inline-menu {
+      display: inline-flex !important;
+      align-items: center !important;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .header__inline-menu {
+      display: none !important;
+    }
   }
 
   /* Inline Live Shoppers Pill Badge */
@@ -124,23 +132,6 @@
 
   .header-live-shoppers--desktop {
     margin-left: 1.5rem !important;
-  }
-
-  .header-live-shoppers--mobile {
-    display: none !important;
-  }
-
-  @media screen and (max-width: 989px) {
-    .header-live-shoppers--desktop {
-      display: none !important;
-    }
-    .header-live-shoppers--mobile {
-      display: inline-flex !important;
-      margin-right: 6px !important;
-      padding: 3px 8px !important;
-      font-size: 0.62rem !important;
-      gap: 5px !important;
-    }
   }
 
   .header-live-green-dot {
@@ -220,6 +211,13 @@
           </summary>
           <div id="menu-drawer" class="gradient menu-drawer motion-reduce" tabindex="-1">
             <div class="menu-drawer__inner-container">
+              <div style="padding: 2.2rem 3rem 0.5rem 3rem;">
+                <div class="header-live-shoppers" style="margin-left: 0 !important;" role="region" aria-label="Live Activity">
+                  <span class="header-live-green-dot" aria-hidden="true"></span>
+                  <span class="header-live-shoppers-count">127</span>
+                  <span>SHOPPING NOW</span>
+                </div>
+              </div>
               <div class="menu-drawer__navigation-container">
                 <nav class="menu-drawer__navigation">
                   <ul class="menu-drawer__menu has-submenu list-menu" role="list">
@@ -604,11 +602,6 @@
     {%- endif -%}
 
     <div class="header__icons">
-      <div class="header-live-shoppers header-live-shoppers--mobile" role="region" aria-label="Live Activity">
-        <span class="header-live-green-dot" aria-hidden="true"></span>
-        <span class="header-live-shoppers-count">127</span>
-        <span>SHOPPING NOW</span>
-      </div>
       <details-modal class="header__search">
         <details>
           <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
