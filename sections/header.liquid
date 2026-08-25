@@ -33,9 +33,22 @@
   }
 
   .header__heading-logo {
-    max-width: {{ section.settings.logo_width }}px;
+    width: 44px;
+    max-width: 44px;
+    max-height: 44px;
     height: auto;
+    object-fit: contain;
     display: block;
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+  }
+
+  @media screen and (max-width: 749px) {
+    .header__heading-logo {
+      width: 34px;
+      max-width: 34px;
+      max-height: 34px;
+    }
   }
 
   @media screen and (min-width: 990px) {
@@ -385,8 +398,8 @@
               src="{{ 'okane-emblem-black.png' | asset_url }}"
               alt="{{ logo_alt }}"
               class="header__heading-logo"
-              width="{{ section.settings.logo_width | default: 90 }}"
-              height="auto"
+              width="44"
+              height="44"
               loading="eager"
             >
           </a>
@@ -504,8 +517,8 @@
               src="{{ 'okane-emblem-black.png' | asset_url }}"
               alt="{{ logo_alt }}"
               class="header__heading-logo"
-              width="{{ section.settings.logo_width | default: 90 }}"
-              height="auto"
+              width="44"
+              height="44"
               loading="eager"
             >
           </a>
