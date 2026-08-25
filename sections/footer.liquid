@@ -462,25 +462,14 @@
       <!-- Left Column: OKANE BABY Logo + Newsletter -->
       <div class="okane-footer-brand-section">
         <div class="okane-footer-logo-wrapper">
-          {%- if section.settings.logo != blank -%}
-            <img 
-              src="{{ section.settings.logo | image_url: width: 340 }}" 
-              alt="{{ shop.name | escape }}" 
-              class="okane-footer-logo-img" 
-              loading="lazy" 
-              width="56" 
-              height="56"
-            >
-          {%- else -%}
-            <img 
-              src="{{ 'okane-emblem-white.png' | asset_url }}" 
-              alt="OKANE BABY" 
-              class="okane-footer-logo-img" 
-              loading="lazy" 
-              width="56" 
-              height="56"
-            >
-          {%- endif -%}
+          <img 
+            src="{{ 'okane-emblem-white.png' | asset_url }}" 
+            alt="OKANE BABY" 
+            class="okane-footer-logo-img" 
+            loading="lazy" 
+            width="56" 
+            height="56"
+          >
         </div>
 
         <p class="okane-newsletter-label">OKANE BABY NEWSLETTER</p>
