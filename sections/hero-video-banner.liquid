@@ -103,7 +103,7 @@
     }
   }
 
-  /* Center Button Overlay with Glowing White Aura */
+  /* Center Button Overlay - Solid Rectangle CTA */
   .hero-cursive-button-box {
     position: absolute !important;
     top: 50% !important;
@@ -111,8 +111,6 @@
     transform: translate(-50%, -50%) !important;
     z-index: 5 !important;
     text-align: center !important;
-    width: 90% !important;
-    max-width: 600px !important;
     pointer-events: auto !important;
   }
 
@@ -120,43 +118,40 @@
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 14px 28px !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    color: #000000 !important;
+    padding: 16px 44px !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
     text-decoration: none !important;
-    border: none !important;
-    box-shadow: none !important;
+    border: 2px solid #000000 !important;
+    border-radius: 0px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
     font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: clamp(1.6rem, 4.5vw, 3.2rem) !important;
+    font-size: clamp(1rem, 2.2vw, 1.35rem) !important;
     font-weight: 900 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
+    letter-spacing: 0.12em !important;
     white-space: nowrap !important;
     position: relative !important;
     z-index: 3 !important;
-    text-shadow: none !important;
-    transition: transform 0.2s ease, opacity 0.2s ease !important;
-  }
-
-  .hero-cursive-button::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 140% !important;
-    height: 190% !important;
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.7) 50%, transparent 85%) !important;
-    filter: blur(28px) !important;
-    z-index: -1 !important;
-    pointer-events: none !important;
-    border-radius: 50% !important;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease !important;
+    cursor: pointer !important;
   }
 
   .hero-cursive-button:hover {
-    transform: scale(1.05) !important;
-    opacity: 0.85 !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .hero-cursive-button {
+      padding: 12px 32px !important;
+      font-size: 0.95rem !important;
+      letter-spacing: 0.1em !important;
+    }
   }
 </style>
 
@@ -176,10 +171,10 @@
       <source src="{{ 'product-landscape-video.mp4' | asset_url }}" type="video/mp4">
     </video>
 
-    <!-- Center Cursive "Shop Broken Halo Now" Button Overlay -->
+    <!-- Center Solid Rectangle "SHOP NOW" Button Overlay -->
     <div class="hero-cursive-button-box">
       <a href="/collections/all" class="hero-cursive-button">
-        Shop Broken Halo Now
+        SHOP NOW
       </a>
     </div>
 
