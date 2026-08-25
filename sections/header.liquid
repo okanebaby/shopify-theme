@@ -33,9 +33,9 @@
   }
 
   .header__heading-logo {
-    width: 44px;
-    max-width: 44px;
-    max-height: 44px;
+    width: 40px;
+    max-width: 40px;
+    max-height: 40px;
     height: auto;
     object-fit: contain;
     display: block;
@@ -45,9 +45,9 @@
 
   @media screen and (max-width: 749px) {
     .header__heading-logo {
-      width: 34px;
-      max-width: 34px;
-      max-height: 34px;
+      width: 32px;
+      max-width: 32px;
+      max-height: 32px;
     }
   }
 
@@ -84,39 +84,105 @@
 
   .list-menu__item--link {
     text-decoration: none;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    padding-bottom: 0.4rem;
+    padding-top: 0.4rem;
     line-height: calc(1 + 0.8 / var(--font-body-scale));
   }
 
   @media screen and (min-width: 750px) {
     .list-menu__item--link {
-      padding-bottom: 0.5rem;
-      padding-top: 0.5rem;
+      padding-bottom: 0.35rem;
+      padding-top: 0.35rem;
+    }
+  }
+
+  .header__inline-menu {
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  /* Inline Live Shoppers Pill Badge */
+  .header-live-shoppers {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    padding: 4px 10px !important;
+    border-radius: 20px !important;
+    font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    user-select: none !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .header-live-shoppers--desktop {
+    margin-left: 1.5rem !important;
+  }
+
+  .header-live-shoppers--mobile {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    .header-live-shoppers--desktop {
+      display: none !important;
+    }
+    .header-live-shoppers--mobile {
+      display: inline-flex !important;
+      margin-right: 6px !important;
+      padding: 3px 8px !important;
+      font-size: 0.62rem !important;
+      gap: 5px !important;
+    }
+  }
+
+  .header-live-green-dot {
+    width: 6px !important;
+    height: 6px !important;
+    background-color: #00d659 !important;
+    border-radius: 50% !important;
+    display: inline-block !important;
+    box-shadow: 0 0 6px rgba(0, 214, 89, 0.9) !important;
+    flex-shrink: 0 !important;
+    animation: header-live-pulse 2.2s infinite ease-in-out !important;
+  }
+
+  @keyframes header-live-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 7px rgba(0, 214, 89, 0.9);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(0.85);
+      box-shadow: 0 0 2px rgba(0, 214, 89, 0.3);
     }
   }
 </style>
 
 {%- style -%}
   .header {
-    padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    min-height: unset !important;
   }
 
   .section-header {
-    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .section-header {
-      margin-bottom: {{ section.settings.margin_bottom }}px;
-    }
+    margin-bottom: 0px !important;
   }
 
   @media screen and (min-width: 990px) {
     .header {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+      padding-top: 8px !important;
+      padding-bottom: 8px !important;
     }
   }
 {%- endstyle -%}
@@ -458,6 +524,11 @@
               </li>
             {%- endfor -%}
           </ul>
+          <div class="header-live-shoppers header-live-shoppers--desktop" role="region" aria-label="Live Activity">
+            <span class="header-live-green-dot" aria-hidden="true"></span>
+            <span class="header-live-shoppers-count">127</span>
+            <span>SHOPPING NOW</span>
+          </div>
         </nav>
       {%- else -%}
         <nav class="header__inline-menu">
@@ -503,6 +574,11 @@
               </li>
             {%- endfor -%}
           </ul>
+          <div class="header-live-shoppers header-live-shoppers--desktop" role="region" aria-label="Live Activity">
+            <span class="header-live-green-dot" aria-hidden="true"></span>
+            <span class="header-live-shoppers-count">127</span>
+            <span>SHOPPING NOW</span>
+          </div>
         </nav>
       {%- endif -%}
     {%- endif -%}
@@ -517,8 +593,8 @@
               src="{{ 'okane-emblem-black.png' | asset_url }}"
               alt="{{ logo_alt }}"
               class="header__heading-logo"
-              width="44"
-              height="44"
+              width="40"
+              height="40"
               loading="eager"
             >
           </a>
@@ -528,6 +604,11 @@
     {%- endif -%}
 
     <div class="header__icons">
+      <div class="header-live-shoppers header-live-shoppers--mobile" role="region" aria-label="Live Activity">
+        <span class="header-live-green-dot" aria-hidden="true"></span>
+        <span class="header-live-shoppers-count">127</span>
+        <span>SHOPPING NOW</span>
+      </div>
       <details-modal class="header__search">
         <details>
           <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
@@ -793,6 +874,30 @@
     }
   </script>
 {%- endif -%}
+
+<script>
+  (function() {
+    function initHeaderLiveShoppers() {
+      const countEls = document.querySelectorAll('.header-live-shoppers-count');
+      if (!countEls.length) return;
+      let currentCount = 127;
+      function updateCounter() {
+        const change = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.3 ? 2 : 1);
+        currentCount = Math.max(118, Math.min(142, currentCount + change));
+        countEls.forEach(el => el.textContent = currentCount);
+        const nextDelay = Math.floor(Math.random() * 12000) + 14000;
+        setTimeout(updateCounter, nextDelay);
+      }
+      setTimeout(updateCounter, 16000);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeaderLiveShoppers);
+    } else {
+      initHeaderLiveShoppers();
+    }
+  })();
+</script>
 
 {% schema %}
 {
