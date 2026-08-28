@@ -1,0 +1,416 @@
+{%- comment -%}
+  OKANE BABY - Social Proof Recent Purchases Popup Toast
+  - Displays randomized realistic customer orders across Australia, America, Canada, Europe, and Asia
+  - Shows product image, title (Broken Halo Set: Ash Black), randomized size (S, M, L), and realistic timestamps (minutes/hours ago)
+  - Luxury minimal streetwear aesthetic with smooth slide transitions and dismissible controls
+{%- endcomment -%}
+
+{%- assign r_product = all_products['broken-halo-set-ash-black'] | default: product -%}
+{%- assign r_image = r_product.featured_image | image_url: width: 180 -%}
+{%- assign r_url = r_product.url | default: '/products/broken-halo-set-ash-black' -%}
+{%- assign r_title = r_product.title | default: 'Broken Halo Set: Ash Black' -%}
+
+<style>
+  .recent-purchase-toast {
+    position: fixed !important;
+    bottom: 24px !important;
+    left: 24px !important;
+    z-index: 99998 !important;
+    max-width: 370px !important;
+    width: calc(100% - 48px) !important;
+    background: #0e0e0e !important;
+    background: rgba(14, 14, 14, 0.95) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+    padding: 12px 14px !important;
+    box-sizing: border-box !important;
+    opacity: 0;
+    transform: translateY(25px) scale(0.96);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    pointer-events: none;
+    font-family: 'Roboto Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  }
+
+  .recent-purchase-toast.is-visible {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    pointer-events: auto !important;
+  }
+
+  .recent-purchase-toast.is-hiding {
+    opacity: 0 !important;
+    transform: translateY(18px) scale(0.96) !important;
+    pointer-events: none !important;
+  }
+
+  .recent-purchase-close {
+    position: absolute !important;
+    top: 6px !important;
+    right: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    padding: 4px 6px !important;
+    transition: color 0.2s ease, transform 0.2s ease !important;
+    z-index: 3 !important;
+  }
+
+  .recent-purchase-close:hover {
+    color: #ffffff !important;
+    transform: scale(1.15) !important;
+  }
+
+  .recent-purchase-content-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    width: 100% !important;
+  }
+
+  .recent-purchase-image-box {
+    width: 58px !important;
+    height: 58px !important;
+    min-width: 58px !important;
+    min-height: 58px !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    background-color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .recent-purchase-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .recent-purchase-img--logo {
+    width: 32px !important;
+    height: 32px !important;
+    object-fit: contain !important;
+    opacity: 0.8 !important;
+  }
+
+  .recent-purchase-details {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    padding-right: 14px !important;
+  }
+
+  .recent-purchase-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    line-height: 1.2 !important;
+  }
+
+  .recent-purchase-buyer {
+    font-family: 'Roboto Condensed', sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    letter-spacing: 0.02em !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .recent-purchase-verified {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    color: #00d659 !important;
+    font-size: 0.65rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    flex-shrink: 0 !important;
+  }
+
+  .recent-purchase-check-icon {
+    width: 10px !important;
+    height: 10px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .recent-purchase-product-title {
+    font-family: 'Roboto Condensed', 'Arial Black', sans-serif !important;
+    font-size: 0.78rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.2 !important;
+  }
+
+  .recent-purchase-meta {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 0.72rem !important;
+    line-height: 1 !important;
+    margin-top: 1px !important;
+  }
+
+  .recent-purchase-size {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
+    font-size: 0.68rem !important;
+    padding: 2px 5px !important;
+    border-radius: 2px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1 !important;
+  }
+
+  .recent-purchase-bullet {
+    color: rgba(255, 255, 255, 0.3) !important;
+    font-size: 0.65rem !important;
+  }
+
+  .recent-purchase-time {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .recent-purchase-toast {
+      bottom: 16px !important;
+      left: 12px !important;
+      right: 12px !important;
+      width: calc(100% - 24px) !important;
+      max-width: 360px !important;
+      margin: 0 auto !important;
+      padding: 10px 12px !important;
+    }
+
+    .recent-purchase-image-box {
+      width: 52px !important;
+      height: 52px !important;
+      min-width: 52px !important;
+      min-height: 52px !important;
+    }
+
+    .recent-purchase-buyer {
+      font-size: 0.78rem !important;
+    }
+
+    .recent-purchase-product-title {
+      font-size: 0.74rem !important;
+    }
+  }
+</style>
+
+<div id="RecentPurchaseToast" class="recent-purchase-toast" role="alert" aria-live="polite">
+  <button type="button" class="recent-purchase-close" id="RecentPurchaseCloseBtn" aria-label="Close notification">&times;</button>
+  
+  <a href="{{ r_url }}" class="recent-purchase-content-link">
+    <div class="recent-purchase-image-box">
+      {%- if r_image != blank -%}
+        <img 
+          src="{{ r_image }}" 
+          alt="{{ r_title | escape }}" 
+          class="recent-purchase-img"
+          width="64" 
+          height="64" 
+          loading="lazy"
+        >
+      {%- else -%}
+        <img 
+          src="{{ 'okane-emblem-white.png' | asset_url }}" 
+          alt="OKANE BABY" 
+          class="recent-purchase-img recent-purchase-img--logo"
+          width="64" 
+          height="64" 
+        >
+      {%- endif -%}
+    </div>
+
+    <div class="recent-purchase-details">
+      <div class="recent-purchase-header">
+        <span class="recent-purchase-buyer" id="RecentBuyerName">Marcus in Sydney, Australia</span>
+        <span class="recent-purchase-verified">
+          <svg class="recent-purchase-check-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#00d659" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Verified
+        </span>
+      </div>
+
+      <div class="recent-purchase-product-title">
+        {{ r_title }}
+      </div>
+
+      <div class="recent-purchase-meta">
+        <span class="recent-purchase-size" id="RecentPurchaseSize">Size: M</span>
+        <span class="recent-purchase-bullet">&bull;</span>
+        <span class="recent-purchase-time" id="RecentPurchaseTime">28 mins ago</span>
+      </div>
+    </div>
+  </a>
+</div>
+
+<script>
+  (function() {
+    const PURCHASES = [
+      // Australia
+      { name: 'Liam', location: 'Sydney, Australia', region: 'AU' },
+      { name: 'Marcus', location: 'Melbourne, Australia', region: 'AU' },
+      { name: 'Noah', location: 'Brisbane, Australia', region: 'AU' },
+      { name: 'Lucas', location: 'Perth, Australia', region: 'AU' },
+      { name: 'Ethan', location: 'Gold Coast, Australia', region: 'AU' },
+      { name: 'Alexander', location: 'Adelaide, Australia', region: 'AU' },
+      { name: 'Harrison', location: 'Sydney, Australia', region: 'AU' },
+      { name: 'Jack', location: 'Melbourne, Australia', region: 'AU' },
+      { name: 'Oliver', location: 'Canberra, Australia', region: 'AU' },
+      { name: 'Cooper', location: 'Newcastle, Australia', region: 'AU' },
+
+      // America / USA
+      { name: 'Jordan', location: 'Los Angeles, USA', region: 'US' },
+      { name: 'Kai', location: 'New York, USA', region: 'US' },
+      { name: 'Tyler', location: 'Miami, USA', region: 'US' },
+      { name: 'Mason', location: 'Chicago, USA', region: 'US' },
+      { name: 'Jayden', location: 'Houston, USA', region: 'US' },
+      { name: 'Dominic', location: 'Las Vegas, USA', region: 'US' },
+      { name: 'Austin', location: 'Atlanta, USA', region: 'US' },
+      { name: 'Cameron', location: 'San Francisco, USA', region: 'US' },
+      { name: 'Brandon', location: 'Dallas, USA', region: 'US' },
+      { name: 'Dylan', location: 'Seattle, USA', region: 'US' },
+
+      // Canada
+      { name: 'Christian', location: 'Toronto, Canada', region: 'CA' },
+      { name: 'Felix', location: 'Vancouver, Canada', region: 'CA' },
+      { name: 'Gabriel', location: 'Montreal, Canada', region: 'CA' },
+      { name: 'Nathan', location: 'Calgary, Canada', region: 'CA' },
+
+      // Europe
+      { name: 'Leo', location: 'London, UK', region: 'EU' },
+      { name: 'Antoine', location: 'Paris, France', region: 'EU' },
+      { name: 'Maximilian', location: 'Berlin, Germany', region: 'EU' },
+      { name: 'Lars', location: 'Amsterdam, Netherlands', region: 'EU' },
+      { name: 'Matteo', location: 'Milan, Italy', region: 'EU' },
+      { name: 'Elias', location: 'Stockholm, Sweden', region: 'EU' },
+      { name: 'Hugo', location: 'Manchester, UK', region: 'EU' },
+      { name: 'Alejandro', location: 'Madrid, Spain', region: 'EU' },
+
+      // Asia
+      { name: 'Ren', location: 'Tokyo, Japan', region: 'AS' },
+      { name: 'Min-Jun', location: 'Seoul, South Korea', region: 'AS' },
+      { name: 'Darren', location: 'Singapore', region: 'AS' },
+      { name: 'Kaito', location: 'Osaka, Japan', region: 'AS' },
+      { name: 'Kenji', location: 'Tokyo, Japan', region: 'AS' },
+      { name: 'Tariq', location: 'Dubai, UAE', region: 'AS' }
+    ];
+
+    const SIZES = ['Size: S', 'Size: M', 'Size: L'];
+
+    function getRandomRealisticTimeAgo() {
+      const generators = [
+        () => `${Math.floor(Math.random() * 10) + 12} mins ago`,     // 12-21 mins
+        () => `${Math.floor(Math.random() * 15) + 24} mins ago`,     // 24-38 mins
+        () => `${Math.floor(Math.random() * 16) + 40} mins ago`,     // 40-55 mins
+        () => `1 hour ago`,
+        () => `1 hr ${Math.floor(Math.random() * 25) + 10} mins ago`,
+        () => `1 hr ${Math.floor(Math.random() * 20) + 36} mins ago`,
+        () => `2 hours ago`,
+        () => `2 hrs ${Math.floor(Math.random() * 30) + 15} mins ago`,
+        () => `3 hours ago`,
+        () => `4 hours ago`
+      ];
+      const pick = generators[Math.floor(Math.random() * generators.length)];
+      return pick();
+    }
+
+    function initRecentPurchases() {
+      const toast = document.getElementById('RecentPurchaseToast');
+      const closeBtn = document.getElementById('RecentPurchaseCloseBtn');
+      const buyerEl = document.getElementById('RecentBuyerName');
+      const sizeEl = document.getElementById('RecentPurchaseSize');
+      const timeEl = document.getElementById('RecentPurchaseTime');
+
+      if (!toast || !buyerEl || !sizeEl || !timeEl) return;
+
+      let isPaused = false;
+      let lastIndex = -1;
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          hideToast();
+          isPaused = true;
+          setTimeout(() => { isPaused = false; }, 45000); // Snooze for 45s if user dismissed
+        });
+      }
+
+      function pickNextPurchase() {
+        let index;
+        do {
+          index = Math.floor(Math.random() * PURCHASES.length);
+        } while (index === lastIndex && PURCHASES.length > 1);
+        lastIndex = index;
+
+        const purchase = PURCHASES[index];
+        const size = SIZES[Math.floor(Math.random() * SIZES.length)];
+        const timeAgo = getRandomRealisticTimeAgo();
+
+        buyerEl.textContent = `${purchase.name} in ${purchase.location}`;
+        sizeEl.textContent = size;
+        timeEl.textContent = timeAgo;
+      }
+
+      function showToast() {
+        if (isPaused) return;
+        pickNextPurchase();
+        toast.classList.remove('is-hiding');
+        toast.classList.add('is-visible');
+
+        // Keep visible for 5.5 seconds
+        setTimeout(() => {
+          hideToast();
+        }, 5500);
+      }
+
+      function hideToast() {
+        toast.classList.remove('is-visible');
+        toast.classList.add('is-hiding');
+        
+        // Schedule next popup after random delay (9 - 16 seconds)
+        if (!isPaused) {
+          const nextDelay = Math.floor(Math.random() * 7000) + 9000;
+          setTimeout(showToast, nextDelay);
+        }
+      }
+
+      // Initial trigger after 4.5 seconds on page load
+      setTimeout(showToast, 4500);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initRecentPurchases);
+    } else {
+      initRecentPurchases();
+    }
+  })();
+</script>
