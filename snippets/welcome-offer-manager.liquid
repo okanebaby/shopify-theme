@@ -1,4 +1,4 @@
-﻿{% comment %}
+{% comment %}
   OKANE BABY - Welcome Offer Manager
   Features:
   - Per-visitor 15-minute persistent localStorage countdown timer (never resets on refresh/navigation)
@@ -18,7 +18,7 @@
     color: #ffffff;
     border: 1.5px solid #000000;
     border-radius: 0px;
-    padding: 12px 14px;
+    padding: 14px 16px;
     margin-bottom: 12px;
     box-sizing: border-box;
     font-family: 'Roboto Condensed', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -33,7 +33,7 @@
     color: #666666;
     border-color: #cccccc;
     text-align: center;
-    padding: 10px 14px;
+    padding: 12px 16px;
   }
 
   .welcome-offer-banner-row {
@@ -41,11 +41,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
 
   .welcome-offer-banner-title {
-    font-size: 0.85rem;
+    font-size: 0.96rem;
     font-weight: 900;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -55,40 +55,43 @@
 
   .welcome-offer-product-banner.is-expired .welcome-offer-banner-title {
     color: #888888;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     margin: 0;
   }
 
   .welcome-offer-banner-details {
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 6px;
+    color: #ffffff;
+    margin-bottom: 8px;
     line-height: 1.2;
   }
 
   .welcome-offer-banner-timer {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
+    gap: 8px;
+    font-size: 0.92rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #00d659;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 3px 8px;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 6px 14px;
     border-radius: 0px;
+    border: 1px solid rgba(0, 214, 89, 0.35);
     width: fit-content;
   }
 
   .welcome-offer-banner-timer .welcome-timer-digits {
     font-variant-numeric: tabular-nums;
     font-weight: 900;
+    font-size: 1.08rem;
     color: #00d659;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 10px rgba(0, 214, 89, 0.45);
   }
 
   /* Cart Drawer & Cart Page Gift Styling */
@@ -137,18 +140,21 @@
 
   @media screen and (max-width: 749px) {
     .welcome-offer-product-banner {
-      padding: 10px 12px;
+      padding: 12px 14px;
       margin-bottom: 10px;
     }
     .welcome-offer-banner-title {
-      font-size: 0.78rem;
+      font-size: 0.88rem;
     }
     .welcome-offer-banner-details {
-      font-size: 0.76rem;
+      font-size: 0.84rem;
     }
     .welcome-offer-banner-timer {
-      font-size: 0.74rem;
-      padding: 2px 6px;
+      font-size: 0.86rem;
+      padding: 5px 12px;
+    }
+    .welcome-offer-banner-timer .welcome-timer-digits {
+      font-size: 0.98rem;
     }
   }
 </style>
@@ -216,7 +222,7 @@
       banners.forEach(banner => {
         if (isExpired) {
           banner.classList.add('is-expired');
-          banner.innerHTML = '<div class="welcome-offer-banner-title">WELCOME OFFER EXPIRED</div>';
+          banner.innerHTML = '<div class="welcome-offer-banner-title">MYSTERY GIFT OFFER EXPIRED</div>';
         } else {
           banner.classList.remove('is-expired');
           const digits = banner.querySelector('.welcome-timer-digits');
